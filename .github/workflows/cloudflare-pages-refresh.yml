@@ -1,0 +1,20 @@
+name: Refresh Cloudflare Pages
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trigger-pages-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          CLOUDFLARE_PAGES_DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL }}
+        run: |
+          test -n "$CLOUDFLARE_PAGES_DEPLOY_HOOK_URL"
+          curl --fail --request POST "$CLOUDFLARE_PAGES_DEPLOY_HOOK_URL"

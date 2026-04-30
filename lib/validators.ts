@@ -7,6 +7,20 @@ export const CneWrapperSchema = z.object({
   total: z.number().optional(),
 });
 
+export function unwrapCneData(raw: unknown): unknown {
+  const wrapper = CneWrapperSchema.safeParse(raw);
+
+  if (!wrapper.success) {
+    return raw;
+  }
+
+  if (!wrapper.data.success) {
+    throw new Error("CNE API returned an unsuccessful response envelope");
+  }
+
+  return wrapper.data.data;
+}
+
 /* ── Capacidad instalada (operational plants) ──────────────────────── */
 // Numeric fields arrive as strings from the API
 export const CapacidadRawSchema = z.object({

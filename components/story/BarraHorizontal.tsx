@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
@@ -40,16 +40,26 @@ function truncate(s: string, max: number) {
   return s.length > max ? s.slice(0, max - 1) + "…" : s;
 }
 
-export function BarraHorizontal({ data, unit = "MW", color = "#e8a020", height = 380, ariaLabel }: Props) {
-  const [isMobile, setIsMobile] = useState(false);
+function subscribeToMobileBreakpoint(onStoreChange: () => void) {
+  const mq = window.matchMedia("(max-width: 768px)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+function getMobileSnapshot() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+export function BarraHorizontal({ data, unit = "MW", color = "#e8a020", height = 380, ariaLabel }: Props) {
+  const isMobile = useSyncExternalStore(
+    subscribeToMobileBreakpoint,
+    getMobileSnapshot,
+    getServerSnapshot
+  );
 
   const sorted = [...data].sort((a, b) => a.value - b.value);
   const maxLen = isMobile ? 15 : Infinity;

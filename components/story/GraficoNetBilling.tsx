@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
@@ -26,24 +26,32 @@ function formatPeriodo(p: string) {
   return `${meses[parseInt(mes) - 1]} ${anio}`;
 }
 
-export function GraficoNetBilling({ porMes, porRegion }: Props) {
-  const [isMobile, setIsMobile] = useState(false);
+function subscribeToMobileBreakpoint(onStoreChange: () => void) {
+  const mq = window.matchMedia("(max-width: 768px)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+function getMobileSnapshot() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+export function GraficoNetBilling({ porMes, porRegion }: Props) {
+  const isMobile = useSyncExternalStore(
+    subscribeToMobileBreakpoint,
+    getMobileSnapshot,
+    getServerSnapshot
+  );
 
   const maxLen = isMobile ? 15 : Infinity;
-  // Cumulative kW over months
-  let cumulative = 0;
-  const cumMes = porMes.map((m) => {
-    cumulative += m.kw;
-    return { periodo: m.periodo, kw: cumulative };
-  });
+  const cumMes = porMes.reduce<{ periodo: string; kw: number }[]>((items, m) => {
+    const previous = items.at(-1)?.kw ?? 0;
+    return [...items, { periodo: m.periodo, kw: previous + m.kw }];
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>

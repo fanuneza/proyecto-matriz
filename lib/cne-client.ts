@@ -1,6 +1,51 @@
 const BASE_URL = process.env.CNE_API_BASE_URL ?? "https://api.cne.cl";
 const EMAIL    = process.env.CNE_API_EMAIL ?? "";
 const PASSWORD = process.env.CNE_API_PASSWORD ?? "";
+const REQUEST_TIMEOUT_MS = 15_000;
+const MAX_RETRIES = 2;
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isRetryableStatus(status: number) {
+  return status === 429 || status >= 500;
+}
+
+async function fetchWithTimeout(input: string, init: RequestInit = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function fetchWithRetry(input: string, init: RequestInit = {}) {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt += 1) {
+    try {
+      const res = await fetchWithTimeout(input, init);
+      if (!isRetryableStatus(res.status) || attempt === MAX_RETRIES) {
+        return res;
+      }
+
+      lastError = new Error(`Retryable HTTP status ${res.status}`);
+    } catch (err) {
+      lastError = err;
+      if (attempt === MAX_RETRIES) {
+        throw err;
+      }
+    }
+
+    await wait(400 * 2 ** attempt);
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("CNE request failed");
+}
 
 /* ── Token management ─────────────────────────────────────────────── */
 let cachedToken: string | null = null;
@@ -9,8 +54,12 @@ let tokenExpiresAt = 0;
 async function getToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt - 60_000) return cachedToken;
 
+  if (!EMAIL || !PASSWORD) {
+    throw new Error("CNE API credentials are not configured");
+  }
+
   const body = new URLSearchParams({ email: EMAIL, password: PASSWORD });
-  const res = await fetch(`${BASE_URL}/api/login`, {
+  const res = await fetchWithRetry(`${BASE_URL}/api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
     body,
@@ -42,7 +91,7 @@ async function fetchCne<T>(path: string, ttlMs: number): Promise<{ data: T; fetc
   if (cached && Date.now() - cached.fetchedAt < ttlMs) return cached;
 
   const token = await getToken();
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await fetchWithRetry(`${BASE_URL}${path}`, {
     headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
   });
 

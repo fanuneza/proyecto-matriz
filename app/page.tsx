@@ -1,22 +1,4 @@
-// Rebuild the page once a week. For precise scheduling (e.g. Mon 3 AM CLT),
-// trigger GET /api/revalidate?secret=REVALIDATE_SECRET via a Railway cron job.
-export const revalidate = 604800; // 7 days
-
-import { fetchCapacidadRaw, fetchNetBillingRaw, fetchPipelineRaw } from "@/lib/cne-client";
-import { CneWrapperSchema, CapacidadArraySchema, NetBillingArraySchema, PipelineArraySchema } from "@/lib/validators";
-import { normalizePlanta, normalizePipeline } from "@/lib/normalize-ernc";
-import { normalizeNetBilling } from "@/lib/normalize-netbilling";
-import {
-  filtrarErnc,
-  totalNetaMw,
-  capacidadPorRegion,
-  capacidadPorTecnologia,
-  capacidadPorAnio,
-  pipelinePorAnio,
-  netBillingPorMes,
-  netBillingPorRegion,
-} from "@/lib/aggregates";
-import { nombreRegionCorto, nombreRegion } from "@/lib/regions";
+import { getStoryData } from "@/lib/story-data";
 import { Header } from "@/components/ui/Header";
 import { Footer } from "@/components/ui/Footer";
 import { Stat } from "@/components/ui/Stat";
@@ -25,91 +7,27 @@ import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
 import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
 import styles from "./page.module.css";
 
-function unwrap(raw: unknown) {
-  const r = CneWrapperSchema.safeParse(raw);
-  return r.success ? r.data.data : raw;
-}
-
-const ErrorPage = () => (
-  <>
-    <Header />
-    <main className={styles.error}>
-      <p>
-        Los datos no están disponibles en este momento.
-        Intenta nuevamente en unos minutos.
-      </p>
-    </main>
-    <Footer />
-  </>
-);
-
 export default async function Page() {
-  let capResult, pipeResult, nbResult;
-
-  try {
-    [capResult, pipeResult, nbResult] = await Promise.all([
-      fetchCapacidadRaw(),
-      fetchPipelineRaw(),
-      fetchNetBillingRaw(),
-    ]);
-  } catch (err) {
-    console.error("[page] CNE API fetch failed:", err);
-    return <ErrorPage />;
-  }
-
-  const capParsed  = CapacidadArraySchema.safeParse(unwrap(capResult.data));
-  const pipeParsed = PipelineArraySchema.safeParse(unwrap(pipeResult.data));
-  const nbParsed   = NetBillingArraySchema.safeParse(unwrap(nbResult.data));
-
-  if (!capParsed.success || !pipeParsed.success || !nbParsed.success) {
-    console.error("[page] CNE API validation failed");
-    return <ErrorPage />;
-  }
-
-  const todasPlantas = capParsed.data.map(normalizePlanta);
-  const ernc         = filtrarErnc(todasPlantas);
-  const pipeline     = pipeParsed.data.map(normalizePipeline);
-  const nb           = nbParsed.data.map(normalizeNetBilling);
-
-  // Aggregates
-  const totalErncMw     = totalNetaMw(ernc);
-  const totalMwGeneral  = totalNetaMw(todasPlantas);
-  const porcentajeErnc  = (totalErncMw / totalMwGeneral) * 100;
-
-  const regiones    = capacidadPorRegion(ernc)
-    .slice(0, 12)
-    .map((r) => ({ label: nombreRegionCorto(r.region ?? ""), value: r.mw }));
-
-  const tecnologias = capacidadPorTecnologia(ernc)
-    .map((t) => ({ label: t.tecnologia, value: t.mw }));
-
-  const porAnioOp   = capacidadPorAnio(ernc)
-    .filter((d) => d.anio >= 2000 && d.anio <= new Date().getFullYear());
-
-  const porAnioPipe = pipelinePorAnio(pipeline)
-    .filter((d) => d.anio >= new Date().getFullYear());
-
-  const nbPorMes    = netBillingPorMes(nb);
-  const nbPorRegion = netBillingPorRegion(nb)
-    .slice(0, 12)
-    .map((r) => ({ region: nombreRegion(r.region), kw: r.kw }));
-
-  const totalNbMw   = nb.reduce((s, r) => s + r.potenciaKw, 0) / 1000;
+  const {
+    totalErncMw,
+    porcentajeErnc,
+    totalNbMw,
+    pipelineMwTotal,
+    erncCount,
+    regiones,
+    tecnologias,
+    porAnioOp,
+    porAnioPipe,
+    nbPorMes,
+    nbPorRegion,
+    generadoEl,
+  } = await getStoryData();
 
   // Headline numbers
   const fmtMw = (mw: number) =>
     mw >= 1000
       ? `${(mw / 1000).toLocaleString("es-CL", { maximumFractionDigits: 1 })} GW`
       : `${mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`;
-
-  const pipelineMwTotal = porAnioPipe.reduce((s, d) => s + d.mw, 0);
-
-  const generadoEl = new Date(capResult.fetchedAt).toLocaleDateString("es-CL", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "America/Santiago",
-  });
 
   return (
     <>
@@ -140,7 +58,7 @@ export default async function Page() {
                 accent
               />
               <Stat
-                value={ernc.length.toLocaleString("es-CL")}
+                value={erncCount.toLocaleString("es-CL")}
                 label="Centrales ERNC en operación"
               />
               <Stat
@@ -285,9 +203,9 @@ export default async function Page() {
               </p>
               <p>
                 La Región Metropolitana concentra el mayor volumen, con{" "}
-                {(nbPorRegion.find((r) => r.region === "Metropolitana")?.kw ?? 0 / 1000).toFixed(1)}{" "}
+                {((nbPorRegion.find((r) => r.region === "Metropolitana")?.kw ?? 0) / 1000).toFixed(1)}{" "}
                 MW acumulados, pero el fenómeno se distribuye hacia regiones
-                con alta irradiación solar como O'Higgins, Maule y Valparaíso.
+                con alta irradiación solar como O&apos;Higgins, Maule y Valparaíso.
                 En total, las instalaciones de net billing suman{" "}
                 <strong>{totalNbMw.toFixed(1)} MW</strong> a lo largo del
                 territorio.

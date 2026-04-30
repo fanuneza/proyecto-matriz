@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
-
-const BASE_URL = "https://matriz.agenciachucao.cl";
+import { SITE_URL } from "./site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Proyecto Matriz: Chile y la nueva matriz energética",
     template: "%s | Proyecto Matriz",
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
   authors: [{ name: "Fabián Núñez", url: "https://github.com/fanuneza" }],
   creator: "Fabián Núñez",
   alternates: {
-    canonical: BASE_URL,
+    canonical: SITE_URL,
   },
   openGraph: {
     title: "Chile y la nueva matriz energética",
     description:
       "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la CNE.",
-    url: BASE_URL,
+    url: SITE_URL,
     siteName: "Proyecto Matriz",
     locale: "es_CL",
     type: "article",
@@ -70,8 +70,8 @@ const jsonLd = {
   headline: "Chile y la nueva matriz energética",
   description:
     "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la Comisión Nacional de Energía.",
-  url: BASE_URL,
-  image: `${BASE_URL}/og-image.jpg`,
+  url: SITE_URL,
+  image: `${SITE_URL}/og-image.jpg`,
   author: {
     "@type": "Person",
     name: "Fabián Núñez",
@@ -96,24 +96,21 @@ export default function RootLayout({
   return (
     <html lang="es-CL">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9XSP6Z6MQW" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9XSP6Z6MQW');`,
-          }}
-        />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-9XSP6Z6MQW"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9XSP6Z6MQW');`}
+        </Script>
+      </body>
     </html>
   );
 }
