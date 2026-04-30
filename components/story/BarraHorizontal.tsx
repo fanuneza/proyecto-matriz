@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useSyncExternalStore } from "react";
+import { PLOTLY_SPANISH_SEPARATORS } from "@/lib/format";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
@@ -21,6 +22,7 @@ type Props = {
 const DARK_LAYOUT: Partial<Plotly.Layout> = {
   paper_bgcolor: "transparent",
   plot_bgcolor: "transparent",
+  separators: PLOTLY_SPANISH_SEPARATORS,
   font: { color: "#8a8680", family: "Inter, system-ui, sans-serif", size: 12 },
   margin: { t: 8, r: 32, b: 48, l: 170 },
   xaxis: {

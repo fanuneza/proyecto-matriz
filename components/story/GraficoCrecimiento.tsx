@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { PLOTLY_SPANISH_SEPARATORS } from "@/lib/format";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
@@ -57,6 +58,7 @@ export function GraficoCrecimiento({ operacional, pipeline }: Props) {
         layout={{
           paper_bgcolor: "transparent",
           plot_bgcolor: "transparent",
+          separators: PLOTLY_SPANISH_SEPARATORS,
           font: { color: "#8a8680", family: "Inter, system-ui, sans-serif", size: 12 },
           margin: { t: 8, r: 24, b: 48, l: 60 },
           height: 340,

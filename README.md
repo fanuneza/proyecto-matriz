@@ -9,15 +9,16 @@ la Comision Nacional de Energia (CNE).
 - Rama principal: `main`
 - Implementacion actual: Next.js static export para Cloudflare Pages
 - Rama historica: `railway-app`
-- Dominio canonico: `https://matiz.fnunez.cl`
+- Dominio canonico: `https://matriz.fnunez.cl`
 
 ## Stack
 
-- Next.js 16 App Router
-- React 19
-- TypeScript
-- Zod para validacion de payloads CNE
-- Plotly para visualizaciones
+- Next.js 16.2.4 App Router
+- React 19.2.5 y React DOM 19.2.5
+- TypeScript 6.0.3
+- ESLint 10.2.1 con `eslint-config-next` 16.2.4
+- Zod 4.4.1 para validacion de payloads CNE
+- Plotly 3.5.0 y React Plotly 2.6.0 para visualizaciones
 - Cloudflare Pages para hosting estatico
 - GitHub Actions para disparar refrescos semanales
 
@@ -83,6 +84,12 @@ Node version: 20
 
 El proyecto usa `output: "export"` en `next.config.ts`, por lo que Cloudflare
 Pages debe servir el contenido generado en `out/`.
+
+`wrangler.toml` debe mantener:
+
+```toml
+pages_build_output_dir = "./out"
+```
 
 ## Refresco semanal
 
@@ -167,6 +174,8 @@ Next genera:
 - metadata y JSON-LD desde `app/layout.tsx`
 
 ## Validacion antes de desplegar
+
+Despues de actualizar paquetes, validar siempre lint y build antes de desplegar.
 
 ```bash
 npm run lint

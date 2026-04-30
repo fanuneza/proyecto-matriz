@@ -5,6 +5,7 @@ import { Stat } from "@/components/ui/Stat";
 import { BarraHorizontal } from "@/components/story/BarraHorizontal";
 import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
 import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
+import { formatCompactMw, formatNumber, formatPercent, formatMw } from "@/lib/format";
 import styles from "./page.module.css";
 
 export default async function Page() {
@@ -23,12 +24,6 @@ export default async function Page() {
     generadoEl,
   } = await getStoryData();
 
-  // Headline numbers
-  const fmtMw = (mw: number) =>
-    mw >= 1000
-      ? `${(mw / 1000).toLocaleString("es-CL", { maximumFractionDigits: 1 })} GW`
-      : `${mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`;
-
   return (
     <>
       <Header />
@@ -45,24 +40,24 @@ export default async function Page() {
             <p className={styles.heroLead}>
               En las últimas dos décadas, Chile transformó su capacidad de
               generación eléctrica. Hoy, más del{" "}
-              <strong>{porcentajeErnc.toFixed(0)}%</strong> de la capacidad
+              <strong>{formatPercent(porcentajeErnc)}</strong> de la capacidad
               instalada corresponde a fuentes de energía renovable no
               convencional. Esta es la historia que cuentan los datos.
             </p>
 
             <div className={styles.heroStats}>
               <Stat
-                value={fmtMw(totalErncMw)}
+                value={formatCompactMw(totalErncMw)}
                 label="Capacidad ERNC instalada"
-                sub={`${porcentajeErnc.toFixed(0)}% del sistema eléctrico`}
+                sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
                 accent
               />
               <Stat
-                value={erncCount.toLocaleString("es-CL")}
+                value={formatNumber(erncCount)}
                 label="Centrales ERNC en operación"
               />
               <Stat
-                value={fmtMw(pipelineMwTotal)}
+                value={formatCompactMw(pipelineMwTotal)}
                 label="En construcción"
                 sub="Proyectos aprobados"
               />
@@ -120,7 +115,7 @@ export default async function Page() {
                 De las tecnologías ERNC presentes en el sistema eléctrico
                 chileno, la <strong>solar fotovoltaica</strong> es la que más
                 capacidad ha acumulado, con más de{" "}
-                {fmtMw(tecnologias.find((t) => t.label.toLowerCase().includes("solar"))?.value ?? 0)}{" "}
+                {formatCompactMw(tecnologias.find((t) => t.label.toLowerCase().includes("solar"))?.value ?? 0)}{" "}
                 de potencia instalada. Chile es hoy uno de los países con
                 mayor densidad de generación solar por superficie en América
                 del Sur.
@@ -163,7 +158,7 @@ export default async function Page() {
               <p>
                 Los proyectos actualmente en construcción sugieren que esa
                 tendencia continuará al menos hasta 2026, con{" "}
-                {fmtMw(pipelineMwTotal)} adicionales comprometidos y aprobados.
+                {formatCompactMw(pipelineMwTotal)} adicionales comprometidos y aprobados.
               </p>
               <p>
                 A esta expansión de gran escala se suma la generación
@@ -203,11 +198,10 @@ export default async function Page() {
               </p>
               <p>
                 La Región Metropolitana concentra el mayor volumen, con{" "}
-                {((nbPorRegion.find((r) => r.region === "Metropolitana")?.kw ?? 0) / 1000).toFixed(1)}{" "}
-                MW acumulados, pero el fenómeno se distribuye hacia regiones
+                {formatMw((nbPorRegion.find((r) => r.region === "Metropolitana")?.kw ?? 0) / 1000)} acumulados, pero el fenómeno se distribuye hacia regiones
                 con alta irradiación solar como O&apos;Higgins, Maule y Valparaíso.
                 En total, las instalaciones de net billing suman{" "}
-                <strong>{totalNbMw.toFixed(1)} MW</strong> a lo largo del
+                <strong>{formatMw(totalNbMw)}</strong> a lo largo del
                 territorio.
               </p>
             </div>

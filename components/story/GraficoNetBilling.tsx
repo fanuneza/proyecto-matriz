@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useSyncExternalStore } from "react";
+import { PLOTLY_SPANISH_SEPARATORS } from "@/lib/format";
 
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
@@ -75,6 +76,7 @@ export function GraficoNetBilling({ porMes, porRegion }: Props) {
           layout={{
             paper_bgcolor: "transparent",
             plot_bgcolor: "transparent",
+            separators: PLOTLY_SPANISH_SEPARATORS,
             font: { color: "#8a8680", family: "Inter, system-ui, sans-serif", size: 12 },
             margin: { t: 8, r: 24, b: 64, l: 64 },
             height: 300,
@@ -118,6 +120,7 @@ export function GraficoNetBilling({ porMes, porRegion }: Props) {
           layout={{
             paper_bgcolor: "transparent",
             plot_bgcolor: "transparent",
+            separators: PLOTLY_SPANISH_SEPARATORS,
             font: { color: "#8a8680", family: "Inter, system-ui, sans-serif", size: 12 },
             margin: { t: 8, r: 32, b: 48, l: 130 },
             height: 360,

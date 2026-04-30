@@ -1,2 +1,1 @@
-export const SITE_URL = "https://matiz.fnunez.cl";
-
+export const SITE_URL = "https://matriz.fnunez.cl";
