@@ -1,2 +1,2 @@
-export const SITE_URL = "https://matriz.agenciachucao.cl";
+export const SITE_URL = "https://matiz.fnunez.cl";
 
