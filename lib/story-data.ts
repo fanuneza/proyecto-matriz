@@ -1,4 +1,5 @@
 import { fetchCapacidadRaw, fetchNetBillingRaw, fetchPipelineRaw } from "@/lib/cne-client";
+import type { DataMetadata } from "@/lib/data-types";
 import {
   capacidadPorAnio,
   capacidadPorRegion,
@@ -48,6 +49,31 @@ export async function getStoryData() {
     .slice(0, 12)
     .map((r) => ({ region: nombreRegion(r.region), kw: r.kw }));
 
+  const metadata: DataMetadata = {
+    generatedAt: new Date().toISOString(),
+    schemaVersion: 1,
+    endpoints: {
+      capacidad: {
+        name: "capacidad",
+        path: "/api/ea/capacidad/instaladagx",
+        fetchedAt: new Date(capResult.fetchedAt).toISOString(),
+        recordCount: capParsed.data.length,
+      },
+      pipeline: {
+        name: "pipeline",
+        path: "/api/ea/proyectosenconstrucciongx",
+        fetchedAt: new Date(pipeResult.fetchedAt).toISOString(),
+        recordCount: pipeParsed.data.length,
+      },
+      netBilling: {
+        name: "netBilling",
+        path: "/api/ea/netbilling",
+        fetchedAt: new Date(nbResult.fetchedAt).toISOString(),
+        recordCount: nbParsed.data.length,
+      },
+    },
+  };
+
   return {
     totalErncMw,
     porcentajeErnc,
@@ -70,5 +96,6 @@ export async function getStoryData() {
       year: "numeric",
       timeZone: "America/Santiago",
     }),
+    metadata,
   };
 }
