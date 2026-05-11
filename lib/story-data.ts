@@ -31,8 +31,20 @@ export async function getStoryData() {
   const pipeParsed = PipelineArraySchema.safeParse(unwrapCneData(pipeResult.data));
   const nbParsed = NetBillingArraySchema.safeParse(unwrapCneData(nbResult.data));
 
-  if (!capParsed.success || !pipeParsed.success || !nbParsed.success) {
-    throw new Error("CNE API validation failed while generating static story data");
+  if (!capParsed.success) {
+    throw new Error(
+      `CNE validation failed for dataset "capacidad":\n${capParsed.error.toString()}`
+    );
+  }
+  if (!pipeParsed.success) {
+    throw new Error(
+      `CNE validation failed for dataset "pipeline":\n${pipeParsed.error.toString()}`
+    );
+  }
+  if (!nbParsed.success) {
+    throw new Error(
+      `CNE validation failed for dataset "netBilling":\n${nbParsed.error.toString()}`
+    );
   }
 
   const todasPlantas = capParsed.data.map(normalizePlanta);
