@@ -1,5 +1,8 @@
-import { fetchCapacidadRaw, fetchNetBillingRaw, fetchPipelineRaw } from "@/lib/cne-client";
-import type { DataMetadata } from "@/lib/data-types";
+import {
+  fetchCapacidadRaw,
+  fetchNetBillingRaw,
+  fetchPipelineRaw,
+} from "@/lib/cne-client";
 import {
   capacidadPorAnio,
   capacidadPorRegion,
@@ -10,8 +13,10 @@ import {
   pipelinePorAnio,
   totalNetaMw,
 } from "@/lib/aggregates";
-import { normalizePlanta, normalizePipeline } from "@/lib/normalize-ernc";
+import type { DataMetadata } from "@/lib/data-types";
 import { normalizeNetBilling } from "@/lib/normalize-netbilling";
+import { normalizePlanta, normalizePipeline } from "@/lib/normalize-ernc";
+import { buildRegionProfiles, buildTechnologyProfiles } from "@/lib/region-profiles";
 import { nombreRegion, nombreRegionCorto } from "@/lib/regions";
 import {
   CapacidadArraySchema,
@@ -33,33 +38,35 @@ export async function getStoryData() {
 
   if (!capParsed.success) {
     throw new Error(
-      `CNE validation failed for dataset "capacidad":\n${capParsed.error.toString()}`
+      `CNE validation failed for dataset "capacidad":\n${capParsed.error.toString()}`,
     );
   }
   if (!pipeParsed.success) {
     throw new Error(
-      `CNE validation failed for dataset "pipeline":\n${pipeParsed.error.toString()}`
+      `CNE validation failed for dataset "pipeline":\n${pipeParsed.error.toString()}`,
     );
   }
   if (!nbParsed.success) {
     throw new Error(
-      `CNE validation failed for dataset "netBilling":\n${nbParsed.error.toString()}`
+      `CNE validation failed for dataset "netBilling":\n${nbParsed.error.toString()}`,
     );
   }
 
-  const todasPlantas = capParsed.data.map(normalizePlanta);
-  const ernc = filtrarErnc(todasPlantas);
-  const pipeline = pipeParsed.data.map(normalizePipeline);
-  const nb = nbParsed.data.map(normalizeNetBilling);
+  const operationalPlants = capParsed.data.map(normalizePlanta);
+  const ernc = filtrarErnc(operationalPlants);
+  const pipelineProjects = pipeParsed.data.map(normalizePipeline);
+  const netBillingRecords = nbParsed.data.map(normalizeNetBilling);
   const currentYear = new Date().getFullYear();
 
   const totalErncMw = totalNetaMw(ernc);
-  const totalMwGeneral = totalNetaMw(todasPlantas);
-  const porcentajeErnc = (totalErncMw / totalMwGeneral) * 100;
-  const porAnioPipe = pipelinePorAnio(pipeline).filter((d) => d.anio >= currentYear);
-  const nbPorRegion = netBillingPorRegion(nb)
+  const totalMwGeneral = totalNetaMw(operationalPlants);
+  const porcentajeErnc = totalMwGeneral > 0 ? (totalErncMw / totalMwGeneral) * 100 : 0;
+  const porAnioPipe = pipelinePorAnio(pipelineProjects).filter(
+    (entry) => entry.anio >= currentYear,
+  );
+  const nbPorRegion = netBillingPorRegion(netBillingRecords)
     .slice(0, 12)
-    .map((r) => ({ region: nombreRegion(r.region), kw: r.kw }));
+    .map((entry) => ({ region: nombreRegion(entry.region), kw: entry.kw }));
 
   const metadata: DataMetadata = {
     generatedAt: new Date().toISOString(),
@@ -86,22 +93,35 @@ export async function getStoryData() {
     },
   };
 
+  const regionProfiles = buildRegionProfiles(
+    operationalPlants,
+    pipelineProjects,
+    netBillingRecords,
+    totalErncMw,
+  );
+  const technologyProfiles = buildTechnologyProfiles(operationalPlants, totalErncMw);
+
   return {
     totalErncMw,
     porcentajeErnc,
-    totalNbMw: nb.reduce((s, r) => s + r.potenciaKw, 0) / 1000,
-    pipelineMwTotal: porAnioPipe.reduce((s, d) => s + d.mw, 0),
+    totalNbMw: netBillingRecords.reduce((sum, entry) => sum + entry.potenciaKw, 0) / 1000,
+    pipelineMwTotal: porAnioPipe.reduce((sum, entry) => sum + entry.mw, 0),
     erncCount: ernc.length,
     regiones: capacidadPorRegion(ernc)
       .slice(0, 12)
-      .map((r) => ({ label: nombreRegionCorto(r.region ?? ""), value: r.mw })),
-    tecnologias: capacidadPorTecnologia(ernc)
-      .map((t) => ({ label: t.tecnologia, value: t.mw })),
-    porAnioOp: capacidadPorAnio(ernc)
-      .filter((d) => d.anio >= 2000 && d.anio <= currentYear),
+      .map((region) => ({ label: nombreRegionCorto(region.region ?? ""), value: region.mw })),
+    tecnologias: capacidadPorTecnologia(ernc).map((technology) => ({
+      label: technology.tecnologia,
+      value: technology.mw,
+    })),
+    porAnioOp: capacidadPorAnio(ernc).filter(
+      (entry) => entry.anio >= 2000 && entry.anio <= currentYear,
+    ),
     porAnioPipe,
-    nbPorMes: netBillingPorMes(nb),
+    nbPorMes: netBillingPorMes(netBillingRecords),
     nbPorRegion,
+    regionProfiles,
+    technologyProfiles,
     generadoEl: new Date(capResult.fetchedAt).toLocaleDateString("es-CL", {
       day: "numeric",
       month: "long",
@@ -109,5 +129,8 @@ export async function getStoryData() {
       timeZone: "America/Santiago",
     }),
     metadata,
+    operationalPlants,
+    pipelineProjects,
+    netBillingRecords,
   };
 }

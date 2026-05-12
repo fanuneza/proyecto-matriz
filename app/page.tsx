@@ -1,11 +1,15 @@
-import { getStoryData } from "@/lib/story-data";
-import { Header } from "@/components/ui/Header";
-import { Footer } from "@/components/ui/Footer";
-import { Stat } from "@/components/ui/Stat";
-import { BarraHorizontal } from "@/components/story/BarraHorizontal";
 import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
 import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
-import { formatCompactMw, formatNumber, formatPercent, formatMw } from "@/lib/format";
+import { BarraHorizontal } from "@/components/story/BarraHorizontal";
+import { MonthlyChangeSummary } from "@/components/story/MonthlyChangeSummary";
+import { Footer } from "@/components/ui/Footer";
+import { Header } from "@/components/ui/Header";
+import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
+import { Stat } from "@/components/ui/Stat";
+import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
+import { compareSnapshots } from "@/lib/snapshot-compare";
+import { listSnapshots, readSnapshot } from "@/lib/snapshots";
+import { getStoryData } from "@/lib/story-data";
 import styles from "./page.module.css";
 
 export default async function Page() {
@@ -24,41 +28,47 @@ export default async function Page() {
     generadoEl,
   } = await getStoryData();
 
+  const snapshots = listSnapshots();
+  const delta =
+    snapshots.length >= 2
+      ? (() => {
+          const current = readSnapshot(snapshots[snapshots.length - 1]);
+          const previous = readSnapshot(snapshots[snapshots.length - 2]);
+          return current && previous ? compareSnapshots(previous, current) : null;
+        })()
+      : null;
+
   return (
     <>
       <Header />
 
       <main className={styles.main}>
-        {/* ── Hero ───────────────────────────────────────────────────── */}
         <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
           <div className={`container ${styles.heroInner}`}>
-            <p className={styles.eyebrow}>Chile · Energía · Datos CNE</p>
+            <p className={styles.eyebrow}>Chile · Energia · Datos CNE</p>
             <h1 id="titulo-principal" className={styles.heroTitle}>
-              Chile y la nueva<br />
-              <span className={styles.accent}>matriz energética</span>
+              Chile y la nueva
+              <br />
+              <span className={styles.accent}>matriz energetica</span>
             </h1>
             <p className={styles.heroLead}>
-              En las últimas dos décadas, Chile transformó su capacidad de
-              generación eléctrica. Hoy, más del{" "}
-              <strong>{formatPercent(porcentajeErnc)}</strong> de la capacidad
-              instalada corresponde a fuentes de energía renovable no
-              convencional. Esta es la historia que cuentan los datos.
+              Hoy, mas del <strong>{formatPercent(porcentajeErnc)}</strong> de la
+              capacidad instalada del sistema corresponde a fuentes renovables no
+              convencionales. Esta historia se construye con datos agregados,
+              snapshots mensuales y rutas estaticas exportadas.
             </p>
 
             <div className={styles.heroStats}>
               <Stat
                 value={formatCompactMw(totalErncMw)}
                 label="Capacidad ERNC instalada"
-                sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
+                sub={`${formatPercent(porcentajeErnc)} del sistema electrico`}
                 accent
               />
-              <Stat
-                value={formatNumber(erncCount)}
-                label="Centrales ERNC en operación"
-              />
+              <Stat value={formatNumber(erncCount)} label="Centrales ERNC en operacion" />
               <Stat
                 value={formatCompactMw(pipelineMwTotal)}
-                label="En construcción"
+                label="En construccion"
                 sub="Proyectos aprobados"
               />
             </div>
@@ -70,170 +80,144 @@ export default async function Page() {
           </div>
         </section>
 
-        {/* ── Cap 2: Regiones ────────────────────────────────────────── */}
+        <section className={styles.chapter} aria-labelledby="cap-cambios">
+          <div className={`container ${styles.chapterLayout}`}>
+            <div className={styles.chapterText}>
+              <p className={styles.chapterNum}>00</p>
+              <h2 id="cap-cambios">Registro mensual</h2>
+              <p>
+                El sitio ya no muestra solo una fotografia fija. Tambien prepara una
+                capa de snapshots mensuales para registrar cambios de capacidad ERNC,
+                net billing y pipeline.
+              </p>
+            </div>
+            <div className={styles.chapterChart}>
+              <MonthlyChangeSummary delta={delta} />
+            </div>
+          </div>
+        </section>
+
         <section id="regiones" className={styles.chapter} aria-labelledby="cap-regiones">
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>01</p>
-              <h2 id="cap-regiones">La expansión renovable no es uniforme</h2>
+              <h2 id="cap-regiones">La expansion renovable no es uniforme</h2>
               <p>
-                La capacidad ERNC instalada se concentra en el norte del país.
-                La Región de Antofagasta lidera con amplitud, impulsada por la
-                irradiación solar del desierto de Atacama, una de las más altas
-                del mundo, y por el auge de proyectos fotovoltaicos a gran
-                escala.
-              </p>
-              <p>
-                Las regiones del Biobío y del Maule combinan centrales
-                hidroeléctricas de pasada y biomasa, mientras que la Región
-                Metropolitana concentra una alta densidad de instalaciones
-                pequeñas distribuidas entre múltiples operadores.
+                La mayor capacidad ERNC se concentra en el norte del pais, donde la
+                radiacion solar y el desarrollo fotovoltaico de escala utility empujan
+                el crecimiento.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>
-                Capacidad ERNC instalada por región
-              </p>
+              <p className={styles.chartTitle}>Capacidad ERNC instalada por region</p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={regiones}
                 unit="MW"
-                ariaLabel="Capacidad ERNC instalada por región, en megawatts. Antofagasta lidera."
+                ariaLabel="Capacidad ERNC instalada por region, en megawatts."
                 height={420}
               />
             </div>
           </div>
         </section>
 
-        {/* ── Cap 3: Tecnologías ─────────────────────────────────────── */}
-        <section id="tecnologias" className={`${styles.chapter} ${styles.chapterAlt}`} aria-labelledby="cap-tecnologias">
+        <section
+          id="tecnologias"
+          className={`${styles.chapter} ${styles.chapterAlt}`}
+          aria-labelledby="cap-tecnologias"
+        >
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>02</p>
-              <h2 id="cap-tecnologias">La energía solar lidera la transición</h2>
+              <h2 id="cap-tecnologias">La energia solar lidera la transicion</h2>
               <p>
-                De las tecnologías ERNC presentes en el sistema eléctrico
-                chileno, la <strong>solar fotovoltaica</strong> es la que más
-                capacidad ha acumulado, con más de{" "}
-                {formatCompactMw(tecnologias.find((t) => t.label.toLowerCase().includes("solar"))?.value ?? 0)}{" "}
-                de potencia instalada. Chile es hoy uno de los países con
-                mayor densidad de generación solar por superficie en América
-                del Sur.
-              </p>
-              <p>
-                La <strong>energía eólica</strong> ocupa el segundo lugar, con
-                proyectos dispersos desde la zona norte hasta el Biobío. La
-                hidroelectricidad de pasada, fuente históricamente dominante,
-                mantiene una presencia relevante en el sur del país.
+                La tecnologia solar domina la expansion reciente, seguida por la
+                eolica y distintas variantes hidraulicas y de biomasa.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>
-                Composición por tecnología ERNC
-              </p>
+              <p className={styles.chartTitle}>Composicion por tecnologia ERNC</p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={tecnologias}
                 unit="MW"
                 color="#e8a020"
-                ariaLabel="Composición por tecnología ERNC. Solar domina, seguida de Eólica e Hidráulica."
+                ariaLabel="Composicion por tecnologia ERNC."
                 height={360}
               />
             </div>
           </div>
         </section>
 
-        {/* ── Cap 4: Crecimiento ─────────────────────────────────────── */}
         <section id="crecimiento" className={styles.chapter} aria-labelledby="cap-crecimiento">
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>03</p>
-              <h2 id="cap-crecimiento">Una aceleración sostenida desde 2015</h2>
+              <h2 id="cap-crecimiento">Una aceleracion sostenida desde 2015</h2>
               <p>
-                La incorporación de nueva capacidad ERNC al sistema eléctrico
-                chileno se aceleró de forma notable a partir de 2015, cuando
-                mejoras regulatorias y la reducción de costos de la tecnología
-                solar abrieron el mercado a proyectos de mayor escala.
-              </p>
-              <p>
-                Los proyectos actualmente en construcción sugieren que esa
-                tendencia continuará al menos hasta 2026, con{" "}
-                {formatCompactMw(pipelineMwTotal)} adicionales comprometidos y aprobados.
-              </p>
-              <p>
-                A esta expansión de gran escala se suma la generación
-                distribuida mediante <em>net billing</em>: un sistema que
-                permite a hogares y empresas instalar paneles solares u otras
-                fuentes renovables, inyectar sus excedentes a la red eléctrica
-                y descontarlos de su factura. Es la cara más cercana de la
-                transición energética.
+                La entrada de nueva capacidad se acelero con fuerza durante la ultima
+                decada. El pipeline actual indica que esa trayectoria continua.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>
-                MW ERNC puestos en servicio por año
-              </p>
+              <p className={styles.chartTitle}>MW ERNC puestos en servicio por ano</p>
               <p className={styles.chartSub}>
-                Barras sólidas: operacional · Barras tenues: en construcción
+                Barras solidas: operacional · Barras tenues: en construccion
               </p>
-              <GraficoCrecimiento
-                operacional={porAnioOp}
-                pipeline={porAnioPipe}
-              />
+              <GraficoCrecimiento operacional={porAnioOp} pipeline={porAnioPipe} />
             </div>
           </div>
         </section>
 
-        {/* ── Cap 5: Net billing ─────────────────────────────────────── */}
-        <section id="net-billing" className={`${styles.chapter} ${styles.chapterAlt}`} aria-labelledby="cap-netbilling">
+        <section
+          id="net-billing"
+          className={`${styles.chapter} ${styles.chapterAlt}`}
+          aria-labelledby="cap-netbilling"
+        >
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>04</p>
-              <h2 id="cap-netbilling">La transición también ocurre a pequeña escala</h2>
+              <h2 id="cap-netbilling">La transicion tambien ocurre a pequena escala</h2>
               <p>
-                Mientras los proyectos de gran escala dominan el debate, la
-                generación distribuida, instalaciones residenciales y comerciales
-                conectadas a la red bajo la modalidad de <em>net billing</em>,
-                ha crecido de manera constante en todo el país.
+                La generacion distribuida avanza con instalaciones conectadas a la red
+                bajo net billing. Ya no es solo un fenomeno residencial: tambien
+                aparece en comercio y servicios.
               </p>
               <p>
-                La Región Metropolitana concentra el mayor volumen, con{" "}
-                {formatMw((nbPorRegion.find((r) => r.region === "Metropolitana")?.kw ?? 0) / 1000)} acumulados, pero el fenómeno se distribuye hacia regiones
-                con alta irradiación solar como O&apos;Higgins, Maule y Valparaíso.
-                En total, las instalaciones de net billing suman{" "}
-                <strong>{formatMw(totalNbMw)}</strong> a lo largo del
-                territorio.
+                En total, el net billing suma <strong>{formatMw(totalNbMw)}</strong> a
+                nivel nacional.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Generación distribuida (net billing)</p>
-              <p className={styles.chartSub}>Capacidad acumulada y distribución regional</p>
-              <GraficoNetBilling
-                porMes={nbPorMes}
-                porRegion={nbPorRegion}
-              />
+              <p className={styles.chartTitle}>Generacion distribuida (net billing)</p>
+              <p className={styles.chartSub}>Capacidad acumulada y distribucion regional</p>
+              <GraficoNetBilling porMes={nbPorMes} porRegion={nbPorRegion} />
             </div>
           </div>
         </section>
 
-        {/* ── Cierre ─────────────────────────────────────────────────── */}
         <section className={styles.cierre} aria-labelledby="cap-cierre">
           <div className="container">
             <h2 id="cap-cierre" className={styles.cierreTitle}>
-              Una transición que los datos ya reflejan
+              Una transicion que los datos ya reflejan
             </h2>
             <p className={styles.cierreLead}>
-              Chile cuenta hoy con una de las matrices eléctricas con mayor
-              participación renovable de América del Sur. Los datos de la
-              Comisión Nacional de Energía muestran una expansión sostenida que
-              abarca desde proyectos de cientos de megawatts en el desierto
-              hasta instalaciones individuales en techos de todo el país.
-              Lo que estos números no capturan, como la carga sobre las redes de
-              distribución, el acceso desigual a los beneficios o las tensiones
-              territoriales de los proyectos a gran escala, son preguntas
-              que este trabajo no responde, pero que los datos ayudan a
-              formular.
+              Chile cuenta con una de las matrices electricas con mayor participacion
+              renovable de America del Sur. Esta version del proyecto ya no se limita
+              a una sola pagina: agrega rutas tematicas, snapshots mensuales,
+              comparacion regional y artefactos publicos descargables.
             </p>
+          </div>
+        </section>
+
+        <section className={styles.chapter} aria-labelledby="cap-metodologia">
+          <div className={`container ${styles.chapterLayout}`}>
+            <div className={styles.chapterText}>
+              <p className={styles.chapterNum}>05</p>
+              <div id="cap-metodologia">
+                <MethodologyBlock />
+              </div>
+            </div>
           </div>
         </section>
       </main>

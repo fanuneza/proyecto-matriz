@@ -1,9 +1,9 @@
 /* ── Scroll offset for fixed header (56px) ──────────────────────────── */
-:global(#inicio),
-:global(#regiones),
-:global(#tecnologias),
-:global(#crecimiento),
-:global(#net-billing) {
+.main :global(#inicio),
+.main :global(#regiones),
+.main :global(#tecnologias),
+.main :global(#crecimiento),
+.main :global(#net-billing) {
   scroll-margin-top: 56px;
 }
 
@@ -176,7 +176,7 @@
 }
 
 /* ── Chart loading shimmer ──────────────────────────────────────────── */
-:global(.chart-loading) {
+.main :global(.chart-loading) {
   height: 360px;
   background: var(--bg-subtle);
   border-radius: 4px;
@@ -258,7 +258,7 @@
     padding-block: var(--space-md);
   }
 
-  :global(.chart-loading) {
+  .main :global(.chart-loading) {
     height: 280px;
   }
 }
@@ -296,7 +296,7 @@
     font-size: var(--step-0);
   }
 
-  :global(.chart-loading) {
+  .main :global(.chart-loading) {
     height: 220px;
   }
 }

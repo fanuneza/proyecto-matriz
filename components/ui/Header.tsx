@@ -1,15 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Logo } from "./Logo";
 import styles from "./Header.module.css";
 
 const NAV_ITEMS = [
-  { label: "Inicio",       href: "#inicio" },
-  { label: "Regiones",     href: "#regiones" },
-  { label: "Tecnologías",  href: "#tecnologias" },
-  { label: "Crecimiento",  href: "#crecimiento" },
-  { label: "Net Billing",  href: "#net-billing" },
+  { label: "Inicio", href: "/" },
+  { label: "Regiones", href: "/regiones" },
+  { label: "Tecnologias", href: "/tecnologias" },
+  { label: "Comparar", href: "/comparar" },
+  { label: "Datos", href: "/datos" },
+  { label: "Archivo", href: "/archivo" },
 ];
 
 export function Header() {
@@ -20,32 +22,29 @@ export function Header() {
   return (
     <header className={styles.header} role="banner">
       <div className={`container ${styles.inner}`}>
-        {/* Brand */}
-        <a href="#inicio" className={styles.brand} onClick={close}>
+        <Link href="/" className={styles.brand} onClick={close}>
           <Logo size={26} />
           <span className={styles.wordmark}>Proyecto Matriz</span>
-        </a>
+        </Link>
 
-        {/* Desktop nav */}
-        <nav className={styles.nav} aria-label="Navegación principal">
+        <nav className={styles.nav} aria-label="Navegacion principal">
           <ul className={styles.navList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>
-                <a href={href} className={styles.navLink}>
+                <Link href={href} className={styles.navLink}>
                   {label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           className={styles.burger}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-label={open ? "Cerrar menu" : "Abrir menu"}
           aria-expanded={open}
           aria-controls="mobile-menu"
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpen((current) => !current)}
         >
           <span className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`} />
           <span className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`} />
@@ -53,19 +52,18 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <div
         id="mobile-menu"
         className={`${styles.mobileMenu} ${open ? styles.mobileMenuOpen : ""}`}
         aria-hidden={!open}
       >
-        <nav aria-label="Navegación móvil">
+        <nav aria-label="Navegacion movil">
           <ul className={styles.mobileNavList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>
-                <a href={href} className={styles.mobileNavLink} onClick={close}>
+                <Link href={href} className={styles.mobileNavLink} onClick={close}>
                   {label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

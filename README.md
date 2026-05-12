@@ -49,9 +49,44 @@ debe fallar. Cloudflare Pages mantiene publicado el ultimo deploy exitoso.
 npm run dev
 npm run lint
 npm run build
+npm run test
+npm run generate-artifacts
+npm run check-output
+npm run check-routes
+npm run write-snapshot
+npm run analyze
 ```
 
 `npm run build` genera la salida estatica en `out/`.
+
+`npm run build` tambien ejecuta `prebuild`, que genera artefactos publicos en
+`public/data/` antes del export estatico.
+
+## Artefactos de datos
+
+Durante el build se generan estos archivos:
+
+- `public/data/current/summary.json`
+- `public/data/current/metadata.json`
+- `public/data/downloads/regiones-current.csv`
+- `public/data/downloads/tecnologias-current.csv`
+- `public/data/downloads/matriz-current.csv`
+
+Los archivos contienen solo datos agregados. No deben incluir payloads crudos de
+la CNE, credenciales, tokens ni secretos.
+
+Los snapshots mensuales se guardan en `data/snapshots/` y se copian a
+`public/data/snapshots/` durante la generacion de artefactos.
+
+## Bundle analysis
+
+Ejecutar `npm run analyze` para levantar un build de analisis con webpack. En
+Next 16, `@next/bundle-analyzer` no reporta sobre builds Turbopack normales, por
+eso el script de analisis usa `next build --webpack`.
+
+La conclusion actual es que Plotly sigue siendo la dependencia cliente mas
+costosa, mientras que el grafico horizontal simple fue reemplazado por una
+version HTML estatica para no enviar Plotly donde no aporta interactividad.
 
 ## Variables de entorno
 
@@ -185,10 +220,21 @@ npm run build
 Despues del build, verificar:
 
 - `out/index.html`
+- `out/datos/index.html`
 - `out/robots.txt`
 - `out/sitemap.xml`
+- `out/data/current/summary.json`
+- `out/data/current/metadata.json`
+- `out/data/downloads/*.csv`
 - que no exista `out/api`
 - que no aparezcan credenciales ni variables `CNE_API_*` en `out/`
+
+Comandos de validacion:
+
+```bash
+npm run check-output
+npm run check-routes
+```
 
 ## Recuperacion
 

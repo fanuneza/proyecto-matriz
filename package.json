@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run generate-artifacts",
     "build": "next build",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "generate-artifacts": "tsx scripts/generate-data-artifacts.ts",
+    "check-output": "tsx scripts/check-output.ts",
+    "check-routes": "tsx scripts/check-static-routes.ts",
+    "write-snapshot": "tsx scripts/write-monthly-snapshot.ts",
+    "analyze": "npm run generate-artifacts && set ANALYZE=true&& next build --webpack"
   },
   "dependencies": {
     "next": "16.2.4",
@@ -18,12 +24,14 @@
   },
   "devDependencies": {
     "@eslint/compat": "2.0.5",
+    "@next/bundle-analyzer": "^16.2.4",
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/react-plotly.js": "2.6.4",
     "eslint": "10.2.1",
     "eslint-config-next": "16.2.4",
+    "tsx": "^4.20.6",
     "typescript": "6.0.3",
     "vitest": "^4.1.6"
   }

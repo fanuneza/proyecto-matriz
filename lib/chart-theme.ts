@@ -1,0 +1,24 @@
+import type { Config, Layout } from "plotly.js";
+
+export const CHART_COLORS = {
+  ernc: "#f59e0b",
+  pipeline: "#78716c",
+  netBilling: "#a3e635",
+  grid: "#292524",
+  text: "#e7e5e4",
+  bg: "transparent",
+} as const;
+
+export const BASE_LAYOUT: Partial<Layout> = {
+  paper_bgcolor: CHART_COLORS.bg,
+  plot_bgcolor: CHART_COLORS.bg,
+  font: { color: CHART_COLORS.text, family: "inherit", size: 13 },
+  margin: { t: 24, r: 16, b: 40, l: 16 },
+  xaxis: { gridcolor: CHART_COLORS.grid, zerolinecolor: CHART_COLORS.grid },
+  yaxis: { gridcolor: CHART_COLORS.grid, zerolinecolor: CHART_COLORS.grid },
+};
+
+export const BASE_CONFIG: Partial<Config> = {
+  displayModeBar: false,
+  responsive: true,
+};

@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "snapshotMonth": "2026-05",
+  "generatedAt": "2026-05-12T00:41:55.703Z",
+  "national": {
+    "totalErncMw": 19342.01423500002,
+    "porcentajeErnc": 51.039904286153345,
+    "totalNbMw": 480.31025993563907,
+    "pipelineMwTotal": 1514.5,
+    "erncCount": 986
+  },
+  "regiones": [
+    {
+      "nombre": "Metropolitana",
+      "slug": "metropolitana",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Valparaiso",
+      "slug": "valparaiso",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Maule",
+      "slug": "maule",
+      "erncMw": 0
+    },
+    {
+      "nombre": "O'Higgins",
+      "slug": "ohiggins",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Coquimbo",
+      "slug": "coquimbo",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Biobio",
+      "slug": "biobio",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Los Lagos",
+      "slug": "los-lagos",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Nuble",
+      "slug": "nuble",
+      "erncMw": 0
+    },
+    {
+      "nombre": "La Araucania",
+      "slug": "la-araucania",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Los Rios",
+      "slug": "los-rios",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Antofagasta",
+      "slug": "antofagasta",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Atacama",
+      "slug": "atacama",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Tarapaca",
+      "slug": "tarapaca",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Arica y Parinacota",
+      "slug": "arica-y-parinacota",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Aysen",
+      "slug": "aysen",
+      "erncMw": 0
+    },
+    {
+      "nombre": "Magallanes",
+      "slug": "magallanes",
+      "erncMw": 0
+    }
+  ],
+  "tecnologias": [
+    {
+      "nombre": "Solar",
+      "slug": "solar",
+      "mw": 11970.653859999995
+    },
+    {
+      "nombre": "Eólica",
+      "slug": "eolica",
+      "mw": 5865.297099999997
+    },
+    {
+      "nombre": "Mini Hidráulica Pasada",
+      "slug": "mini-hidraulica-pasada",
+      "mw": 563.1605750000001
+    },
+    {
+      "nombre": "Biomasa",
+      "slug": "biomasa",
+      "mw": 519.6904999999999
+    },
+    {
+      "nombre": "Solar-CSP",
+      "slug": "solar-csp",
+      "mw": 108.27
+    },
+    {
+      "nombre": "Biomasa-Petróleo N°6",
+      "slug": "biomasa-petroleo-n-6",
+      "mw": 88
+    },
+    {
+      "nombre": "Geotérmica",
+      "slug": "geotermica",
+      "mw": 83.58
+    },
+    {
+      "nombre": "Hidráulica Pasada",
+      "slug": "hidraulica-pasada",
+      "mw": 81.8451
+    },
+    {
+      "nombre": "Biogas",
+      "slug": "biogas",
+      "mw": 58.4571
+    },
+    {
+      "nombre": "Solar Fotovoltaica",
+      "slug": "solar-fotovoltaica",
+      "mw": 3.06
+    }
+  ],
+  "sourceMetadata": {
+    "capacidad": {
+      "fetchedAt": "2026-05-12T00:41:58.189Z",
+      "recordCount": 1311
+    },
+    "pipeline": {
+      "fetchedAt": "2026-05-12T00:41:57.516Z",
+      "recordCount": 230
+    },
+    "netBilling": {
+      "fetchedAt": "2026-05-12T00:41:58.850Z",
+      "recordCount": 40494
+    }
+  }
+}
