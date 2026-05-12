@@ -2,8 +2,6 @@ import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
 import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
 import { BarraHorizontal } from "@/components/story/BarraHorizontal";
 import { MonthlyChangeSummary } from "@/components/story/MonthlyChangeSummary";
-import { Footer } from "@/components/ui/Footer";
-import { Header } from "@/components/ui/Header";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
 import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
@@ -40,8 +38,6 @@ export default async function Page() {
 
   return (
     <>
-      <Header />
-
       <main className={styles.main}>
         <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
           <div className={`container ${styles.heroInner}`}>
@@ -221,8 +217,6 @@ export default async function Page() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

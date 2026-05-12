@@ -1,7 +1,10 @@
+import type { ReactNode } from "react";
+import styles from "./DataTable.module.css";
+
 type Column<T> = {
   header: string;
   accessor: keyof T;
-  format?: (value: T[keyof T]) => string;
+  format?: (value: T[keyof T], row: T) => ReactNode;
 };
 
 type Props<T> = {
@@ -19,11 +22,10 @@ export function DataTable<T>({
   summaryLabel,
   initiallyOpen = false,
 }: Props<T>) {
-  return (
-    <details open={initiallyOpen}>
-      <summary>{summaryLabel ?? "Ver datos en tabla"}</summary>
-      <table>
-        <caption>{caption}</caption>
+  const table = (
+    <div className={styles.wrap}>
+      <table className={styles.table}>
+        <caption className={styles.caption}>{caption}</caption>
         <thead>
           <tr>
             {columns.map((column) => (
@@ -35,18 +37,29 @@ export function DataTable<T>({
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <tr key={index}>
+            <tr key={index} className={styles.row}>
               {columns.map((column) => (
                 <td key={String(column.accessor)}>
                   {column.format
-                    ? column.format(row[column.accessor])
-                    : String(row[column.accessor] ?? "")}
+                    ? column.format(row[column.accessor], row)
+                    : (row[column.accessor] as ReactNode)}
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
+  );
+
+  if (!summaryLabel) {
+    return table;
+  }
+
+  return (
+    <details open={initiallyOpen} className={styles.details}>
+      <summary className={styles.summary}>{summaryLabel}</summary>
+      {table}
     </details>
   );
 }

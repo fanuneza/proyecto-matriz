@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Footer } from "@/components/ui/Footer";
+import { Header } from "@/components/ui/Header";
 import "./globals.css";
 import { SITE_URL } from "./site";
 
@@ -102,7 +104,9 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Header />
         {children}
+        <Footer />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9XSP6Z6MQW"
           strategy="afterInteractive"

@@ -1,0 +1,78 @@
+.root {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+
+.label {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.cardTitle {
+  font-size: var(--step-1);
+}
+
+.stats {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.term {
+  color: var(--text-muted);
+}
+
+.value {
+  color: var(--text);
+  text-align: right;
+}
+
+.summary {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

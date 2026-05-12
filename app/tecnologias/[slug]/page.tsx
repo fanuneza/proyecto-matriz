@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getStoryData } from "@/lib/story-data";
+import { DataTable } from "@/components/ui/DataTable";
+import { PageShell } from "@/components/ui/PageShell";
+import shell from "@/components/ui/PageShell.module.css";
 import { slugToTecnologia } from "@/lib/slugs";
-import styles from "./page.module.css";
+import { getStoryData } from "@/lib/story-data";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${nombre} | Tecnologias`,
-    description: `Capacidad instalada, distribucion regional, trayectoria anual y pipeline para ${nombre}.`,
+    description: `Capacidad instalada, distribucion regional y trayectoria anual para ${nombre}.`,
   };
 }
 
@@ -35,83 +37,118 @@ export default async function TecnologiaPage({ params }: Props) {
     notFound();
   }
 
-  const recentYears = technology.porAnio.slice(-5);
+  const regionRows = technology.regiones.map((entry) => ({
+    region: <Link href={`/regiones/${entry.slug}`}>{entry.nombre}</Link>,
+    capacidad: `${entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`,
+    participacion: `${entry.sharePct.toFixed(1)}%`,
+  }));
+  const growthRows = technology.porAnio.slice(-6).map((entry) => ({
+    anio: String(entry.anio),
+    capacidad: `${entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`,
+  }));
 
   return (
-    <main className={styles.main}>
-      <nav style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        <Link href="/tecnologias">Todas las tecnologias</Link>
-        <Link href="/datos">Datos y metodologia</Link>
-        <Link href="/">Portada</Link>
-      </nav>
-
-      <header style={{ display: "grid", gap: "0.75rem" }}>
-        <h1>{technology.nombre}</h1>
-        <p>{technology.descripcion}</p>
-        <p>
-          {technology.topRegion
-            ? `${technology.topRegion} concentra la mayor parte visible de esta tecnologia, con ${technology.topRegionSharePct?.toFixed(1)}% del total nacional de ${technology.nombre.toLowerCase()}.`
-            : "La distribucion regional de esta tecnologia sigue abierta a nuevas instalaciones."}
-        </p>
-      </header>
-
-      <dl className={styles.stats}>
-        <dt>Capacidad instalada</dt>
-        <dd>{technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</dd>
-        <dt>Participacion dentro de ERNC</dt>
-        <dd>{technology.nationalSharePct.toFixed(1)}%</dd>
-        <dt>Pipeline asociado</dt>
-        <dd>
-          {technology.pipelineMw === null
-            ? "Sin proyectos agregados"
-            : `${technology.pipelineMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`}
-        </dd>
-      </dl>
-
-      <section>
-        <h2>Distribucion regional</h2>
-        <ul className={styles.regionList}>
-          {technology.regiones.map((entry) => (
-            <li key={entry.slug}>
-              <span>
-                <Link href={`/regiones/${entry.slug}`}>{entry.nombre}</Link>
-                <br />
-                <small>{entry.sharePct.toFixed(1)}% de esta tecnologia</small>
-              </span>
-              <span>{entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</span>
-            </li>
-          ))}
-        </ul>
+    <PageShell
+      eyebrow="Ficha tecnologica"
+      title={technology.nombre}
+      lede={<p>{technology.descripcion}</p>}
+      navLinks={[
+        { href: "/tecnologias", label: "Todas las tecnologias" },
+        { href: "/datos", label: "Datos" },
+        { href: "/", label: "Inicio" },
+      ]}
+      asideTitle="Concentracion"
+      aside={
+        <>
+          <p>
+            {technology.topRegion
+              ? `${technology.topRegion} concentra ${technology.topRegionSharePct?.toFixed(1)}% del total nacional visible de esta tecnologia.`
+              : "Sin una region claramente dominante en la agregacion actual."}
+          </p>
+          <p>
+            {technology.pipelineMw === null
+              ? "Sin pipeline agregado disponible para esta tecnologia."
+              : `${technology.pipelineMw.toLocaleString("es-CL", {
+                  maximumFractionDigits: 0,
+                })} MW siguen en construccion.`}
+          </p>
+        </>
+      }
+    >
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Indicadores principales</h2>
+        <div className={shell.metaList}>
+          <div className={shell.metaRow}>
+            <span className={shell.metaLabel}>Capacidad instalada</span>
+            <strong className={shell.metaValue}>
+              {technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
+            </strong>
+          </div>
+          <div className={shell.metaRow}>
+            <span className={shell.metaLabel}>Participacion dentro de ERNC</span>
+            <strong className={shell.metaValue}>
+              {technology.nationalSharePct.toFixed(1)}%
+            </strong>
+          </div>
+          <div className={shell.metaRow}>
+            <span className={shell.metaLabel}>Pipeline asociado</span>
+            <strong className={shell.metaValue}>
+              {technology.pipelineMw === null
+                ? "Sin proyectos agregados"
+                : `${technology.pipelineMw.toLocaleString("es-CL", {
+                    maximumFractionDigits: 0,
+                  })} MW`}
+            </strong>
+          </div>
+        </div>
       </section>
 
-      <section style={{ display: "grid", gap: "0.75rem" }}>
-        <h2>Crecimiento observado</h2>
-        {recentYears.length > 0 ? (
-          <ul className={styles.regionList}>
-            {recentYears.map((entry) => (
-              <li key={entry.anio}>
-                <span>{entry.anio}</span>
-                <span>{entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No hay una serie anual suficiente para resumir esta tecnologia.</p>
-        )}
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Distribucion regional</h2>
+        <DataTable
+          caption={`Capacidad instalada de ${technology.nombre.toLowerCase()} por region`}
+          columns={[
+            { header: "Region", accessor: "region" },
+            { header: "Capacidad", accessor: "capacidad" },
+            { header: "Participacion", accessor: "participacion" },
+          ]}
+          rows={regionRows}
+        />
       </section>
 
-      <section style={{ display: "grid", gap: "0.75rem" }}>
-        <h2>Metodologia</h2>
-        <p>
-          La categoria resume capacidad instalada informada por la CNE y agrupa
-          variantes menores bajo un mismo nombre editorial para evitar rutas
-          fragmentadas.
-        </p>
-        <p>
-          Capacidad instalada no equivale a generacion efectiva. El factor de planta
-          y la operacion horaria quedan fuera de esta pagina.
-        </p>
+      <section className={shell.section}>
+        <div className={shell.twoColumn}>
+          <div className={shell.stack}>
+            <h2 className={shell.sectionTitle}>Crecimiento observado</h2>
+            {growthRows.length > 0 ? (
+              <DataTable
+                caption={`Serie anual reciente de ${technology.nombre.toLowerCase()}`}
+                columns={[
+                  { header: "Ano", accessor: "anio" },
+                  { header: "Capacidad incorporada", accessor: "capacidad" },
+                ]}
+                rows={growthRows}
+              />
+            ) : (
+              <p className={shell.notice}>
+                No hay una serie anual suficiente para resumir esta tecnologia.
+              </p>
+            )}
+          </div>
+          <div className={shell.stack}>
+            <h2 className={shell.sectionTitle}>Metodologia</h2>
+            <p className={shell.sectionText}>
+              La categoria resume capacidad instalada informada por la CNE y agrupa
+              variantes menores bajo un mismo nombre editorial para evitar rutas
+              fragmentadas.
+            </p>
+            <p className={shell.sectionText}>
+              Capacidad instalada no equivale a generacion efectiva. El factor de
+              planta y la operacion horaria quedan fuera de esta pagina.
+            </p>
+          </div>
+        </div>
       </section>
-    </main>
+    </PageShell>
   );
 }

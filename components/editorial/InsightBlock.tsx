@@ -1,3 +1,5 @@
+import styles from "./InsightBlock.module.css";
+
 type Props = {
   title: string;
   value: string;
@@ -7,11 +9,11 @@ type Props = {
 
 export function InsightBlock({ title, value, context, source }: Props) {
   return (
-    <figure role="figure" aria-label={title}>
-      <figcaption>{title}</figcaption>
-      <p>{value}</p>
-      <p>{context}</p>
-      {source ? <cite>{source}</cite> : null}
+    <figure role="figure" aria-label={title} className={styles.block}>
+      <figcaption className={styles.title}>{title}</figcaption>
+      <p className={styles.value}>{value}</p>
+      <p className={styles.context}>{context}</p>
+      {source ? <cite className={styles.source}>{source}</cite> : null}
     </figure>
   );
 }

@@ -1,99 +1,131 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { GlossaryList } from "@/components/ui/GlossaryList";
+import { DataTable } from "@/components/ui/DataTable";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
+import { PageShell } from "@/components/ui/PageShell";
+import shell from "@/components/ui/PageShell.module.css";
 import { listSnapshots } from "@/lib/snapshots";
 import { getStoryData } from "@/lib/story-data";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Datos y metodologia | Chile y la nueva matriz energetica",
-  description:
-    "Fuentes de datos, metodologia de calculo, glosario y archivos descargables.",
+  title: "Datos y metodologia",
+  description: "Fuentes, metodologia, glosario y descargas publicas del proyecto.",
 };
 
 export default async function DatosPage() {
   const data = await getStoryData();
-  const { metadata: meta } = data;
+  const { metadata } = data;
   const snapshots = listSnapshots();
+  const endpointRows = Object.values(metadata.endpoints).map((endpoint) => ({
+    dataset: endpoint.name,
+    consultado: new Date(endpoint.fetchedAt).toLocaleDateString("es-CL"),
+    registros: endpoint.recordCount.toLocaleString("es-CL"),
+  }));
+  const downloadRows = [
+    {
+      archivo: "Resumen nacional (CSV)",
+      ruta: <a href="/data/downloads/matriz-current.csv">Abrir archivo</a>,
+    },
+    {
+      archivo: "Regiones (CSV)",
+      ruta: <a href="/data/downloads/regiones-current.csv">Abrir archivo</a>,
+    },
+    {
+      archivo: "Tecnologias (CSV)",
+      ruta: <a href="/data/downloads/tecnologias-current.csv">Abrir archivo</a>,
+    },
+    {
+      archivo: "Resumen nacional (JSON)",
+      ruta: <a href="/data/current/summary.json">Abrir archivo</a>,
+    },
+    {
+      archivo: "Metadatos (JSON)",
+      ruta: <a href="/data/current/metadata.json">Abrir archivo</a>,
+    },
+  ];
+  const snapshotRows = snapshots.map((month) => ({
+    mes: <Link href={`/archivo/${month}`}>{month}</Link>,
+    archivo: <a href={`/data/snapshots/${month}.json`}>Descargar JSON</a>,
+  }));
 
   return (
-    <main className={styles.main}>
-      <h1>Datos y metodologia</h1>
-
-      <section aria-label="Estado de los datos" className={styles.section}>
-        <h2>Estado de los datos</h2>
+    <PageShell
+      eyebrow="Transparencia"
+      title="Datos y metodologia"
+      lede={
         <p>
-          Generado el: <time dateTime={meta.generatedAt}>{meta.generatedAt}</time>
+          Esta seccion documenta de donde salen los datos, como se agregan y que
+          archivos publica el sitio en cada build.
         </p>
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <caption>Datasets consultados</caption>
-            <thead>
-              <tr>
-                <th>Dataset</th>
-                <th>Consultado el</th>
-                <th>Registros</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.values(meta.endpoints).map((endpoint) => (
-                <tr key={endpoint.name}>
-                  <td>{endpoint.name}</td>
-                  <td>{new Date(endpoint.fetchedAt).toLocaleDateString("es-CL")}</td>
-                  <td>{endpoint.recordCount.toLocaleString("es-CL")}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      }
+      navLinks={[
+        { href: "/", label: "Inicio" },
+        { href: "/archivo", label: "Archivo" },
+        { href: "/regiones", label: "Regiones" },
+      ]}
+      asideTitle="Estado actual"
+      aside={
+        <>
+          <p>
+            Generado el{" "}
+            <time dateTime={metadata.generatedAt}>
+              {new Date(metadata.generatedAt).toLocaleString("es-CL")}
+            </time>
+            .
+          </p>
+          <p>{snapshots.length} snapshots mensuales publicados.</p>
+        </>
+      }
+    >
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Datasets consultados</h2>
+        <DataTable
+          caption="Estado de las fuentes consultadas en la compilacion actual"
+          columns={[
+            { header: "Dataset", accessor: "dataset" },
+            { header: "Consultado el", accessor: "consultado" },
+            { header: "Registros", accessor: "registros" },
+          ]}
+          rows={endpointRows}
+        />
       </section>
 
-      <div className={styles.section}>
+      <section className={shell.section}>
         <MethodologyBlock showDatosLink={false} />
-      </div>
-
-      <div className={styles.section}>
-        <GlossaryList />
-      </div>
-
-      <section aria-label="Archivos descargables" className={styles.section}>
-        <h2>Archivos descargables</h2>
-        <ul className={styles.downloads}>
-          <li>
-            <a href="/data/downloads/matriz-current.csv">Resumen nacional (CSV)</a>
-          </li>
-          <li>
-            <a href="/data/downloads/regiones-current.csv">Por region (CSV)</a>
-          </li>
-          <li>
-            <a href="/data/downloads/tecnologias-current.csv">Por tecnologia (CSV)</a>
-          </li>
-          <li>
-            <a href="/data/current/summary.json">Resumen nacional (JSON)</a>
-          </li>
-          <li>
-            <a href="/data/current/metadata.json">Metadatos (JSON)</a>
-          </li>
-        </ul>
       </section>
 
-      <section aria-label="Archivo mensual" className={styles.section}>
-        <h2>Archivo de snapshots mensuales</h2>
-        <p>
-          Los snapshots almacenan datos agregados, no respuestas brutas de la API.
-        </p>
-        {snapshots.length === 0 ? (
-          <p>No hay snapshots disponibles todavia.</p>
+      <section className={shell.section}>
+        <GlossaryList />
+      </section>
+
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Archivos descargables</h2>
+        <DataTable
+          caption="Descargas publicas del proyecto"
+          columns={[
+            { header: "Archivo", accessor: "archivo" },
+            { header: "Ruta", accessor: "ruta" },
+          ]}
+          rows={downloadRows}
+        />
+      </section>
+
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Snapshots mensuales</h2>
+        {snapshotRows.length > 0 ? (
+          <DataTable
+            caption="Snapshots agregados por mes"
+            columns={[
+              { header: "Mes", accessor: "mes" },
+              { header: "Archivo", accessor: "archivo" },
+            ]}
+            rows={snapshotRows}
+          />
         ) : (
-          <ul className={styles.downloads}>
-            {snapshots.map((month) => (
-              <li key={month}>
-                <a href={`/data/snapshots/${month}.json`}>{month}</a>
-              </li>
-            ))}
-          </ul>
+          <p className={shell.notice}>No hay snapshots disponibles todavia.</p>
         )}
       </section>
-    </main>
+    </PageShell>
   );
 }

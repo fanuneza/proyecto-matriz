@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from "./ContentBlocks.module.css";
 
 type Props = {
   showDatosLink?: boolean;
@@ -6,7 +7,7 @@ type Props = {
 
 export function MethodologyBlock({ showDatosLink = true }: Props) {
   return (
-    <section aria-label="Metodologia y fuente">
+    <section aria-label="Metodologia y fuente" className={styles.section}>
       <h2>Fuente y metodologia</h2>
       <p>
         Los datos provienen del sistema de informacion publica de la{" "}
@@ -21,14 +22,12 @@ export function MethodologyBlock({ showDatosLink = true }: Props) {
         factor de planta varia segun tecnologia y ubicacion.
       </p>
       <p>
-        Los datos se actualizan en cada compilacion del sitio y corresponden a
-        la fecha indicada en el pie de pagina.
+        Los datos se actualizan en cada compilacion del sitio y corresponden a la
+        fecha indicada en el pie de pagina.
       </p>
       {showDatosLink ? (
         <p>
-          <Link href="/datos">
-            Ver metodologia completa, glosario y archivos descargables →
-          </Link>
+          <Link href="/datos">Ver metodologia completa, glosario y archivos descargables</Link>
         </p>
       ) : null}
     </section>

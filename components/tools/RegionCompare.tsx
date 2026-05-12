@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { buildComparisonText } from "@/lib/compare-copy";
 import type { RegionProfile } from "@/lib/region-profiles";
+import styles from "./RegionCompare.module.css";
 
 type Props = {
   profiles: RegionProfile[];
@@ -14,38 +15,42 @@ type Props = {
 
 function RegionStatCard({ profile }: { profile: RegionProfile }) {
   return (
-    <article
-      style={{
-        border: "1px solid var(--border)",
-        padding: "1rem",
-        background: "var(--bg-surface)",
-      }}
-    >
-      <h2 style={{ fontSize: "var(--step-1)", marginBottom: "0.75rem" }}>{profile.nombre}</h2>
-      <dl style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "0.5rem" }}>
-        <dt>Capacidad ERNC</dt>
-        <dd>{profile.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</dd>
-        <dt>Participacion nacional</dt>
-        <dd>{profile.nationalSharePct.toFixed(1)}%</dd>
-        <dt>Tecnologia principal</dt>
-        <dd>{profile.mainTecnologia ?? "-"}</dd>
+    <article className={styles.card}>
+      <h2 className={styles.cardTitle}>{profile.nombre}</h2>
+      <dl className={styles.stats}>
+        <div className={styles.row}>
+          <dt className={styles.term}>Capacidad ERNC</dt>
+          <dd className={styles.value}>
+            {profile.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
+          </dd>
+        </div>
+        <div className={styles.row}>
+          <dt className={styles.term}>Participacion nacional</dt>
+          <dd className={styles.value}>{profile.nationalSharePct.toFixed(1)}%</dd>
+        </div>
+        <div className={styles.row}>
+          <dt className={styles.term}>Tecnologia principal</dt>
+          <dd className={styles.value}>{profile.mainTecnologia ?? "-"}</dd>
+        </div>
         {profile.nbMw !== null ? (
-          <>
-            <dt>Net billing</dt>
-            <dd>{profile.nbMw.toLocaleString("es-CL", { maximumFractionDigits: 1 })} MW</dd>
-          </>
+          <div className={styles.row}>
+            <dt className={styles.term}>Net billing</dt>
+            <dd className={styles.value}>
+              {profile.nbMw.toLocaleString("es-CL", { maximumFractionDigits: 1 })} MW
+            </dd>
+          </div>
         ) : null}
         {profile.pipelineMw !== null ? (
-          <>
-            <dt>Pipeline</dt>
-            <dd>
+          <div className={styles.row}>
+            <dt className={styles.term}>Pipeline</dt>
+            <dd className={styles.value}>
               {profile.pipelineMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
             </dd>
-          </>
+          </div>
         ) : null}
       </dl>
-      <p style={{ marginTop: "1rem" }}>
-        <Link href={`/regiones/${profile.slug}`}>Ver region →</Link>
+      <p>
+        <Link href={`/regiones/${profile.slug}`}>Ver region</Link>
       </p>
     </article>
   );
@@ -55,10 +60,9 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
   const searchParams = useSearchParams();
   const queryA = searchParams.get("a");
   const queryB = searchParams.get("b");
-  const [manualSelection, setManualSelection] = useState<{
-    a: string;
-    b: string;
-  } | null>(null);
+  const [manualSelection, setManualSelection] = useState<{ a: string; b: string } | null>(
+    null,
+  );
   const defaultA = initialA ?? profiles[0]?.slug ?? "";
   const defaultB = initialB ?? profiles[1]?.slug ?? profiles[0]?.slug ?? "";
   const slugA =
@@ -69,21 +73,15 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
     (queryB && profiles.some((profile) => profile.slug === queryB) ? queryB : defaultB);
   const profileA = profiles.find((profile) => profile.slug === slugA);
   const profileB = profiles.find((profile) => profile.slug === slugB);
-  const comparison =
-    profileA && profileB ? buildComparisonText(profileA, profileB) : null;
+  const comparison = profileA && profileB ? buildComparisonText(profileA, profileB) : null;
 
   return (
-    <div style={{ display: "grid", gap: "1.5rem" }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(14rem, 1fr))",
-          gap: "1rem",
-        }}
-      >
-        <label>
+    <div className={styles.root}>
+      <div className={styles.controls}>
+        <label className={styles.label}>
           <span>Region A</span>
           <select
+            className={styles.select}
             value={slugA}
             onChange={(event) =>
               setManualSelection({
@@ -99,9 +97,10 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
             ))}
           </select>
         </label>
-        <label>
+        <label className={styles.label}>
           <span>Region B</span>
           <select
+            className={styles.select}
             value={slugB}
             onChange={(event) =>
               setManualSelection({
@@ -121,18 +120,12 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
 
       {profileA && profileB ? (
         <>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
-              gap: "1rem",
-            }}
-          >
+          <div className={styles.grid}>
             <RegionStatCard profile={profileA} />
             <RegionStatCard profile={profileB} />
           </div>
-          <p>{comparison}</p>
-          <p style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <p className={styles.summary}>{comparison}</p>
+          <p className={styles.links}>
             <Link href={`/regiones/${profileA.slug}`}>Ir a {profileA.nombre}</Link>
             <Link href={`/regiones/${profileB.slug}`}>Ir a {profileB.nombre}</Link>
           </p>

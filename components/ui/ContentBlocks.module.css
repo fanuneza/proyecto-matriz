@@ -1,0 +1,40 @@
+.section {
+  display: grid;
+  gap: 1rem;
+}
+
+.section h2 {
+  font-size: var(--step-1);
+}
+
+.section p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.glossary {
+  display: grid;
+  gap: 1rem;
+}
+
+.entry {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.entry:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.term {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.definition {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
