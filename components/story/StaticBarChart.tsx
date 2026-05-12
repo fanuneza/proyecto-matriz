@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+import styles from "./StaticBarChart.module.css";
+
 type Bar = { label: string; value: number };
 
 type Props = {
@@ -19,43 +22,31 @@ export function StaticBarChart({
   const sorted = [...data].sort((a, b) => b.value - a.value);
 
   return (
-    <figure role="figure" aria-label={title} style={{ margin: 0 }}>
+    <figure role="figure" aria-label={title} className={styles.figure}>
       <figcaption className="sr-only">{title}</figcaption>
-      <div style={{ display: "grid", gap: "0.75rem" }} role="list">
+      <div className={styles.list} role="list">
         {sorted.map((bar) => (
-          <div
-            key={bar.label}
-            role="listitem"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 12rem) minmax(0, 1fr) auto",
-              alignItems: "center",
-              gap: "0.75rem",
-            }}
-          >
-            <span>{bar.label}</span>
+          <div key={bar.label} role="listitem" className={styles.row}>
+            <span className={styles.label}>{bar.label}</span>
             <div
               role="meter"
               aria-label={`${bar.label}: ${bar.value} ${unit}`}
               aria-valuenow={bar.value}
               aria-valuemin={0}
               aria-valuemax={max}
-              style={{
-                width: "100%",
-                height: "0.8rem",
-                background: "var(--bg-subtle)",
-                position: "relative",
-              }}
+              className={styles.track}
             >
               <div
-                style={{
-                  width: `${(bar.value / max) * 100}%`,
-                  height: "100%",
-                  background: color,
-                }}
+                className={styles.bar}
+                style={
+                  {
+                    width: `${(bar.value / max) * 100}%`,
+                    "--bar-color": color,
+                  } as CSSProperties
+                }
               />
             </div>
-            <span>
+            <span className={styles.value}>
               {bar.value.toLocaleString("es-CL", { maximumFractionDigits: 0 })} {unit}
             </span>
           </div>

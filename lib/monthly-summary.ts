@@ -34,7 +34,7 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
 
   if (topRegion) {
     parts.push(
-      `${topRegion.nombre} concentro el mayor cambio regional, con una variacion de ${Math.abs(topRegion.deltaMw).toLocaleString("es-CL", {
+      `${topRegion.nombre} concentró el mayor cambio regional, con una variacion de ${Math.abs(topRegion.deltaMw).toLocaleString("es-CL", {
         maximumFractionDigits: 0,
       })} MW.`,
     );
@@ -42,7 +42,7 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
 
   if (topTechnology) {
     parts.push(
-      `${topTechnology.nombre} fue la tecnologia con mayor movimiento mensual, con ${Math.abs(topTechnology.deltaMw).toLocaleString("es-CL", {
+      `${topTechnology.nombre} fue la tecnología con mayor movimiento mensual, con ${Math.abs(topTechnology.deltaMw).toLocaleString("es-CL", {
         maximumFractionDigits: 0,
       })} MW de diferencia.`,
     );
@@ -53,19 +53,19 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
       ? ` El mayor ajuste del pipeline aparecio en ${topPipeline.nombre}.`
       : "";
     parts.push(
-      `La cartera en construccion ${describeSignedChange(delta.pipeline.totalMwDelta)}.${pipelineText}`.trim(),
+      `La cartera en construcción ${describeSignedChange(delta.pipeline.totalMwDelta)}.${pipelineText}`.trim(),
     );
   }
 
   if (Math.abs(delta.netBilling.totalMwDelta) >= SECONDARY_MW) {
     const netBillingTail = topNetBilling
-      ? ` ${topNetBilling.nombre} registro la variacion regional mas visible.`
+      ? ` ${topNetBilling.nombre} registró la variación regional mas visible.`
       : "";
     parts.push(
-      `La generacion distribuida bajo net billing ${describeSignedChange(delta.netBilling.totalMwDelta)}.${netBillingTail}`.trim(),
+      `La generación distribuida bajo net billing ${describeSignedChange(delta.netBilling.totalMwDelta)}.${netBillingTail}`.trim(),
     );
   }
 
-  parts.push("Los valores reflejan capacidad instalada y proyectos declarados, no generacion real.");
+  parts.push("Los valores reflejan capacidad instalada y proyectos declarados, no generación real.");
   return parts.join(" ");
 }

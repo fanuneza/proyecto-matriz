@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InsightBlock } from "@/components/editorial/InsightBlock";
 import { MonthlySummary } from "@/components/story/MonthlySummary";
-import { DataTable } from "@/components/ui/DataTable";
+import { StaticBarChart } from "@/components/story/StaticBarChart";
+import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { compareSnapshots } from "@/lib/snapshot-compare";
@@ -39,6 +40,10 @@ export default async function ArchivoMonthPage({ params }: Props) {
     ernc: `${region.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`,
     participacion: `${region.nationalSharePct.toFixed(1)}%`,
   }));
+  const regionChartRows = snapshot.regiones.slice(0, 8).map((region) => ({
+    label: region.nombre,
+    value: region.erncMw,
+  }));
 
   return (
     <PageShell
@@ -55,7 +60,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
         { href: "/datos", label: "Datos" },
         { href: "/", label: "Inicio" },
       ]}
-      asideTitle="Fecha de generacion"
+      asideTitle="Fecha de generación"
       aside={
         <p>
           {new Date(snapshot.generatedAt).toLocaleString("es-CL", {
@@ -77,7 +82,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
             </strong>
           </div>
           <div className={shell.metaRow}>
-            <span className={shell.metaLabel}>Participacion en la matriz</span>
+            <span className={shell.metaLabel}>Participación en la matriz</span>
             <strong className={shell.metaValue}>
               {snapshot.national.porcentajeErnc.toFixed(1)}%
             </strong>
@@ -87,7 +92,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
             <strong className={shell.metaValue}>{snapshot.national.totalNbMw.toFixed(1)} MW</strong>
           </div>
           <div className={shell.metaRow}>
-            <span className={shell.metaLabel}>Proyectos en construccion</span>
+            <span className={shell.metaLabel}>Proyectos en construcción</span>
             <strong className={shell.metaValue}>
               {snapshot.national.pipelineMwTotal.toLocaleString("es-CL", {
                 maximumFractionDigits: 0,
@@ -103,7 +108,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
           <div className={shell.twoColumn}>
             {topRegion ? (
               <InsightBlock
-                title="Region con mayor capacidad"
+                title="Región con mayor capacidad"
                 value={`${topRegion.nombre}: ${topRegion.erncMw.toLocaleString("es-CL", {
                   maximumFractionDigits: 0,
                 })} MW`}
@@ -113,11 +118,11 @@ export default async function ArchivoMonthPage({ params }: Props) {
             ) : null}
             {topTechnology ? (
               <InsightBlock
-                title="Tecnologia dominante"
+                title="Tecnología dominante"
                 value={`${topTechnology.nombre}: ${topTechnology.erncMw.toLocaleString("es-CL", {
                   maximumFractionDigits: 0,
                 })} MW`}
-                context="La pagina agrupa variantes menores bajo slugs editoriales estables."
+                context="La página agrupa variantes menores bajo slugs editoriales estables."
                 source="Fuente: snapshot mensual del proyecto"
               />
             ) : null}
@@ -127,12 +132,19 @@ export default async function ArchivoMonthPage({ params }: Props) {
 
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Regiones con mayor capacidad</h2>
-        <DataTable
-          caption={`Regiones lideres del snapshot ${month}`}
+        <DataViewTabs
+          chart={
+            <StaticBarChart
+              data={regionChartRows}
+              title={`Regiones líderes del snapshot ${month}`}
+              unit="MW"
+            />
+          }
+          caption={`Regiones líderes del snapshot ${month}`}
           columns={[
-            { header: "Region", accessor: "region" },
+            { header: "Región", accessor: "region" },
             { header: "ERNC instalada", accessor: "ernc" },
-            { header: "Participacion nacional", accessor: "participacion" },
+            { header: "Participación nacional", accessor: "participacion" },
           ]}
           rows={regionRows}
         />
@@ -144,7 +156,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
           <MonthlySummary delta={delta} />
         ) : (
           <p className={shell.notice}>
-            El resumen comparativo aparecera cuando exista un snapshot previo valido.
+            El resumen comparativo aparecerá cuando exista un snapshot previo válido.
           </p>
         )}
       </section>

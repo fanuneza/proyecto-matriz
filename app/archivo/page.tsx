@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DataTable } from "@/components/ui/DataTable";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { listSnapshots } from "@/lib/snapshots";
 
 export const metadata: Metadata = {
   title: "Archivo mensual",
-  description: "Registro mensual de snapshots agregados de la matriz energetica.",
+  description: "Registro mensual de snapshots agregados de la matriz energética.",
 };
 
 export default function ArchivoPage() {
   const snapshots = listSnapshots();
-  const rows = snapshots.map((month) => ({
-    mes: month,
-    archivo: <Link href={`/archivo/${month}`}>Abrir snapshot</Link>,
-    descarga: <a href={`/data/snapshots/${month}.json`}>Descargar JSON</a>,
-  }));
 
   return (
     <PageShell
@@ -37,25 +31,30 @@ export default function ArchivoPage() {
       asideTitle="Uso"
       aside={
         <>
-          <p>El archivo sirve para comparar cortes mensuales sin romper la exportacion estatica.</p>
-          <p>Cada fila ofrece una pagina editorial y un JSON descargable.</p>
+          <p>El archivo sirve para comparar cortes mensuales sin romper la exportación estática.</p>
+          <p>Cada fila ofrece una página editorial y un JSON descargable.</p>
         </>
       }
     >
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Snapshots publicados</h2>
-        {rows.length > 0 ? (
-          <DataTable
-            caption="Archivo mensual del proyecto"
-            columns={[
-              { header: "Mes", accessor: "mes" },
-              { header: "Pagina", accessor: "archivo" },
-              { header: "JSON", accessor: "descarga" },
-            ]}
-            rows={rows}
-          />
+        {snapshots.length > 0 ? (
+          <div className={shell.resourceList}>
+            {snapshots.map((month) => (
+              <div key={month} className={shell.resourceRow}>
+                <div>
+                  <p className={shell.resourceTitle}>{month}</p>
+                  <p className={shell.resourceMeta}>Snapshot agregado mensual</p>
+                </div>
+                <p className={shell.inlineLinks}>
+                  <Link href={`/archivo/${month}`}>Abrir snapshot</Link>
+                  <a href={`/data/snapshots/${month}.json`}>JSON</a>
+                </p>
+              </div>
+            ))}
+          </div>
         ) : (
-          <p className={shell.notice}>No hay registros mensuales disponibles todavia.</p>
+          <p className={shell.notice}>No hay registros mensuales disponibles todavía.</p>
         )}
       </section>
     </PageShell>

@@ -35,16 +35,16 @@
       "nationalSharePct": 7.224495665355393,
       "nbMw": 30.07529800102005,
       "pipelineMw": 407.9,
-      "mainTecnologia": "Eolica"
+      "mainTecnologia": "Eólica"
     },
     {
-      "nombre": "Biobio",
+      "nombre": "Biobío",
       "slug": "biobio",
       "erncMw": 1184.7971000000005,
       "nationalSharePct": 6.125510433427717,
       "nbMw": 25.93637512000009,
       "pipelineMw": 97.1,
-      "mainTecnologia": "Eolica"
+      "mainTecnologia": "Eólica"
     },
     {
       "nombre": "Metropolitana",
@@ -56,13 +56,13 @@
       "mainTecnologia": "Solar"
     },
     {
-      "nombre": "La Araucania",
+      "nombre": "La Araucanía",
       "slug": "la-araucania",
       "erncMw": 1075.8722,
       "nationalSharePct": 5.562358640255643,
       "nbMw": 13.472882210020007,
       "pipelineMw": 98.9,
-      "mainTecnologia": "Eolica"
+      "mainTecnologia": "Eólica"
     },
     {
       "nombre": "Maule",
@@ -83,7 +83,7 @@
       "mainTecnologia": "Solar"
     },
     {
-      "nombre": "Valparaiso",
+      "nombre": "Valparaíso",
       "slug": "valparaiso",
       "erncMw": 667.9379000000004,
       "nationalSharePct": 3.4533006329368967,
@@ -92,7 +92,7 @@
       "mainTecnologia": "Solar"
     },
     {
-      "nombre": "Tarapaca",
+      "nombre": "Tarapacá",
       "slug": "tarapaca",
       "erncMw": 607.4187,
       "nationalSharePct": 3.1404107794567517,
@@ -107,10 +107,10 @@
       "nationalSharePct": 2.5011035775406127,
       "nbMw": 23.038901000199964,
       "pipelineMw": 68.8,
-      "mainTecnologia": "Eolica"
+      "mainTecnologia": "Eólica"
     },
     {
-      "nombre": "Nuble",
+      "nombre": "Ñuble",
       "slug": "nuble",
       "erncMw": 347.7014,
       "nationalSharePct": 1.7976483512809265,
@@ -128,22 +128,22 @@
       "mainTecnologia": "Solar"
     },
     {
-      "nombre": "Los Rios",
+      "nombre": "Los Ríos",
       "slug": "los-rios",
       "erncMw": 135.93560000000002,
       "nationalSharePct": 0.7027996068476675,
       "nbMw": 15.478656001299989,
       "pipelineMw": 214,
-      "mainTecnologia": "Hidraulica de Pasada"
+      "mainTecnologia": "Hidráulica de Pasada"
     },
     {
-      "nombre": "Aysen",
+      "nombre": "Aysén",
       "slug": "aysen",
       "erncMw": 28.799999999999997,
       "nationalSharePct": 0.14889865993318027,
       "nbMw": 0.8519099999999995,
       "pipelineMw": null,
-      "mainTecnologia": "Hidraulica de Pasada"
+      "mainTecnologia": "Hidráulica de Pasada"
     },
     {
       "nombre": "Magallanes",
@@ -152,7 +152,7 @@
       "nationalSharePct": 0.060024772285563306,
       "nbMw": 0.8744799999999998,
       "pipelineMw": null,
-      "mainTecnologia": "Eolica"
+      "mainTecnologia": "Eólica"
     }
   ],
   "tecnologias": [
@@ -184,7 +184,7 @@
           "mw": 780.9322
         },
         {
-          "nombre": "Valparaiso",
+          "nombre": "Valparaíso",
           "slug": "valparaiso",
           "mw": 660.2686000000004
         },
@@ -194,7 +194,7 @@
           "mw": 601.7235799999999
         },
         {
-          "nombre": "Tarapaca",
+          "nombre": "Tarapacá",
           "slug": "tarapaca",
           "mw": 601.3666999999999
         },
@@ -204,12 +204,12 @@
           "mw": 582.7073300000001
         },
         {
-          "nombre": "Nuble",
+          "nombre": "Ñuble",
           "slug": "nuble",
           "mw": 247.00339999999997
         },
         {
-          "nombre": "Biobio",
+          "nombre": "Biobío",
           "slug": "biobio",
           "mw": 165.82389999999998
         },
@@ -219,12 +219,12 @@
           "mw": 144.8668
         },
         {
-          "nombre": "La Araucania",
+          "nombre": "La Araucanía",
           "slug": "la-araucania",
           "mw": 132.11100000000002
         },
         {
-          "nombre": "Los Rios",
+          "nombre": "Los Ríos",
           "slug": "los-rios",
           "mw": 3
         },
@@ -234,14 +234,14 @@
           "mw": 3
         },
         {
-          "nombre": "Aysen",
+          "nombre": "Aysén",
           "slug": "aysen",
           "mw": 2.96
         }
       ]
     },
     {
-      "nombre": "Eolica",
+      "nombre": "Eólica",
       "slug": "eolica",
       "erncMw": 5865.297099999997,
       "nationalSharePct": 30.32412771874889,
@@ -258,7 +258,7 @@
           "mw": 1085.9769
         },
         {
-          "nombre": "La Araucania",
+          "nombre": "La Araucanía",
           "slug": "la-araucania",
           "mw": 787.072
         },
@@ -268,7 +268,7 @@
           "mw": 767.8959999999998
         },
         {
-          "nombre": "Biobio",
+          "nombre": "Biobío",
           "slug": "biobio",
           "mw": 621.9679000000001
         },
@@ -288,14 +288,14 @@
           "mw": 11.610000000000001
         },
         {
-          "nombre": "Aysen",
+          "nombre": "Aysén",
           "slug": "aysen",
           "mw": 1.8
         }
       ]
     },
     {
-      "nombre": "Hidraulica de Pasada",
+      "nombre": "Hidráulica de Pasada",
       "slug": "hidraulica-de-pasada",
       "erncMw": 645.005675,
       "nationalSharePct": 3.334738911694319,
@@ -317,12 +317,12 @@
           "mw": 84.99266499999997
         },
         {
-          "nombre": "La Araucania",
+          "nombre": "La Araucanía",
           "slug": "la-araucania",
           "mw": 79.72420000000001
         },
         {
-          "nombre": "Los Rios",
+          "nombre": "Los Ríos",
           "slug": "los-rios",
           "mw": 71.93560000000001
         },
@@ -332,12 +332,12 @@
           "mw": 50.9385
         },
         {
-          "nombre": "Biobio",
+          "nombre": "Biobío",
           "slug": "biobio",
           "mw": 41.965199999999996
         },
         {
-          "nombre": "Nuble",
+          "nombre": "Ñuble",
           "slug": "nuble",
           "mw": 30.8078
         },
@@ -347,7 +347,7 @@
           "mw": 27.7434
         },
         {
-          "nombre": "Aysen",
+          "nombre": "Aysén",
           "slug": "aysen",
           "mw": 24.04
         },
@@ -357,7 +357,7 @@
           "mw": 11.332
         },
         {
-          "nombre": "Tarapaca",
+          "nombre": "Tarapacá",
           "slug": "tarapaca",
           "mw": 6.0520000000000005
         },
@@ -367,7 +367,7 @@
           "mw": 5.1
         },
         {
-          "nombre": "Valparaiso",
+          "nombre": "Valparaíso",
           "slug": "valparaiso",
           "mw": 1.6237
         }
@@ -381,22 +381,22 @@
       "pipelineMw": null,
       "regiones": [
         {
-          "nombre": "Biobio",
+          "nombre": "Biobío",
           "slug": "biobio",
           "mw": 349.53009999999995
         },
         {
-          "nombre": "La Araucania",
+          "nombre": "La Araucanía",
           "slug": "la-araucania",
           "mw": 76.965
         },
         {
-          "nombre": "Nuble",
+          "nombre": "Ñuble",
           "slug": "nuble",
           "mw": 69.8902
         },
         {
-          "nombre": "Los Rios",
+          "nombre": "Los Ríos",
           "slug": "los-rios",
           "mw": 61
         },
@@ -413,7 +413,7 @@
       ]
     },
     {
-      "nombre": "Geotermica",
+      "nombre": "Geotérmica",
       "slug": "geotermica",
       "erncMw": 83.58,
       "nationalSharePct": 0.43211631934775024,
@@ -439,12 +439,12 @@
           "mw": 46.02
         },
         {
-          "nombre": "Valparaiso",
+          "nombre": "Valparaíso",
           "slug": "valparaiso",
           "mw": 6.0456
         },
         {
-          "nombre": "Biobio",
+          "nombre": "Biobío",
           "slug": "biobio",
           "mw": 5.51
         },
@@ -480,7 +480,7 @@
         "mw": 30.07529800102005
       },
       {
-        "nombre": "Biobio",
+        "nombre": "Biobío",
         "slug": "biobio",
         "mw": 25.93637512000009
       },
@@ -490,7 +490,7 @@
         "mw": 138.78574162740009
       },
       {
-        "nombre": "La Araucania",
+        "nombre": "La Araucanía",
         "slug": "la-araucania",
         "mw": 13.472882210020007
       },
@@ -505,12 +505,12 @@
         "mw": 57.71841431219924
       },
       {
-        "nombre": "Valparaiso",
+        "nombre": "Valparaíso",
         "slug": "valparaiso",
         "mw": 71.88329424120988
       },
       {
-        "nombre": "Tarapaca",
+        "nombre": "Tarapacá",
         "slug": "tarapaca",
         "mw": 3.3991800000000065
       },
@@ -520,7 +520,7 @@
         "mw": 23.038901000199964
       },
       {
-        "nombre": "Nuble",
+        "nombre": "Ñuble",
         "slug": "nuble",
         "mw": 23.134136000020032
       },
@@ -530,12 +530,12 @@
         "mw": 4.241910011
       },
       {
-        "nombre": "Los Rios",
+        "nombre": "Los Ríos",
         "slug": "los-rios",
         "mw": 15.478656001299989
       },
       {
-        "nombre": "Aysen",
+        "nombre": "Aysén",
         "slug": "aysen",
         "mw": 0.8519099999999995
       },
@@ -565,7 +565,7 @@
         "mw": 407.9
       },
       {
-        "nombre": "Biobio",
+        "nombre": "Biobío",
         "slug": "biobio",
         "mw": 97.1
       },
@@ -575,7 +575,7 @@
         "mw": 484
       },
       {
-        "nombre": "La Araucania",
+        "nombre": "La Araucanía",
         "slug": "la-araucania",
         "mw": 98.9
       },
@@ -590,12 +590,12 @@
         "mw": 237.95
       },
       {
-        "nombre": "Valparaiso",
+        "nombre": "Valparaíso",
         "slug": "valparaiso",
         "mw": 103.6
       },
       {
-        "nombre": "Tarapaca",
+        "nombre": "Tarapacá",
         "slug": "tarapaca",
         "mw": 533
       },
@@ -605,7 +605,7 @@
         "mw": 68.8
       },
       {
-        "nombre": "Nuble",
+        "nombre": "Ñuble",
         "slug": "nuble",
         "mw": 392
       },
@@ -615,7 +615,7 @@
         "mw": 11.9
       },
       {
-        "nombre": "Los Rios",
+        "nombre": "Los Ríos",
         "slug": "los-rios",
         "mw": 214
       }

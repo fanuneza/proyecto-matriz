@@ -19,8 +19,8 @@ export function MonthlyChangeSummary({ delta }: Props) {
       <section aria-label="Cambios mensuales">
         <h2>Cambios desde el mes pasado</h2>
         <p>
-          La comparacion mensual estara disponible una vez que existan al menos dos
-          registros historicos.
+          La comparación mensual estará disponible una vez que existan al menos dos
+          registros históricos.
         </p>
       </section>
     );
@@ -34,7 +34,7 @@ export function MonthlyChangeSummary({ delta }: Props) {
         <dd>{formatDelta(delta.national.totalErncMwDelta)}</dd>
         <dt>Net billing</dt>
         <dd>{formatDelta(delta.national.totalNbMwDelta)}</dd>
-        <dt>Proyectos en construccion</dt>
+        <dt>Proyectos en construcción</dt>
         <dd>{formatDelta(delta.national.pipelineMwDelta)}</dd>
       </dl>
       {delta.regiones[0] ? (
@@ -42,7 +42,7 @@ export function MonthlyChangeSummary({ delta }: Props) {
       ) : null}
       {delta.tecnologias[0] ? (
         <p>
-          Mayor cambio por tecnologia:{" "}
+          Mayor cambio por tecnología:{" "}
           {describeTopChange(delta.tecnologias[0].nombre, delta.tecnologias[0].deltaMw)}.
         </p>
       ) : null}

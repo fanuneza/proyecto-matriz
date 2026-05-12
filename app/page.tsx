@@ -41,30 +41,30 @@ export default async function Page() {
       <main className={styles.main}>
         <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
           <div className={`container ${styles.heroInner}`}>
-            <p className={styles.eyebrow}>Chile · Energia · Datos CNE</p>
+            <p className={styles.eyebrow}>Chile · Energía · Datos CNE</p>
             <h1 id="titulo-principal" className={styles.heroTitle}>
               Chile y la nueva
               <br />
-              <span className={styles.accent}>matriz energetica</span>
+              <span className={styles.accent}>matriz energética</span>
             </h1>
             <p className={styles.heroLead}>
-              Hoy, mas del <strong>{formatPercent(porcentajeErnc)}</strong> de la
+              Hoy, más del <strong>{formatPercent(porcentajeErnc)}</strong> de la
               capacidad instalada del sistema corresponde a fuentes renovables no
               convencionales. Esta historia se construye con datos agregados,
-              snapshots mensuales y rutas estaticas exportadas.
+              snapshots mensuales y rutas estáticas exportadas.
             </p>
 
             <div className={styles.heroStats}>
               <Stat
                 value={formatCompactMw(totalErncMw)}
                 label="Capacidad ERNC instalada"
-                sub={`${formatPercent(porcentajeErnc)} del sistema electrico`}
+                sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
                 accent
               />
-              <Stat value={formatNumber(erncCount)} label="Centrales ERNC en operacion" />
+              <Stat value={formatNumber(erncCount)} label="Centrales ERNC en operación" />
               <Stat
                 value={formatCompactMw(pipelineMwTotal)}
-                label="En construccion"
+                label="En construcción"
                 sub="Proyectos aprobados"
               />
             </div>
@@ -82,7 +82,7 @@ export default async function Page() {
               <p className={styles.chapterNum}>00</p>
               <h2 id="cap-cambios">Registro mensual</h2>
               <p>
-                El sitio ya no muestra solo una fotografia fija. Tambien prepara una
+                El sitio ya no muestra solo una fotografía fija. También prepara una
                 capa de snapshots mensuales para registrar cambios de capacidad ERNC,
                 net billing y pipeline.
               </p>
@@ -97,20 +97,20 @@ export default async function Page() {
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>01</p>
-              <h2 id="cap-regiones">La expansion renovable no es uniforme</h2>
+              <h2 id="cap-regiones">La expansión renovable no es uniforme</h2>
               <p>
-                La mayor capacidad ERNC se concentra en el norte del pais, donde la
-                radiacion solar y el desarrollo fotovoltaico de escala utility empujan
+                La mayor capacidad ERNC se concentra en el norte del país, donde la
+                radiación solar y el desarrollo fotovoltaico de escala utility empujan
                 el crecimiento.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Capacidad ERNC instalada por region</p>
+              <p className={styles.chartTitle}>Capacidad ERNC instalada por región</p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={regiones}
                 unit="MW"
-                ariaLabel="Capacidad ERNC instalada por region, en megawatts."
+                ariaLabel="Capacidad ERNC instalada por región, en megawatts."
                 height={420}
               />
             </div>
@@ -125,20 +125,20 @@ export default async function Page() {
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>02</p>
-              <h2 id="cap-tecnologias">La energia solar lidera la transicion</h2>
+              <h2 id="cap-tecnologias">La energía solar lidera la transición</h2>
               <p>
-                La tecnologia solar domina la expansion reciente, seguida por la
-                eolica y distintas variantes hidraulicas y de biomasa.
+                La tecnología solar domina la expansión reciente, seguida por la
+                eólica y distintas variantes hidráulicas y de biomasa.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Composicion por tecnologia ERNC</p>
+              <p className={styles.chartTitle}>Composición por tecnología ERNC</p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={tecnologias}
                 unit="MW"
                 color="#e8a020"
-                ariaLabel="Composicion por tecnologia ERNC."
+                ariaLabel="Composición por tecnología ERNC."
                 height={360}
               />
             </div>
@@ -149,16 +149,16 @@ export default async function Page() {
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>03</p>
-              <h2 id="cap-crecimiento">Una aceleracion sostenida desde 2015</h2>
+              <h2 id="cap-crecimiento">Una aceleración sostenida desde 2015</h2>
               <p>
-                La entrada de nueva capacidad se acelero con fuerza durante la ultima
-                decada. El pipeline actual indica que esa trayectoria continua.
+                La entrada de nueva capacidad se aceleró con fuerza durante la última
+                década. El pipeline actual indica que esa trayectoria continúa.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>MW ERNC puestos en servicio por ano</p>
+              <p className={styles.chartTitle}>MW ERNC puestos en servicio por año</p>
               <p className={styles.chartSub}>
-                Barras solidas: operacional · Barras tenues: en construccion
+                Barras sólidas: operacional · Barras tenues: en construcción
               </p>
               <GraficoCrecimiento operacional={porAnioOp} pipeline={porAnioPipe} />
             </div>
@@ -173,10 +173,10 @@ export default async function Page() {
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>04</p>
-              <h2 id="cap-netbilling">La transicion tambien ocurre a pequena escala</h2>
+              <h2 id="cap-netbilling">La transición también ocurre a pequeña escala</h2>
               <p>
-                La generacion distribuida avanza con instalaciones conectadas a la red
-                bajo net billing. Ya no es solo un fenomeno residencial: tambien
+                La generación distribuida avanza con instalaciones conectadas a la red
+                bajo net billing. Ya no es solo un fenómeno residencial: también
                 aparece en comercio y servicios.
               </p>
               <p>
@@ -185,8 +185,8 @@ export default async function Page() {
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Generacion distribuida (net billing)</p>
-              <p className={styles.chartSub}>Capacidad acumulada y distribucion regional</p>
+              <p className={styles.chartTitle}>Generación distribuida (net billing)</p>
+              <p className={styles.chartSub}>Capacidad acumulada y distribución regional</p>
               <GraficoNetBilling porMes={nbPorMes} porRegion={nbPorRegion} />
             </div>
           </div>
@@ -195,13 +195,13 @@ export default async function Page() {
         <section className={styles.cierre} aria-labelledby="cap-cierre">
           <div className="container">
             <h2 id="cap-cierre" className={styles.cierreTitle}>
-              Una transicion que los datos ya reflejan
+              Una transición que los datos ya reflejan
             </h2>
             <p className={styles.cierreLead}>
-              Chile cuenta con una de las matrices electricas con mayor participacion
-              renovable de America del Sur. Esta version del proyecto ya no se limita
-              a una sola pagina: agrega rutas tematicas, snapshots mensuales,
-              comparacion regional y artefactos publicos descargables.
+              Chile cuenta con una de las matrices eléctricas con mayor participación
+              renovable de América del Sur. Esta versión del proyecto ya no se limita
+              a una sola página: agrega rutas temáticas, snapshots mensuales,
+              comparación regional y artefactos públicos descargables.
             </p>
           </div>
         </section>

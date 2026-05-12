@@ -8,7 +8,7 @@ import styles from "./Header.module.css";
 const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
   { label: "Regiones", href: "/regiones" },
-  { label: "Tecnologias", href: "/tecnologias" },
+  { label: "Tecnologías", href: "/tecnologias" },
   { label: "Comparar", href: "/comparar" },
   { label: "Datos", href: "/datos" },
   { label: "Archivo", href: "/archivo" },
@@ -27,7 +27,7 @@ export function Header() {
           <span className={styles.wordmark}>Proyecto Matriz</span>
         </Link>
 
-        <nav className={styles.nav} aria-label="Navegacion principal">
+        <nav className={styles.nav} aria-label="Navegación principal">
           <ul className={styles.navList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>
@@ -41,7 +41,7 @@ export function Header() {
 
         <button
           className={styles.burger}
-          aria-label={open ? "Cerrar menu" : "Abrir menu"}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((current) => !current)}
@@ -57,7 +57,7 @@ export function Header() {
         className={`${styles.mobileMenu} ${open ? styles.mobileMenuOpen : ""}`}
         aria-hidden={!open}
       >
-        <nav aria-label="Navegacion movil">
+        <nav aria-label="Navegación móvil">
           <ul className={styles.mobileNavList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>

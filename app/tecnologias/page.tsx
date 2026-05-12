@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DataTable } from "@/components/ui/DataTable";
+import { StaticBarChart } from "@/components/story/StaticBarChart";
+import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { getStoryData } from "@/lib/story-data";
 
 export const metadata: Metadata = {
-  title: "Energias renovables por tecnologia",
-  description: "Distribucion de la capacidad ERNC por tecnologia en Chile.",
+  title: "Energías renovables por tecnología",
+  description: "Distribución de la capacidad ERNC por tecnología en Chile.",
 };
 
 export default async function TecnologiasPage() {
   const data = await getStoryData();
-  const rows = data.technologyProfiles.map((technology) => ({
+  const chartRows = data.technologyProfiles.map((technology) => ({
+    label: technology.nombre,
+    value: technology.erncMw,
+  }));
+  const tableRows = data.technologyProfiles.map((technology) => ({
     tecnologia: <Link href={`/tecnologias/${technology.slug}`}>{technology.nombre}</Link>,
     ernc: `${technology.erncMw.toLocaleString("es-CL", {
       maximumFractionDigits: 0,
@@ -29,12 +34,12 @@ export default async function TecnologiasPage() {
 
   return (
     <PageShell
-      eyebrow="Matriz tecnologica"
-      title="Energias renovables por tecnologia"
+      eyebrow="Matriz tecnológica"
+      title="Energías renovables por tecnología"
       lede={
         <p>
-          La capacidad instalada no equivale a generacion real. Esta vista ordena las
-          tecnologias principales del proyecto y su peso relativo dentro del total
+          La capacidad instalada no equivale a generación real. Esta vista ordena las
+          tecnologías principales del proyecto y su peso relativo dentro del total
           ERNC.
         </p>
       }
@@ -46,23 +51,30 @@ export default async function TecnologiasPage() {
       asideTitle="Criterio editorial"
       aside={
         <>
-          <p>Las variantes menores se agrupan bajo categorias estables.</p>
-          <p>La tabla mantiene slugs y nombres consistentes para rutas y SEO.</p>
+          <p>Las variantes menores se agrupan bajo categorías estables.</p>
+          <p>Los nombres y slugs se mantienen consistentes para rutas y SEO.</p>
         </>
       }
     >
       <section className={shell.section}>
-        <h2 className={shell.sectionTitle}>Panorama por tecnologia</h2>
-        <DataTable
-          caption="Capacidad ERNC por tecnologia principal"
+        <h2 className={shell.sectionTitle}>Panorama por tecnología</h2>
+        <DataViewTabs
+          chart={
+            <StaticBarChart
+              data={chartRows}
+              title="Capacidad ERNC por tecnología principal"
+              unit="MW"
+            />
+          }
+          caption="Capacidad ERNC por tecnología principal"
           columns={[
-            { header: "Tecnologia", accessor: "tecnologia" },
+            { header: "Tecnología", accessor: "tecnologia" },
             { header: "ERNC instalada", accessor: "ernc" },
-            { header: "Participacion ERNC", accessor: "participacion" },
-            { header: "Region lider", accessor: "region" },
+            { header: "Participación ERNC", accessor: "participacion" },
+            { header: "Región líder", accessor: "region" },
             { header: "Pipeline", accessor: "pipeline" },
           ]}
-          rows={rows}
+          rows={tableRows}
         />
       </section>
     </PageShell>

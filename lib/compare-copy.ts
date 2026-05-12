@@ -23,21 +23,21 @@ export function buildComparisonText(a: RegionProfile, b: RegionProfile): string 
     a.mainTecnologia !== b.mainTecnologia
   ) {
     parts.push(
-      `La tecnologia principal en ${a.nombre} es ${a.mainTecnologia}, mientras que en ${b.nombre} es ${b.mainTecnologia}.`,
+      `La tecnología principal en ${a.nombre} es ${a.mainTecnologia}, mientras que en ${b.nombre} es ${b.mainTecnologia}.`,
     );
   }
 
   if (a.nbMw !== null && b.nbMw !== null) {
     const largerNb = a.nbMw >= b.nbMw ? a : b;
     parts.push(
-      `${largerNb.nombre} tiene mas capacidad de generacion distribuida (net billing).`,
+      `${largerNb.nombre} tiene más capacidad de generación distribuida (net billing).`,
     );
   }
 
   if (a.pipelineMw !== null && b.pipelineMw !== null && a.pipelineMw !== b.pipelineMw) {
     const largerPipeline = a.pipelineMw >= b.pipelineMw ? a : b;
     parts.push(
-      `${largerPipeline.nombre} muestra una cartera en construccion mayor que la de la otra region.`,
+      `${largerPipeline.nombre} muestra una cartera en construcción mayor que la de la otra region.`,
     );
   }
 

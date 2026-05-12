@@ -69,7 +69,7 @@
   font-size: var(--step-5);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   margin-bottom: var(--space-md);
 }
 
@@ -135,7 +135,7 @@
   font-size: var(--step-3);
   font-weight: 700;
   color: var(--border);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1;
   margin-bottom: var(--space-sm);
   max-width: none;

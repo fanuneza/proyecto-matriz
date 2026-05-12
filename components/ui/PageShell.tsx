@@ -31,7 +31,7 @@ export function PageShell({
       <div className={`container ${styles.inner}`}>
         <header className={styles.header}>
           {navLinks.length > 0 ? (
-            <nav className={styles.nav} aria-label="Navegacion de la seccion">
+            <nav className={styles.nav} aria-label="Navegación de la sección">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href} className={styles.navLink}>
                   {link.label}

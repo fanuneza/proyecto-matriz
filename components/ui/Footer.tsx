@@ -4,7 +4,7 @@ import styles from "./Footer.module.css";
 const FOOTER_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Regiones", href: "/regiones" },
-  { label: "Tecnologias", href: "/tecnologias" },
+  { label: "Tecnologías", href: "/tecnologias" },
   { label: "Comparar", href: "/comparar" },
   { label: "Datos", href: "/datos" },
   { label: "Archivo", href: "/archivo" },
@@ -15,11 +15,11 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.methodology}>
-          <h2 className={styles.heading}>Metodologia</h2>
+          <h2 className={styles.heading}>Metodología</h2>
           <p>
-            Los datos provienen de la API publica de la Comision Nacional de Energia
+            Los datos provienen de la API pública de la Comisión Nacional de Energia
             (CNE). El sitio publica capacidad instalada operacional, proyectos en
-            construccion y generacion distribuida agregada.
+            construcción y generación distribuida agregada.
           </p>
         </div>
 
@@ -38,13 +38,13 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Fabian Nunez
+              Fabián Núñez
             </a>
           </p>
           <p className={styles.source}>
             Datos:{" "}
             <a href="https://api.cne.cl" target="_blank" rel="noopener noreferrer">
-              Comision Nacional de Energia
+              Comisión Nacional de Energía
             </a>
           </p>
         </div>

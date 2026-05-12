@@ -1,6 +1,7 @@
 "use client";
 
 import { StaticBarChart } from "@/components/story/StaticBarChart";
+import { ChartTabs } from "@/components/ui/ChartTabs";
 import { DataTable } from "@/components/ui/DataTable";
 import { CHART_COLORS } from "@/lib/chart-theme";
 
@@ -24,21 +25,35 @@ export function BarraHorizontal({
   void height;
 
   return (
-    <div>
-      <StaticBarChart data={data} title={ariaLabel} unit={unit} color={color} />
-      <DataTable
-        caption={ariaLabel}
-        columns={[
-          { header: "Etiqueta", accessor: "label" },
-          {
-            header: unit,
-            accessor: "value",
-            format: (value) =>
-              `${Number(value).toLocaleString("es-CL", { maximumFractionDigits: 0 })} ${unit}`,
-          },
-        ]}
-        rows={data}
-      />
-    </div>
+    <ChartTabs
+      items={[
+        {
+          id: "grafico",
+          label: "Gráfico",
+          content: <StaticBarChart data={data} title={ariaLabel} unit={unit} color={color} />,
+        },
+        {
+          id: "tabla",
+          label: "Tabla",
+          content: (
+            <DataTable
+              caption={ariaLabel}
+              columns={[
+                { header: "Etiqueta", accessor: "label" },
+                {
+                  header: unit,
+                  accessor: "value",
+                  format: (value) =>
+                    `${Number(value).toLocaleString("es-CL", {
+                      maximumFractionDigits: 0,
+                    })} ${unit}`,
+                },
+              ]}
+              rows={data}
+            />
+          ),
+        },
+      ]}
+    />
   );
 }

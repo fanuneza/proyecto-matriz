@@ -25,11 +25,11 @@ function RegionStatCard({ profile }: { profile: RegionProfile }) {
           </dd>
         </div>
         <div className={styles.row}>
-          <dt className={styles.term}>Participacion nacional</dt>
+          <dt className={styles.term}>Participación nacional</dt>
           <dd className={styles.value}>{profile.nationalSharePct.toFixed(1)}%</dd>
         </div>
         <div className={styles.row}>
-          <dt className={styles.term}>Tecnologia principal</dt>
+          <dt className={styles.term}>Tecnología principal</dt>
           <dd className={styles.value}>{profile.mainTecnologia ?? "-"}</dd>
         </div>
         {profile.nbMw !== null ? (
@@ -50,7 +50,7 @@ function RegionStatCard({ profile }: { profile: RegionProfile }) {
         ) : null}
       </dl>
       <p>
-        <Link href={`/regiones/${profile.slug}`}>Ver region</Link>
+        <Link href={`/regiones/${profile.slug}`}>Ver región</Link>
       </p>
     </article>
   );
@@ -79,7 +79,7 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
     <div className={styles.root}>
       <div className={styles.controls}>
         <label className={styles.label}>
-          <span>Region A</span>
+          <span>Región A</span>
           <select
             className={styles.select}
             value={slugA}
@@ -98,7 +98,7 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
           </select>
         </label>
         <label className={styles.label}>
-          <span>Region B</span>
+          <span>Región B</span>
           <select
             className={styles.select}
             value={slugB}

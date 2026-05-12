@@ -19,8 +19,8 @@ export default async function CompararPage() {
       lede={
         <p>
           Contrasta dos regiones con el mismo marco visual del sitio: capacidad ERNC
-          instalada, participacion nacional, tecnologia dominante, net billing y
-          pipeline en construccion.
+          instalada, participación nacional, tecnología dominante, net billing y
+          pipeline en construcción.
         </p>
       }
       navLinks={[
@@ -32,7 +32,7 @@ export default async function CompararPage() {
       aside={
         <>
           <p>Comparador construido con perfiles regionales agregados.</p>
-          <p>Los resultados mantienen el mismo corte metodologico que la portada.</p>
+          <p>Los resultados mantienen el mismo corte metodológico que la portada.</p>
         </>
       }
     >

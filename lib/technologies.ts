@@ -13,15 +13,15 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
     aliases: ["solar fotovoltaica", "solar-csp", "solar csp", "csp", "termosolar"],
   },
   {
-    nombre: "Eolica",
+    nombre: "Eólica",
     slug: "eolica",
-    descripcion: "Centrales que aprovechan la energia del viento.",
+    descripcion: "Centrales que aprovechan la energía del viento.",
     aliases: ["eolica", "eolica onshore", "viento"],
   },
   {
-    nombre: "Hidraulica de Pasada",
+    nombre: "Hidráulica de Pasada",
     slug: "hidraulica-de-pasada",
-    descripcion: "Centrales hidraulicas de pasada, incluidas variantes de menor escala.",
+    descripcion: "Centrales hidráulicas de pasada, incluidas variantes de menor escala.",
     aliases: [
       "mini hidraulica pasada",
       "mini hidroelectrica",
@@ -33,11 +33,11 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
   {
     nombre: "Biomasa",
     slug: "biomasa",
-    descripcion: "Generacion a partir de materia organica y mezclas asociadas.",
+    descripcion: "Generación a partir de materia organica y mezclas asociadas.",
     aliases: ["biomasa-petroleo n 6", "biomasa petroleo n 6", "biomasa petroleo"],
   },
   {
-    nombre: "Geotermica",
+    nombre: "Geotérmica",
     slug: "geotermica",
     descripcion: "Aprovechamiento del calor del interior de la Tierra.",
     aliases: ["geotermica"],
@@ -45,7 +45,7 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
   {
     nombre: "Biogas",
     slug: "biogas",
-    descripcion: "Generacion a partir de gases de descomposicion organica.",
+    descripcion: "Generación a partir de gases de descomposición orgánica.",
     aliases: ["bio gas", "gas de relleno"],
   },
 ];

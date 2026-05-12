@@ -1,15 +1,14 @@
 # Proyecto Matriz
 
-Sitio editorial estatico sobre la matriz energetica chilena. La aplicacion se
-construye con Next.js y publica una instantanea semanal de datos de la API de
-la Comision Nacional de Energia (CNE).
+Sitio editorial estático sobre la matriz energética chilena. La aplicación se
+construye con Next.js y publica una instantánea semanal de datos de la API de
+la Comisión Nacional de Energía (CNE).
 
 ## Estado actual
 
 - Rama principal: `main`
-- Implementacion actual: Next.js static export para Cloudflare Pages
-- Rama historica: `railway-app`
-- Dominio canonico: `https://matriz.fnunez.cl`
+- Implementación: Next.js static export para Cloudflare Pages
+- Dominio canónico: `https://matriz.fnunez.cl`
 
 ## Stack
 
@@ -17,9 +16,9 @@ la Comision Nacional de Energia (CNE).
 - React 19.2.6 y React DOM 19.2.6
 - TypeScript 6.0.3
 - ESLint 10.3.0 con `eslint-config-next` 16.2.6
-- Zod 4.4.3 para validacion de payloads CNE
+- Zod 4.4.3 para validación de payloads CNE
 - Plotly 3.5.1 y React Plotly 2.6.0 para visualizaciones
-- Cloudflare Pages para hosting estatico
+- Cloudflare Pages para hosting estático
 - GitHub Actions para disparar refrescos semanales
 
 ## Arquitectura
@@ -37,11 +36,28 @@ CNE API
   -> Cloudflare Pages
 ```
 
-No hay rutas runtime de API en produccion. Las credenciales de CNE se usan solo
-durante `npm run build`; el navegador recibe HTML, JS, CSS e imagenes estaticas.
+No hay rutas runtime de API en producción. Las credenciales de CNE se usan solo
+durante `npm run build`; el navegador recibe HTML, JS, CSS e imágenes estáticas.
 
 Si la API de CNE falla o cambia de forma incompatible durante el build, el build
-debe fallar. Cloudflare Pages mantiene publicado el ultimo deploy exitoso.
+debe fallar. Cloudflare Pages mantiene publicado el último deploy exitoso.
+
+## UI y contenido
+
+La experiencia es editorial y de datos: las páginas deben priorizar lectura,
+comparación y navegación clara sobre bloques decorativos. Las secciones nuevas
+deben reutilizar `PageShell`, `StaticBarChart`, `ChartTabs`, `DataViewTabs` y
+`DataTable` antes de crear componentes visuales propios.
+
+Regla principal para visualizaciones: mostrar siempre el gráfico por defecto y
+poner la tabla en la pestaña `Tabla`. Las tablas no deben aparecer como la vista
+principal de una página o sección, salvo que sean contenido administrativo sin
+equivalente gráfico claro; en ese caso usar listas compactas o filas de recursos.
+
+Las rutas interiores usan la navegación global del layout y navegación local en
+`PageShell`. Evitar estilos inline para layout, tarjetas dentro de tarjetas,
+sombras decorativas y secciones flotantes. En móvil, los gráficos deben mantener
+filas estables y textos con salto controlado.
 
 ## Comandos
 
@@ -57,10 +73,10 @@ npm run write-snapshot
 npm run analyze
 ```
 
-`npm run build` genera la salida estatica en `out/`.
+`npm run build` genera la salida estática en `out/`.
 
-`npm run build` tambien ejecuta `prebuild`, que genera artefactos publicos en
-`public/data/` antes del export estatico.
+`npm run build` también ejecuta `prebuild`, que genera artefactos públicos en
+`public/data/` antes del export estático.
 
 ## Artefactos de datos
 
@@ -76,17 +92,17 @@ Los archivos contienen solo datos agregados. No deben incluir payloads crudos de
 la CNE, credenciales, tokens ni secretos.
 
 Los snapshots mensuales se guardan en `data/snapshots/` y se copian a
-`public/data/snapshots/` durante la generacion de artefactos.
+`public/data/snapshots/` durante la generación de artefactos.
 
 ## Bundle analysis
 
-Ejecutar `npm run analyze` para levantar un build de analisis con webpack. En
+Ejecutar `npm run analyze` para levantar un build de análisis con webpack. En
 Next 16, `@next/bundle-analyzer` no reporta sobre builds Turbopack normales, por
-eso el script de analisis usa `next build --webpack`.
+eso el script de análisis usa `next build --webpack`.
 
-La conclusion actual es que Plotly sigue siendo la dependencia cliente mas
-costosa, mientras que el grafico horizontal simple fue reemplazado por una
-version HTML estatica para no enviar Plotly donde no aporta interactividad.
+La conclusión actual es que Plotly sigue siendo la dependencia cliente más
+costosa, mientras que el gráfico horizontal simple fue reemplazado por una
+versión HTML estática para no enviar Plotly donde no aporta interactividad.
 
 ## Variables de entorno
 
