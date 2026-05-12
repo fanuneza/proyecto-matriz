@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { RegionCompare } from "@/components/tools/RegionCompare";
 import { getStoryData } from "@/lib/story-data";
 import styles from "./page.module.css";
@@ -18,7 +19,9 @@ export default async function CompararPage() {
         Selecciona dos regiones para contrastar capacidad ERNC instalada,
         participacion nacional, tecnologia dominante y net billing.
       </p>
-      <RegionCompare profiles={data.regionProfiles} />
+      <Suspense fallback={<p>Cargando comparador...</p>}>
+        <RegionCompare profiles={data.regionProfiles} />
+      </Suspense>
     </main>
   );
 }

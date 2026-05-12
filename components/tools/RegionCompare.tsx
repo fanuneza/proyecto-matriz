@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { buildComparisonText } from "@/lib/compare-copy";
 import type { RegionProfile } from "@/lib/region-profiles";
 
 type Props = {
   profiles: RegionProfile[];
   initialA?: string;
+  initialB?: string;
 };
 
 function RegionStatCard({ profile }: { profile: RegionProfile }) {
@@ -49,10 +51,22 @@ function RegionStatCard({ profile }: { profile: RegionProfile }) {
   );
 }
 
-export function RegionCompare({ profiles, initialA }: Props) {
-  const [slugA, setSlugA] = useState(initialA ?? profiles[0]?.slug ?? "");
-  const [slugB, setSlugB] = useState(profiles[1]?.slug ?? profiles[0]?.slug ?? "");
-
+export function RegionCompare({ profiles, initialA, initialB }: Props) {
+  const searchParams = useSearchParams();
+  const queryA = searchParams.get("a");
+  const queryB = searchParams.get("b");
+  const [manualSelection, setManualSelection] = useState<{
+    a: string;
+    b: string;
+  } | null>(null);
+  const defaultA = initialA ?? profiles[0]?.slug ?? "";
+  const defaultB = initialB ?? profiles[1]?.slug ?? profiles[0]?.slug ?? "";
+  const slugA =
+    manualSelection?.a ??
+    (queryA && profiles.some((profile) => profile.slug === queryA) ? queryA : defaultA);
+  const slugB =
+    manualSelection?.b ??
+    (queryB && profiles.some((profile) => profile.slug === queryB) ? queryB : defaultB);
   const profileA = profiles.find((profile) => profile.slug === slugA);
   const profileB = profiles.find((profile) => profile.slug === slugB);
   const comparison =
@@ -69,7 +83,15 @@ export function RegionCompare({ profiles, initialA }: Props) {
       >
         <label>
           <span>Region A</span>
-          <select value={slugA} onChange={(event) => setSlugA(event.target.value)}>
+          <select
+            value={slugA}
+            onChange={(event) =>
+              setManualSelection({
+                a: event.target.value,
+                b: manualSelection?.b ?? slugB,
+              })
+            }
+          >
             {profiles.map((profile) => (
               <option key={profile.slug} value={profile.slug}>
                 {profile.nombre}
@@ -79,7 +101,15 @@ export function RegionCompare({ profiles, initialA }: Props) {
         </label>
         <label>
           <span>Region B</span>
-          <select value={slugB} onChange={(event) => setSlugB(event.target.value)}>
+          <select
+            value={slugB}
+            onChange={(event) =>
+              setManualSelection({
+                a: manualSelection?.a ?? slugA,
+                b: event.target.value,
+              })
+            }
+          >
             {profiles.map((profile) => (
               <option key={profile.slug} value={profile.slug}>
                 {profile.nombre}
@@ -102,6 +132,10 @@ export function RegionCompare({ profiles, initialA }: Props) {
             <RegionStatCard profile={profileB} />
           </div>
           <p>{comparison}</p>
+          <p style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <Link href={`/regiones/${profileA.slug}`}>Ir a {profileA.nombre}</Link>
+            <Link href={`/regiones/${profileB.slug}`}>Ir a {profileB.nombre}</Link>
+          </p>
         </>
       ) : null}
     </div>

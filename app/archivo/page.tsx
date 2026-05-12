@@ -12,6 +12,10 @@ export default function ArchivoPage() {
 
   return (
     <main style={{ maxWidth: "48rem", margin: "0 auto", padding: "4rem 1.5rem" }}>
+      <nav style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+        <Link href="/">Portada</Link>
+        <Link href="/datos">Datos</Link>
+      </nav>
       <h1>Archivo mensual</h1>
       <p>
         Cada mes se registra un snapshot de datos agregados. Estos archivos

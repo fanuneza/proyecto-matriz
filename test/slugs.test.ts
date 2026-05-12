@@ -39,8 +39,17 @@ describe("tecnologiaSlug", () => {
     expect(tecnologiaSlug("Solar")).toBe("solar");
   });
 
+  it("maps solar variants to the canonical solar slug", () => {
+    expect(tecnologiaSlug("Solar Fotovoltaica")).toBe("solar");
+    expect(tecnologiaSlug("Solar-CSP")).toBe("solar");
+  });
+
   it("converts Hidraulica de Pasada to hidraulica-de-pasada", () => {
     expect(tecnologiaSlug("Hidraulica de Pasada")).toBe("hidraulica-de-pasada");
+  });
+
+  it("maps mini hydro variants to the canonical hydraulic slug", () => {
+    expect(tecnologiaSlug("Mini Hidraulica Pasada")).toBe("hidraulica-de-pasada");
   });
 
   it("converts Eolica to eolica", () => {

@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "snapshotMonth": "2026-05",
-  "generatedAt": "2026-05-12T00:41:55.703Z",
+  "generatedAt": "2026-05-12T01:26:58.573Z",
   "national": {
     "totalErncMw": 19342.01423500002,
     "porcentajeErnc": 51.039904286153345,
@@ -11,149 +11,628 @@
   },
   "regiones": [
     {
-      "nombre": "Metropolitana",
-      "slug": "metropolitana",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Valparaiso",
-      "slug": "valparaiso",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Maule",
-      "slug": "maule",
-      "erncMw": 0
-    },
-    {
-      "nombre": "O'Higgins",
-      "slug": "ohiggins",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Coquimbo",
-      "slug": "coquimbo",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Biobio",
-      "slug": "biobio",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Los Lagos",
-      "slug": "los-lagos",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Nuble",
-      "slug": "nuble",
-      "erncMw": 0
-    },
-    {
-      "nombre": "La Araucania",
-      "slug": "la-araucania",
-      "erncMw": 0
-    },
-    {
-      "nombre": "Los Rios",
-      "slug": "los-rios",
-      "erncMw": 0
-    },
-    {
       "nombre": "Antofagasta",
       "slug": "antofagasta",
-      "erncMw": 0
+      "erncMw": 6369.654400000001,
+      "nationalSharePct": 32.93170154157936,
+      "nbMw": 5.566200000110224,
+      "pipelineMw": 1107.1,
+      "mainTecnologia": "Solar"
     },
     {
       "nombre": "Atacama",
       "slug": "atacama",
-      "erncMw": 0
+      "erncMw": 4027.8909000000003,
+      "nationalSharePct": 20.82456796413373,
+      "nbMw": 7.794209100099994,
+      "pipelineMw": 563,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "Coquimbo",
+      "slug": "coquimbo",
+      "erncMw": 1397.3629799999997,
+      "nationalSharePct": 7.224495665355393,
+      "nbMw": 30.07529800102005,
+      "pipelineMw": 407.9,
+      "mainTecnologia": "Eolica"
+    },
+    {
+      "nombre": "Biobio",
+      "slug": "biobio",
+      "erncMw": 1184.7971000000005,
+      "nationalSharePct": 6.125510433427717,
+      "nbMw": 25.93637512000009,
+      "pipelineMw": 97.1,
+      "mainTecnologia": "Eolica"
+    },
+    {
+      "nombre": "Metropolitana",
+      "slug": "metropolitana",
+      "erncMw": 1100.1472149999997,
+      "nationalSharePct": 5.687862709816678,
+      "nbMw": 138.78574162740009,
+      "pipelineMw": 484,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "La Araucania",
+      "slug": "la-araucania",
+      "erncMw": 1075.8722,
+      "nationalSharePct": 5.562358640255643,
+      "nbMw": 13.472882210020007,
+      "pipelineMw": 98.9,
+      "mainTecnologia": "Eolica"
+    },
+    {
+      "nombre": "Maule",
+      "slug": "maule",
+      "erncMw": 930.0679000000005,
+      "nationalSharePct": 4.808536942946777,
+      "nbMw": 58.058672311099855,
+      "pipelineMw": 207.20000000000002,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "O'Higgins",
+      "slug": "ohiggins",
+      "erncMw": 816.8553300000002,
+      "nationalSharePct": 4.223217499870686,
+      "nbMw": 57.71841431219924,
+      "pipelineMw": 237.95,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "Valparaiso",
+      "slug": "valparaiso",
+      "erncMw": 667.9379000000004,
+      "nationalSharePct": 3.4533006329368967,
+      "nbMw": 71.88329424120988,
+      "pipelineMw": 103.6,
+      "mainTecnologia": "Solar"
     },
     {
       "nombre": "Tarapaca",
       "slug": "tarapaca",
-      "erncMw": 0
+      "erncMw": 607.4187,
+      "nationalSharePct": 3.1404107794567517,
+      "nbMw": 3.3991800000000065,
+      "pipelineMw": 533,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "Los Lagos",
+      "slug": "los-lagos",
+      "erncMw": 483.7638100000001,
+      "nationalSharePct": 2.5011035775406127,
+      "nbMw": 23.038901000199964,
+      "pipelineMw": 68.8,
+      "mainTecnologia": "Eolica"
+    },
+    {
+      "nombre": "Nuble",
+      "slug": "nuble",
+      "erncMw": 347.7014,
+      "nationalSharePct": 1.7976483512809265,
+      "nbMw": 23.134136000020032,
+      "pipelineMw": 392,
+      "mainTecnologia": "Solar"
     },
     {
       "nombre": "Arica y Parinacota",
       "slug": "arica-y-parinacota",
-      "erncMw": 0
+      "erncMw": 156.19879999999998,
+      "nationalSharePct": 0.8075622223323207,
+      "nbMw": 4.241910011,
+      "pipelineMw": 11.9,
+      "mainTecnologia": "Solar"
+    },
+    {
+      "nombre": "Los Rios",
+      "slug": "los-rios",
+      "erncMw": 135.93560000000002,
+      "nationalSharePct": 0.7027996068476675,
+      "nbMw": 15.478656001299989,
+      "pipelineMw": 214,
+      "mainTecnologia": "Hidraulica de Pasada"
     },
     {
       "nombre": "Aysen",
       "slug": "aysen",
-      "erncMw": 0
+      "erncMw": 28.799999999999997,
+      "nationalSharePct": 0.14889865993318027,
+      "nbMw": 0.8519099999999995,
+      "pipelineMw": null,
+      "mainTecnologia": "Hidraulica de Pasada"
     },
     {
       "nombre": "Magallanes",
       "slug": "magallanes",
-      "erncMw": 0
+      "erncMw": 11.610000000000001,
+      "nationalSharePct": 0.060024772285563306,
+      "nbMw": 0.8744799999999998,
+      "pipelineMw": null,
+      "mainTecnologia": "Eolica"
     }
   ],
   "tecnologias": [
     {
       "nombre": "Solar",
       "slug": "solar",
-      "mw": 11970.653859999995
+      "erncMw": 12081.983859999997,
+      "nationalSharePct": 62.46497243362196,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Antofagasta",
+          "slug": "antofagasta",
+          "mw": 4250.271800000001
+        },
+        {
+          "nombre": "Atacama",
+          "slug": "atacama",
+          "mw": 2936.814
+        },
+        {
+          "nombre": "Metropolitana",
+          "slug": "metropolitana",
+          "mw": 969.13455
+        },
+        {
+          "nombre": "Maule",
+          "slug": "maule",
+          "mw": 780.9322
+        },
+        {
+          "nombre": "Valparaiso",
+          "slug": "valparaiso",
+          "mw": 660.2686000000004
+        },
+        {
+          "nombre": "Coquimbo",
+          "slug": "coquimbo",
+          "mw": 601.7235799999999
+        },
+        {
+          "nombre": "Tarapaca",
+          "slug": "tarapaca",
+          "mw": 601.3666999999999
+        },
+        {
+          "nombre": "O'Higgins",
+          "slug": "ohiggins",
+          "mw": 582.7073300000001
+        },
+        {
+          "nombre": "Nuble",
+          "slug": "nuble",
+          "mw": 247.00339999999997
+        },
+        {
+          "nombre": "Biobio",
+          "slug": "biobio",
+          "mw": 165.82389999999998
+        },
+        {
+          "nombre": "Arica y Parinacota",
+          "slug": "arica-y-parinacota",
+          "mw": 144.8668
+        },
+        {
+          "nombre": "La Araucania",
+          "slug": "la-araucania",
+          "mw": 132.11100000000002
+        },
+        {
+          "nombre": "Los Rios",
+          "slug": "los-rios",
+          "mw": 3
+        },
+        {
+          "nombre": "Los Lagos",
+          "slug": "los-lagos",
+          "mw": 3
+        },
+        {
+          "nombre": "Aysen",
+          "slug": "aysen",
+          "mw": 2.96
+        }
+      ]
     },
     {
-      "nombre": "Eólica",
+      "nombre": "Eolica",
       "slug": "eolica",
-      "mw": 5865.297099999997
+      "erncMw": 5865.297099999997,
+      "nationalSharePct": 30.32412771874889,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Antofagasta",
+          "slug": "antofagasta",
+          "mw": 2035.8025999999998
+        },
+        {
+          "nombre": "Atacama",
+          "slug": "atacama",
+          "mw": 1085.9769
+        },
+        {
+          "nombre": "La Araucania",
+          "slug": "la-araucania",
+          "mw": 787.072
+        },
+        {
+          "nombre": "Coquimbo",
+          "slug": "coquimbo",
+          "mw": 767.8959999999998
+        },
+        {
+          "nombre": "Biobio",
+          "slug": "biobio",
+          "mw": 621.9679000000001
+        },
+        {
+          "nombre": "Los Lagos",
+          "slug": "los-lagos",
+          "mw": 384.4489
+        },
+        {
+          "nombre": "O'Higgins",
+          "slug": "ohiggins",
+          "mw": 168.7228
+        },
+        {
+          "nombre": "Magallanes",
+          "slug": "magallanes",
+          "mw": 11.610000000000001
+        },
+        {
+          "nombre": "Aysen",
+          "slug": "aysen",
+          "mw": 1.8
+        }
+      ]
     },
     {
-      "nombre": "Mini Hidráulica Pasada",
-      "slug": "mini-hidraulica-pasada",
-      "mw": 563.1605750000001
+      "nombre": "Hidraulica de Pasada",
+      "slug": "hidraulica-de-pasada",
+      "erncMw": 645.005675,
+      "nationalSharePct": 3.334738911694319,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Maule",
+          "slug": "maule",
+          "mw": 112.4357
+        },
+        {
+          "nombre": "Los Lagos",
+          "slug": "los-lagos",
+          "mw": 96.31490999999998
+        },
+        {
+          "nombre": "Metropolitana",
+          "slug": "metropolitana",
+          "mw": 84.99266499999997
+        },
+        {
+          "nombre": "La Araucania",
+          "slug": "la-araucania",
+          "mw": 79.72420000000001
+        },
+        {
+          "nombre": "Los Rios",
+          "slug": "los-rios",
+          "mw": 71.93560000000001
+        },
+        {
+          "nombre": "O'Higgins",
+          "slug": "ohiggins",
+          "mw": 50.9385
+        },
+        {
+          "nombre": "Biobio",
+          "slug": "biobio",
+          "mw": 41.965199999999996
+        },
+        {
+          "nombre": "Nuble",
+          "slug": "nuble",
+          "mw": 30.8078
+        },
+        {
+          "nombre": "Coquimbo",
+          "slug": "coquimbo",
+          "mw": 27.7434
+        },
+        {
+          "nombre": "Aysen",
+          "slug": "aysen",
+          "mw": 24.04
+        },
+        {
+          "nombre": "Arica y Parinacota",
+          "slug": "arica-y-parinacota",
+          "mw": 11.332
+        },
+        {
+          "nombre": "Tarapaca",
+          "slug": "tarapaca",
+          "mw": 6.0520000000000005
+        },
+        {
+          "nombre": "Atacama",
+          "slug": "atacama",
+          "mw": 5.1
+        },
+        {
+          "nombre": "Valparaiso",
+          "slug": "valparaiso",
+          "mw": 1.6237
+        }
+      ]
     },
     {
       "nombre": "Biomasa",
       "slug": "biomasa",
-      "mw": 519.6904999999999
+      "erncMw": 607.6905,
+      "nationalSharePct": 3.141816010559871,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Biobio",
+          "slug": "biobio",
+          "mw": 349.53009999999995
+        },
+        {
+          "nombre": "La Araucania",
+          "slug": "la-araucania",
+          "mw": 76.965
+        },
+        {
+          "nombre": "Nuble",
+          "slug": "nuble",
+          "mw": 69.8902
+        },
+        {
+          "nombre": "Los Rios",
+          "slug": "los-rios",
+          "mw": 61
+        },
+        {
+          "nombre": "Maule",
+          "slug": "maule",
+          "mw": 36
+        },
+        {
+          "nombre": "O'Higgins",
+          "slug": "ohiggins",
+          "mw": 14.3052
+        }
+      ]
     },
     {
-      "nombre": "Solar-CSP",
-      "slug": "solar-csp",
-      "mw": 108.27
-    },
-    {
-      "nombre": "Biomasa-Petróleo N°6",
-      "slug": "biomasa-petroleo-n-6",
-      "mw": 88
-    },
-    {
-      "nombre": "Geotérmica",
+      "nombre": "Geotermica",
       "slug": "geotermica",
-      "mw": 83.58
-    },
-    {
-      "nombre": "Hidráulica Pasada",
-      "slug": "hidraulica-pasada",
-      "mw": 81.8451
+      "erncMw": 83.58,
+      "nationalSharePct": 0.43211631934775024,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Antofagasta",
+          "slug": "antofagasta",
+          "mw": 83.58
+        }
+      ]
     },
     {
       "nombre": "Biogas",
       "slug": "biogas",
-      "mw": 58.4571
-    },
-    {
-      "nombre": "Solar Fotovoltaica",
-      "slug": "solar-fotovoltaica",
-      "mw": 3.06
+      "erncMw": 58.4571,
+      "nationalSharePct": 0.30222860602708024,
+      "pipelineMw": null,
+      "regiones": [
+        {
+          "nombre": "Metropolitana",
+          "slug": "metropolitana",
+          "mw": 46.02
+        },
+        {
+          "nombre": "Valparaiso",
+          "slug": "valparaiso",
+          "mw": 6.0456
+        },
+        {
+          "nombre": "Biobio",
+          "slug": "biobio",
+          "mw": 5.51
+        },
+        {
+          "nombre": "Maule",
+          "slug": "maule",
+          "mw": 0.7
+        },
+        {
+          "nombre": "O'Higgins",
+          "slug": "ohiggins",
+          "mw": 0.1815
+        }
+      ]
     }
   ],
+  "netBilling": {
+    "totalMw": 480.31025993563907,
+    "regiones": [
+      {
+        "nombre": "Antofagasta",
+        "slug": "antofagasta",
+        "mw": 5.566200000110224
+      },
+      {
+        "nombre": "Atacama",
+        "slug": "atacama",
+        "mw": 7.794209100099994
+      },
+      {
+        "nombre": "Coquimbo",
+        "slug": "coquimbo",
+        "mw": 30.07529800102005
+      },
+      {
+        "nombre": "Biobio",
+        "slug": "biobio",
+        "mw": 25.93637512000009
+      },
+      {
+        "nombre": "Metropolitana",
+        "slug": "metropolitana",
+        "mw": 138.78574162740009
+      },
+      {
+        "nombre": "La Araucania",
+        "slug": "la-araucania",
+        "mw": 13.472882210020007
+      },
+      {
+        "nombre": "Maule",
+        "slug": "maule",
+        "mw": 58.058672311099855
+      },
+      {
+        "nombre": "O'Higgins",
+        "slug": "ohiggins",
+        "mw": 57.71841431219924
+      },
+      {
+        "nombre": "Valparaiso",
+        "slug": "valparaiso",
+        "mw": 71.88329424120988
+      },
+      {
+        "nombre": "Tarapaca",
+        "slug": "tarapaca",
+        "mw": 3.3991800000000065
+      },
+      {
+        "nombre": "Los Lagos",
+        "slug": "los-lagos",
+        "mw": 23.038901000199964
+      },
+      {
+        "nombre": "Nuble",
+        "slug": "nuble",
+        "mw": 23.134136000020032
+      },
+      {
+        "nombre": "Arica y Parinacota",
+        "slug": "arica-y-parinacota",
+        "mw": 4.241910011
+      },
+      {
+        "nombre": "Los Rios",
+        "slug": "los-rios",
+        "mw": 15.478656001299989
+      },
+      {
+        "nombre": "Aysen",
+        "slug": "aysen",
+        "mw": 0.8519099999999995
+      },
+      {
+        "nombre": "Magallanes",
+        "slug": "magallanes",
+        "mw": 0.8744799999999998
+      }
+    ]
+  },
+  "pipeline": {
+    "totalMw": 1514.5,
+    "regiones": [
+      {
+        "nombre": "Antofagasta",
+        "slug": "antofagasta",
+        "mw": 1107.1
+      },
+      {
+        "nombre": "Atacama",
+        "slug": "atacama",
+        "mw": 563
+      },
+      {
+        "nombre": "Coquimbo",
+        "slug": "coquimbo",
+        "mw": 407.9
+      },
+      {
+        "nombre": "Biobio",
+        "slug": "biobio",
+        "mw": 97.1
+      },
+      {
+        "nombre": "Metropolitana",
+        "slug": "metropolitana",
+        "mw": 484
+      },
+      {
+        "nombre": "La Araucania",
+        "slug": "la-araucania",
+        "mw": 98.9
+      },
+      {
+        "nombre": "Maule",
+        "slug": "maule",
+        "mw": 207.20000000000002
+      },
+      {
+        "nombre": "O'Higgins",
+        "slug": "ohiggins",
+        "mw": 237.95
+      },
+      {
+        "nombre": "Valparaiso",
+        "slug": "valparaiso",
+        "mw": 103.6
+      },
+      {
+        "nombre": "Tarapaca",
+        "slug": "tarapaca",
+        "mw": 533
+      },
+      {
+        "nombre": "Los Lagos",
+        "slug": "los-lagos",
+        "mw": 68.8
+      },
+      {
+        "nombre": "Nuble",
+        "slug": "nuble",
+        "mw": 392
+      },
+      {
+        "nombre": "Arica y Parinacota",
+        "slug": "arica-y-parinacota",
+        "mw": 11.9
+      },
+      {
+        "nombre": "Los Rios",
+        "slug": "los-rios",
+        "mw": 214
+      }
+    ],
+    "tecnologias": []
+  },
   "sourceMetadata": {
     "capacidad": {
-      "fetchedAt": "2026-05-12T00:41:58.189Z",
+      "fetchedAt": "2026-05-12T01:27:01.431Z",
       "recordCount": 1311
     },
     "pipeline": {
-      "fetchedAt": "2026-05-12T00:41:57.516Z",
+      "fetchedAt": "2026-05-12T01:27:01.125Z",
       "recordCount": 230
     },
     "netBilling": {
-      "fetchedAt": "2026-05-12T00:41:58.850Z",
+      "fetchedAt": "2026-05-12T01:27:03.399Z",
       "recordCount": 40494
     }
   }

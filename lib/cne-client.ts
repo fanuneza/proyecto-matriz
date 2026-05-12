@@ -2,7 +2,7 @@ const BASE_URL = process.env.CNE_API_BASE_URL ?? "https://api.cne.cl";
 const EMAIL    = process.env.CNE_API_EMAIL ?? "";
 const PASSWORD = process.env.CNE_API_PASSWORD ?? "";
 const REQUEST_TIMEOUT_MS = 15_000;
-const MAX_RETRIES = 2;
+const MAX_RETRIES = 4;
 
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -10,6 +10,15 @@ function wait(ms: number) {
 
 function isRetryableStatus(status: number) {
   return status === 429 || status >= 500;
+}
+
+function getRetryDelayMs(res: Response, attempt: number) {
+  const retryAfterSeconds = Number(res.headers.get("retry-after"));
+  if (Number.isFinite(retryAfterSeconds) && retryAfterSeconds > 0) {
+    return retryAfterSeconds * 1000;
+  }
+
+  return 400 * 2 ** attempt;
 }
 
 async function fetchWithTimeout(input: string, init: RequestInit = {}) {
@@ -34,6 +43,8 @@ async function fetchWithRetry(input: string, init: RequestInit = {}) {
       }
 
       lastError = new Error(`Retryable HTTP status ${res.status}`);
+      await wait(getRetryDelayMs(res, attempt));
+      continue;
     } catch (err) {
       lastError = err;
       if (attempt === MAX_RETRIES) {
@@ -50,36 +61,45 @@ async function fetchWithRetry(input: string, init: RequestInit = {}) {
 /* ── Token management ─────────────────────────────────────────────── */
 let cachedToken: string | null = null;
 let tokenExpiresAt = 0;
+let tokenPromise: Promise<string> | null = null;
 
 async function getToken(): Promise<string> {
   if (cachedToken && Date.now() < tokenExpiresAt - 60_000) return cachedToken;
+  if (tokenPromise) return tokenPromise;
 
   if (!EMAIL || !PASSWORD) {
     throw new Error("CNE API credentials are not configured");
   }
 
-  const body = new URLSearchParams({ email: EMAIL, password: PASSWORD });
-  const res = await fetchWithRetry(`${BASE_URL}/api/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
-    body,
-  });
+  tokenPromise = (async () => {
+    const body = new URLSearchParams({ email: EMAIL, password: PASSWORD });
+    const res = await fetchWithRetry(`${BASE_URL}/api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
+      body,
+    });
 
-  if (!res.ok) throw new Error(`CNE login failed: ${res.status} ${res.statusText}`);
+    if (!res.ok) throw new Error(`CNE login failed: ${res.status} ${res.statusText}`);
 
-  const json = (await res.json()) as { token: string };
-  if (!json.token) throw new Error("CNE login returned no token");
+    const json = (await res.json()) as { token: string };
+    if (!json.token) throw new Error("CNE login returned no token");
 
-  cachedToken = json.token;
-  // JWT exp is in seconds; parse it to know when to refresh
+    cachedToken = json.token;
+    try {
+      const payload = JSON.parse(Buffer.from(json.token.split(".")[1], "base64url").toString());
+      tokenExpiresAt = (payload.exp as number) * 1000;
+    } catch {
+      tokenExpiresAt = Date.now() + 55 * 60 * 1000;
+    }
+
+    return cachedToken;
+  })();
+
   try {
-    const payload = JSON.parse(Buffer.from(json.token.split(".")[1], "base64url").toString());
-    tokenExpiresAt = (payload.exp as number) * 1000;
-  } catch {
-    tokenExpiresAt = Date.now() + 55 * 60 * 1000; // fallback: 55 min
+    return await tokenPromise;
+  } finally {
+    tokenPromise = null;
   }
-
-  return cachedToken;
 }
 
 /* ── Response cache ───────────────────────────────────────────────── */

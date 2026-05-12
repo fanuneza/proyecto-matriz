@@ -9,6 +9,10 @@ function formatDelta(mw: number): string {
   return `${sign}${mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`;
 }
 
+function describeTopChange(nombre: string, deltaMw: number): string {
+  return `${nombre}: ${formatDelta(deltaMw)}`;
+}
+
 export function MonthlyChangeSummary({ delta }: Props) {
   if (!delta) {
     return (
@@ -33,6 +37,15 @@ export function MonthlyChangeSummary({ delta }: Props) {
         <dt>Proyectos en construccion</dt>
         <dd>{formatDelta(delta.national.pipelineMwDelta)}</dd>
       </dl>
+      {delta.regiones[0] ? (
+        <p>Mayor cambio regional: {describeTopChange(delta.regiones[0].nombre, delta.regiones[0].deltaMw)}.</p>
+      ) : null}
+      {delta.tecnologias[0] ? (
+        <p>
+          Mayor cambio por tecnologia:{" "}
+          {describeTopChange(delta.tecnologias[0].nombre, delta.tecnologias[0].deltaMw)}.
+        </p>
+      ) : null}
       <p>
         Los valores reflejan diferencias entre el snapshot de {delta.currMonth} y el
         de {delta.prevMonth}.

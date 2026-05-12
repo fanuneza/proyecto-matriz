@@ -13,12 +13,12 @@ la Comision Nacional de Energia (CNE).
 
 ## Stack
 
-- Next.js 16.2.4 App Router
-- React 19.2.5 y React DOM 19.2.5
+- Next.js 16.2.6 App Router
+- React 19.2.6 y React DOM 19.2.6
 - TypeScript 6.0.3
-- ESLint 10.2.1 con `eslint-config-next` 16.2.4
-- Zod 4.4.1 para validacion de payloads CNE
-- Plotly 3.5.0 y React Plotly 2.6.0 para visualizaciones
+- ESLint 10.3.0 con `eslint-config-next` 16.2.6
+- Zod 4.4.3 para validacion de payloads CNE
+- Plotly 3.5.1 y React Plotly 2.6.0 para visualizaciones
 - Cloudflare Pages para hosting estatico
 - GitHub Actions para disparar refrescos semanales
 

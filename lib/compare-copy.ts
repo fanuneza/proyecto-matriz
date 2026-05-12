@@ -34,5 +34,12 @@ export function buildComparisonText(a: RegionProfile, b: RegionProfile): string 
     );
   }
 
+  if (a.pipelineMw !== null && b.pipelineMw !== null && a.pipelineMw !== b.pipelineMw) {
+    const largerPipeline = a.pipelineMw >= b.pipelineMw ? a : b;
+    parts.push(
+      `${largerPipeline.nombre} muestra una cartera en construccion mayor que la de la otra region.`,
+    );
+  }
+
   return parts.join(" ");
 }

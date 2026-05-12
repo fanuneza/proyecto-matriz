@@ -18,11 +18,19 @@ export default async function TecnologiasPage() {
         La tecnologia solar concentra la mayor parte de la expansion reciente, pero
         la matriz incluye eolica, hidraulica de pasada, biomasa y otras fuentes.
       </p>
+      <p>La capacidad instalada no equivale a generacion real: cada tecnologia opera con factores de planta distintos.</p>
       <ul className={styles.list}>
         {data.technologyProfiles.map((technology) => (
           <li key={technology.slug}>
             <Link href={`/tecnologias/${technology.slug}`}>
-              <strong>{technology.nombre}</strong>
+              <span>
+                <strong>{technology.nombre}</strong>
+                <br />
+                <small>
+                  {technology.nationalSharePct.toFixed(1)}% del total ERNC
+                  {technology.topRegion ? ` · mayor presencia en ${technology.topRegion}` : ""}
+                </small>
+              </span>
               <span>
                 {technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
               </span>

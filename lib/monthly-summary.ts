@@ -1,29 +1,71 @@
-import type { SnapshotDelta } from "@/lib/snapshot-compare";
+import type { AggregateDelta, SnapshotDelta } from "@/lib/snapshot-compare";
 
-const SIGNIFICANT_THRESHOLD_MW = 100;
+const SIGNIFICANT_MW = 100;
+const SECONDARY_MW = 25;
+
+function describeSignedChange(value: number): string {
+  const magnitude = Math.abs(value).toLocaleString("es-CL", {
+    maximumFractionDigits: value % 1 === 0 ? 0 : 1,
+  });
+  return `${value > 0 ? "aumento" : "disminuyo"} en ${magnitude} MW`;
+}
+
+function firstMeaningfulChange(entries: AggregateDelta[], threshold: number) {
+  return entries.find((entry) => Math.abs(entry.deltaMw) >= threshold) ?? null;
+}
 
 export function buildMonthlySummary(delta: SnapshotDelta): string {
-  const { currMonth, national } = delta;
   const parts: string[] = [];
+  const nationalDelta = delta.national.totalErncMwDelta;
+  const topRegion = firstMeaningfulChange(delta.regiones, SIGNIFICANT_MW);
+  const topTechnology = firstMeaningfulChange(delta.tecnologias, SIGNIFICANT_MW);
+  const topPipeline = firstMeaningfulChange(delta.pipeline.regiones, SIGNIFICANT_MW);
+  const topNetBilling = firstMeaningfulChange(delta.netBilling.regiones, SECONDARY_MW);
 
-  if (Math.abs(national.totalErncMwDelta) < SIGNIFICANT_THRESHOLD_MW) {
+  if (Math.abs(nationalDelta) < SIGNIFICANT_MW) {
     parts.push(
-      `En ${currMonth}, la capacidad ERNC instalada registro sin cambios significativos respecto al mes anterior.`,
+      `En ${delta.currMonth}, la capacidad ERNC instalada se mantuvo sin cambios significativos frente a ${delta.prevMonth}.`,
     );
   } else {
-    const direction = national.totalErncMwDelta > 0 ? "aumento" : "disminuyo";
     parts.push(
-      `En ${currMonth}, la capacidad ERNC instalada ${direction} en ${Math.abs(national.totalErncMwDelta).toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW respecto al mes anterior.`,
+      `En ${delta.currMonth}, la capacidad ERNC instalada ${describeSignedChange(nationalDelta)} frente a ${delta.prevMonth}.`,
     );
   }
 
-  if (Math.abs(national.totalNbMwDelta) >= 10) {
-    const direction = national.totalNbMwDelta > 0 ? "aumento" : "disminuyo";
+  if (topRegion) {
     parts.push(
-      `La capacidad de generacion distribuida (net billing) ${direction} en ${Math.abs(national.totalNbMwDelta).toFixed(1)} MW.`,
+      `${topRegion.nombre} concentro el mayor cambio regional, con una variacion de ${Math.abs(topRegion.deltaMw).toLocaleString("es-CL", {
+        maximumFractionDigits: 0,
+      })} MW.`,
     );
   }
 
-  parts.push("Los valores reflejan capacidad instalada, no generacion real.");
+  if (topTechnology) {
+    parts.push(
+      `${topTechnology.nombre} fue la tecnologia con mayor movimiento mensual, con ${Math.abs(topTechnology.deltaMw).toLocaleString("es-CL", {
+        maximumFractionDigits: 0,
+      })} MW de diferencia.`,
+    );
+  }
+
+  if (Math.abs(delta.pipeline.totalMwDelta) >= SIGNIFICANT_MW) {
+    const pipelineText = topPipeline
+      ? ` El mayor ajuste del pipeline aparecio en ${topPipeline.nombre}.`
+      : "";
+    parts.push(
+      `La cartera en construccion ${describeSignedChange(delta.pipeline.totalMwDelta)}.${pipelineText}`.trim(),
+    );
+  }
+
+  if (Math.abs(delta.netBilling.totalMwDelta) >= SECONDARY_MW) {
+    const netBillingTail = topNetBilling
+      ? ` ${topNetBilling.nombre} registro la variacion regional mas visible.`
+      : "";
+    parts.push(
+      `La generacion distribuida bajo net billing ${describeSignedChange(delta.netBilling.totalMwDelta)}.${netBillingTail}`.trim(),
+    );
+  }
+
+  parts.push("Los valores reflejan capacidad instalada y proyectos declarados, no generacion real.");
   return parts.join(" ");
 }

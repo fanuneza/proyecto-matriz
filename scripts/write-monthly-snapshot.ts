@@ -33,12 +33,50 @@ async function main() {
       nombre: region.nombre,
       slug: region.slug,
       erncMw: region.erncMw,
+      nationalSharePct: region.nationalSharePct,
+      nbMw: region.nbMw,
+      pipelineMw: region.pipelineMw,
+      mainTecnologia: region.mainTecnologia,
     })),
     tecnologias: data.technologyProfiles.map((technology) => ({
       nombre: technology.nombre,
       slug: technology.slug,
-      mw: technology.erncMw,
+      erncMw: technology.erncMw,
+      nationalSharePct: technology.nationalSharePct,
+      pipelineMw: technology.pipelineMw,
+      regiones: technology.regiones.map((region) => ({
+        nombre: region.nombre,
+        slug: region.slug,
+        mw: region.mw,
+      })),
     })),
+    netBilling: {
+      totalMw: data.totalNbMw,
+      regiones: data.regionProfiles
+        .filter((region) => region.nbMw !== null)
+        .map((region) => ({
+          nombre: region.nombre,
+          slug: region.slug,
+          mw: region.nbMw ?? 0,
+        })),
+    },
+    pipeline: {
+      totalMw: data.pipelineMwTotal,
+      regiones: data.regionProfiles
+        .filter((region) => region.pipelineMw !== null)
+        .map((region) => ({
+          nombre: region.nombre,
+          slug: region.slug,
+          mw: region.pipelineMw ?? 0,
+        })),
+      tecnologias: data.technologyProfiles
+        .filter((technology) => technology.pipelineMw !== null)
+        .map((technology) => ({
+          nombre: technology.nombre,
+          slug: technology.slug,
+          mw: technology.pipelineMw ?? 0,
+        })),
+    },
     sourceMetadata: {
       capacidad: {
         fetchedAt: data.metadata.endpoints.capacidad.fetchedAt,

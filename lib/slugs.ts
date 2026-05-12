@@ -1,12 +1,17 @@
-import { REGION_SLUGS } from "@/lib/regions";
-import { TEC_BY_NOMBRE, TEC_BY_SLUG } from "@/lib/technologies";
+import { canonicalRegionName, REGION_SLUGS } from "@/lib/regions";
+import {
+  canonicalTechnologyName,
+  TEC_BY_NOMBRE,
+  TEC_BY_SLUG,
+} from "@/lib/technologies";
 
 const SLUG_TO_REGION = new Map(
   Object.entries(REGION_SLUGS).map(([name, slug]) => [slug, name]),
 );
 
 export function regionSlug(nombre: string): string {
-  return REGION_SLUGS[nombre] ?? toSlug(nombre);
+  const canonical = canonicalRegionName(nombre);
+  return REGION_SLUGS[canonical] ?? toSlug(canonical);
 }
 
 export function slugToRegion(slug: string): string | undefined {
@@ -14,7 +19,8 @@ export function slugToRegion(slug: string): string | undefined {
 }
 
 export function tecnologiaSlug(nombre: string): string {
-  return TEC_BY_NOMBRE.get(nombre)?.slug ?? toSlug(nombre);
+  const canonical = canonicalTechnologyName(nombre) ?? nombre;
+  return TEC_BY_NOMBRE.get(canonical)?.slug ?? toSlug(canonical);
 }
 
 export function slugToTecnologia(slug: string): string | undefined {

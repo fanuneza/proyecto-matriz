@@ -18,11 +18,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const nombre = slugToTecnologia(slug) ?? slug;
+  const nombre = slugToTecnologia(slug) ?? "Tecnologia renovable";
 
   return {
     title: `${nombre} | Tecnologias`,
-    description: `Capacidad instalada ERNC y distribucion territorial para ${nombre}.`,
+    description: `Capacidad instalada, distribucion regional, trayectoria anual y pipeline para ${nombre}.`,
   };
 }
 
@@ -35,33 +35,82 @@ export default async function TecnologiaPage({ params }: Props) {
     notFound();
   }
 
+  const recentYears = technology.porAnio.slice(-5);
+
   return (
     <main className={styles.main}>
-      <nav>
-        <Link href="/tecnologias">← Todas las tecnologias</Link>
+      <nav style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <Link href="/tecnologias">Todas las tecnologias</Link>
+        <Link href="/datos">Datos y metodologia</Link>
+        <Link href="/">Portada</Link>
       </nav>
-      <h1>{technology.nombre}</h1>
-      <p>{technology.descripcion}</p>
+
+      <header style={{ display: "grid", gap: "0.75rem" }}>
+        <h1>{technology.nombre}</h1>
+        <p>{technology.descripcion}</p>
+        <p>
+          {technology.topRegion
+            ? `${technology.topRegion} concentra la mayor parte visible de esta tecnologia, con ${technology.topRegionSharePct?.toFixed(1)}% del total nacional de ${technology.nombre.toLowerCase()}.`
+            : "La distribucion regional de esta tecnologia sigue abierta a nuevas instalaciones."}
+        </p>
+      </header>
+
       <dl className={styles.stats}>
         <dt>Capacidad instalada</dt>
-        <dd>
-          {technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
-        </dd>
-        <dt>Participacion nacional</dt>
+        <dd>{technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</dd>
+        <dt>Participacion dentro de ERNC</dt>
         <dd>{technology.nationalSharePct.toFixed(1)}%</dd>
+        <dt>Pipeline asociado</dt>
+        <dd>
+          {technology.pipelineMw === null
+            ? "Sin proyectos agregados"
+            : `${technology.pipelineMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`}
+        </dd>
       </dl>
+
       <section>
-        <h2>Regiones con mayor presencia</h2>
+        <h2>Distribucion regional</h2>
         <ul className={styles.regionList}>
-          {technology.regiones.slice(0, 8).map((entry) => (
-            <li key={entry.nombre}>
-              <span>{entry.nombre}</span>
+          {technology.regiones.map((entry) => (
+            <li key={entry.slug}>
               <span>
-                {entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
+                <Link href={`/regiones/${entry.slug}`}>{entry.nombre}</Link>
+                <br />
+                <small>{entry.sharePct.toFixed(1)}% de esta tecnologia</small>
               </span>
+              <span>{entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</span>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section style={{ display: "grid", gap: "0.75rem" }}>
+        <h2>Crecimiento observado</h2>
+        {recentYears.length > 0 ? (
+          <ul className={styles.regionList}>
+            {recentYears.map((entry) => (
+              <li key={entry.anio}>
+                <span>{entry.anio}</span>
+                <span>{entry.mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No hay una serie anual suficiente para resumir esta tecnologia.</p>
+        )}
+      </section>
+
+      <section style={{ display: "grid", gap: "0.75rem" }}>
+        <h2>Metodologia</h2>
+        <p>
+          La categoria resume capacidad instalada informada por la CNE y agrupa
+          variantes menores bajo un mismo nombre editorial para evitar rutas
+          fragmentadas.
+        </p>
+        <p>
+          Capacidad instalada no equivale a generacion efectiva. El factor de planta
+          y la operacion horaria quedan fuera de esta pagina.
+        </p>
       </section>
     </main>
   );

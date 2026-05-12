@@ -23,7 +23,21 @@ export default async function RegionesPage() {
         {data.regionProfiles.map((region) => (
           <li key={region.slug}>
             <Link href={`/regiones/${region.slug}`}>
-              <strong>{region.nombre}</strong>
+              <span>
+                <strong>{region.nombre}</strong>
+                <br />
+                <small>
+                  {region.mainTecnologia ?? "Sin tecnologia dominante"} · {region.nationalSharePct.toFixed(1)}% del total nacional
+                </small>
+                {region.nbMw !== null ? (
+                  <>
+                    <br />
+                    <small>
+                      Net billing: {region.nbMw.toLocaleString("es-CL", { maximumFractionDigits: 1 })} MW
+                    </small>
+                  </>
+                ) : null}
+              </span>
               <span>
                 {region.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
               </span>

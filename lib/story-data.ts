@@ -5,8 +5,6 @@ import {
 } from "@/lib/cne-client";
 import {
   capacidadPorAnio,
-  capacidadPorRegion,
-  capacidadPorTecnologia,
   filtrarErnc,
   netBillingPorMes,
   netBillingPorRegion,
@@ -17,7 +15,7 @@ import type { DataMetadata } from "@/lib/data-types";
 import { normalizeNetBilling } from "@/lib/normalize-netbilling";
 import { normalizePlanta, normalizePipeline } from "@/lib/normalize-ernc";
 import { buildRegionProfiles, buildTechnologyProfiles } from "@/lib/region-profiles";
-import { nombreRegion, nombreRegionCorto } from "@/lib/regions";
+import { canonicalRegionName, nombreRegion } from "@/lib/regions";
 import {
   CapacidadArraySchema,
   NetBillingArraySchema,
@@ -99,7 +97,11 @@ export async function getStoryData() {
     netBillingRecords,
     totalErncMw,
   );
-  const technologyProfiles = buildTechnologyProfiles(operationalPlants, totalErncMw);
+  const technologyProfiles = buildTechnologyProfiles(
+    operationalPlants,
+    pipelineProjects,
+    totalErncMw,
+  );
 
   return {
     totalErncMw,
@@ -107,19 +109,22 @@ export async function getStoryData() {
     totalNbMw: netBillingRecords.reduce((sum, entry) => sum + entry.potenciaKw, 0) / 1000,
     pipelineMwTotal: porAnioPipe.reduce((sum, entry) => sum + entry.mw, 0),
     erncCount: ernc.length,
-    regiones: capacidadPorRegion(ernc)
+    regiones: regionProfiles
       .slice(0, 12)
-      .map((region) => ({ label: nombreRegionCorto(region.region ?? ""), value: region.mw })),
-    tecnologias: capacidadPorTecnologia(ernc).map((technology) => ({
-      label: technology.tecnologia,
-      value: technology.mw,
+      .map((region) => ({ label: region.nombre, value: region.erncMw })),
+    tecnologias: technologyProfiles.map((technology) => ({
+      label: technology.nombre,
+      value: technology.erncMw,
     })),
     porAnioOp: capacidadPorAnio(ernc).filter(
       (entry) => entry.anio >= 2000 && entry.anio <= currentYear,
     ),
     porAnioPipe,
     nbPorMes: netBillingPorMes(netBillingRecords),
-    nbPorRegion,
+    nbPorRegion: nbPorRegion.map((entry) => ({
+      region: canonicalRegionName(entry.region),
+      kw: entry.kw,
+    })),
     regionProfiles,
     technologyProfiles,
     generadoEl: new Date(capResult.fetchedAt).toLocaleDateString("es-CL", {
