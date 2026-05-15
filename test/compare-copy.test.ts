@@ -8,10 +8,12 @@ function makeProfile(slug: string, erncMw: number, mainTec: string): RegionProfi
     nombre: slug,
     erncMw,
     nationalSharePct: (erncMw / 30000) * 100,
+    comparisonToNationalPct: 0,
     mainTecnologia: mainTec,
-    tecnologias: [{ nombre: mainTec, mw: erncMw }],
+    tecnologias: [{ nombre: mainTec, slug: mainTec.toLowerCase(), mw: erncMw, sharePct: 100 }],
     nbMw: 50,
     pipelineMw: 200,
+    pipelineProjects: null,
   };
 }
 

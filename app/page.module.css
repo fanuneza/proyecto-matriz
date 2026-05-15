@@ -93,13 +93,14 @@
   color: var(--text-muted);
   line-height: 1.65;
   max-width: 58ch;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .heroStats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
   gap: 0;
-  flex-wrap: wrap;
+  align-items: start;
 }
 
 .heroStats > * + * {
@@ -235,6 +236,22 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE — 960px (stats column breakpoint)
+══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .heroStats {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .heroStats > * + * {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    RESPONSIVE — 768px (tablet)
 ══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -247,10 +264,6 @@
 
   .heroTitle {
     font-size: clamp(2rem, 8vw, var(--step-5));
-  }
-
-  .heroStats {
-    gap: var(--space-md);
   }
 
   .chapter {
@@ -290,17 +303,6 @@
 
   .heroLead {
     font-size: var(--step-0);
-  }
-
-  .heroStats {
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .heroStats > * + * {
-    border-left: none;
-    padding-left: 0;
-    margin-left: 0;
   }
 
   .chapter {
