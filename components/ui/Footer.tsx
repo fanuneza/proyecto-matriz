@@ -1,11 +1,14 @@
 import Link from "next/link";
+import { Logo } from "./Logo";
 import styles from "./Footer.module.css";
 
-const FOOTER_LINKS = [
-  { label: "Inicio", href: "/" },
+const EXPLORE_LINKS = [
   { label: "Regiones", href: "/regiones" },
   { label: "Tecnologías", href: "/tecnologias" },
   { label: "Comparar", href: "/comparar" },
+];
+
+const RESOURCE_LINKS = [
   { label: "Datos", href: "/datos" },
   { label: "Archivo", href: "/archivo" },
 ];
@@ -14,40 +17,67 @@ export function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
-        <div className={styles.methodology}>
-          <h2 className={styles.heading}>Metodología</h2>
-          <p>
-            Los datos provienen de la API pública de la Comisión Nacional de Energia
-            (CNE). El sitio publica capacidad instalada operacional, proyectos en
-            construcción y generación distribuida agregada.
+        <div className={styles.brandCol}>
+          <Link href="/" className={styles.brand}>
+            <Logo size={20} />
+            <span className={styles.wordmark}>Proyecto Matriz</span>
+          </Link>
+          <p className={styles.tagline}>
+            Exploración visual de la transición energética chilena a partir de
+            datos abiertos de la CNE.
           </p>
         </div>
 
-        <div className={styles.credits}>
-          <nav aria-label="Enlaces del sitio" className={styles.nav}>
-            {FOOTER_LINKS.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          <p className={styles.credit}>
-            Desarrollo:{" "}
-            <a
-              href="https://agenciachucao.cl/?utm_source=proyecto-matriz&utm_medium=referral&utm_campaign=credit_footer"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Fabián Núñez
-            </a>
-          </p>
-          <p className={styles.source}>
-            Datos:{" "}
+        <div className={styles.linksCol}>
+          <div className={styles.linkGroup}>
+            <p className={styles.groupLabel}>Explorar</p>
+            <ul className={styles.linkList}>
+              {EXPLORE_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.linkGroup}>
+            <p className={styles.groupLabel}>Recursos</p>
+            <ul className={styles.linkList}>
+              {RESOURCE_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className={styles.sourceCol}>
+          <p className={styles.groupLabel}>Fuente</p>
+          <p className={styles.sourceText}>
+            Datos de la API pública de la{" "}
             <a href="https://api.cne.cl" target="_blank" rel="noopener noreferrer">
               Comisión Nacional de Energía
             </a>
+            . Capacidad instalada operacional, proyectos en construcción y
+            generación distribuida agregada.
           </p>
         </div>
+      </div>
+
+      <div className={`container ${styles.bottom}`}>
+        <p className={styles.credit}>
+          Desarrollo:{" "}
+          <a
+            href="https://agenciachucao.cl/?utm_source=proyecto-matriz&utm_medium=referral&utm_campaign=credit_footer"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Fabián Núñez
+          </a>
+        </p>
+        <Link href="/" className={styles.homeLink}>
+          proyectomatriz.cl
+        </Link>
       </div>
     </footer>
   );

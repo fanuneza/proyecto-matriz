@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InsightBlock } from "@/components/editorial/InsightBlock";
 import { StaticBarChart } from "@/components/story/StaticBarChart";
 import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
+import { formatCompactMw } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
 
 export const metadata: Metadata = {
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
 
 export default async function RegionesPage() {
   const data = await getStoryData();
+  const topRegion = data.regionProfiles[0];
   const chartRows = data.regionProfiles.map((region) => ({
     label: region.nombre,
     value: region.erncMw,
@@ -54,6 +57,14 @@ export default async function RegionesPage() {
     >
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Panorama regional</h2>
+        {topRegion ? (
+          <InsightBlock
+            title="Región con mayor capacidad"
+            value={`${topRegion.nombre} — ${formatCompactMw(topRegion.erncMw)}`}
+            context={`Concentra el ${topRegion.nationalSharePct.toFixed(1)}% de la capacidad ERNC nacional. Tecnología principal: ${topRegion.mainTecnologia ?? "mixta"}.`}
+            source="CNE"
+          />
+        ) : null}
         <DataViewTabs
           chart={
             <StaticBarChart

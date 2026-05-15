@@ -1,4 +1,5 @@
 import type { SnapshotDelta } from "@/lib/snapshot-compare";
+import styles from "./MonthlyChangeSummary.module.css";
 
 type Props = {
   delta: SnapshotDelta | null;
@@ -9,47 +10,67 @@ function formatDelta(mw: number): string {
   return `${sign}${mw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW`;
 }
 
-function describeTopChange(nombre: string, deltaMw: number): string {
-  return `${nombre}: ${formatDelta(deltaMw)}`;
+type StatCardProps = {
+  value: string;
+  label: string;
+  positive: boolean;
+};
+
+function StatCard({ value, label, positive }: StatCardProps) {
+  return (
+    <div className={styles.card}>
+      <p className={`${styles.value} ${positive ? styles.positive : styles.negative}`}>
+        {value}
+      </p>
+      <p className={styles.label}>{label}</p>
+    </div>
+  );
 }
 
 export function MonthlyChangeSummary({ delta }: Props) {
   if (!delta) {
     return (
-      <section aria-label="Cambios mensuales">
-        <h2>Cambios desde el mes pasado</h2>
-        <p>
-          La comparación mensual estará disponible una vez que existan al menos dos
-          registros históricos.
-        </p>
-      </section>
+      <p className={styles.notice}>
+        La comparación mensual estará disponible una vez que existan al menos dos
+        registros históricos.
+      </p>
     );
   }
 
+  const { totalErncMwDelta, totalNbMwDelta, pipelineMwDelta } = delta.national;
+
   return (
-    <section aria-label="Cambios mensuales">
-      <h2>Cambios desde {delta.prevMonth}</h2>
-      <dl>
-        <dt>Capacidad ERNC instalada</dt>
-        <dd>{formatDelta(delta.national.totalErncMwDelta)}</dd>
-        <dt>Net billing</dt>
-        <dd>{formatDelta(delta.national.totalNbMwDelta)}</dd>
-        <dt>Proyectos en construcción</dt>
-        <dd>{formatDelta(delta.national.pipelineMwDelta)}</dd>
-      </dl>
+    <section aria-label={`Cambios desde ${delta.prevMonth}`}>
+      <p className={styles.period}>Respecto a {delta.prevMonth}</p>
+      <div className={styles.grid}>
+        <StatCard
+          value={formatDelta(totalErncMwDelta)}
+          label="Capacidad ERNC"
+          positive={totalErncMwDelta >= 0}
+        />
+        <StatCard
+          value={formatDelta(totalNbMwDelta)}
+          label="Net billing"
+          positive={totalNbMwDelta >= 0}
+        />
+        <StatCard
+          value={formatDelta(pipelineMwDelta)}
+          label="En construcción"
+          positive={pipelineMwDelta >= 0}
+        />
+      </div>
       {delta.regiones[0] ? (
-        <p>Mayor cambio regional: {describeTopChange(delta.regiones[0].nombre, delta.regiones[0].deltaMw)}.</p>
-      ) : null}
-      {delta.tecnologias[0] ? (
-        <p>
-          Mayor cambio por tecnología:{" "}
-          {describeTopChange(delta.tecnologias[0].nombre, delta.tecnologias[0].deltaMw)}.
+        <p className={styles.detail}>
+          Mayor cambio regional: <strong>{delta.regiones[0].nombre}</strong>{" "}
+          ({formatDelta(delta.regiones[0].deltaMw)}).
         </p>
       ) : null}
-      <p>
-        Los valores reflejan diferencias entre el snapshot de {delta.currMonth} y el
-        de {delta.prevMonth}.
-      </p>
+      {delta.tecnologias[0] ? (
+        <p className={styles.detail}>
+          Mayor cambio por tecnología: <strong>{delta.tecnologias[0].nombre}</strong>{" "}
+          ({formatDelta(delta.tecnologias[0].deltaMw)}).
+        </p>
+      ) : null}
     </section>
   );
 }

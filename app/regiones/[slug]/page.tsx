@@ -57,6 +57,11 @@ export default async function RegionPage({ params }: Props) {
     <PageShell
       eyebrow="Ficha regional"
       title={region.nombre}
+      breadcrumbs={[
+        { label: "Inicio", href: "/" },
+        { label: "Regiones", href: "/regiones" },
+        { label: region.nombre },
+      ]}
       lede={
         <p>
           {topTech

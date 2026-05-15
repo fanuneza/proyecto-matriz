@@ -49,6 +49,11 @@ export default async function ArchivoMonthPage({ params }: Props) {
     <PageShell
       eyebrow="Snapshot mensual"
       title={`Snapshot ${month}`}
+      breadcrumbs={[
+        { label: "Inicio", href: "/" },
+        { label: "Archivo", href: "/archivo" },
+        { label: `Snapshot ${month}` },
+      ]}
       lede={
         <p>
           Este corte conserva agregados publicables de capacidad ERNC, net billing,

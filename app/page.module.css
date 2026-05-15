@@ -33,19 +33,20 @@
     linear-gradient(rgba(45, 212, 191, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(45, 212, 191, 0.045) 1px, transparent 1px);
   background-size: 40px 40px;
-  padding-block: var(--space-xl);
+  padding-block: var(--space-lg) var(--space-xl);
   overflow: hidden;
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  top: -120px;
-  left: -120px;
+  top: -40px;
+  left: -40px;
   width: 600px;
   height: 600px;
   background: radial-gradient(circle, rgba(45, 212, 191, 0.09) 0%, transparent 65%);
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero::after {
@@ -57,10 +58,12 @@
   height: 120px;
   background: linear-gradient(transparent, var(--bg));
   pointer-events: none;
+  z-index: 0;
 }
 
 .heroInner {
   position: relative;
+  z-index: 1;
   max-width: 780px;
 }
 
@@ -168,6 +171,10 @@
 .chapterText p strong {
   color: var(--text);
   font-weight: 600;
+}
+
+.chapterFull {
+  max-width: 65ch;
 }
 
 .chapterChart {

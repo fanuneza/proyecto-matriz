@@ -1,12 +1,9 @@
 import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
 import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
 import { BarraHorizontal } from "@/components/story/BarraHorizontal";
-import { MonthlyChangeSummary } from "@/components/story/MonthlyChangeSummary";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
 import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
-import { compareSnapshots } from "@/lib/snapshot-compare";
-import { listSnapshots, readSnapshot } from "@/lib/snapshots";
 import { getStoryData } from "@/lib/story-data";
 import styles from "./page.module.css";
 
@@ -26,16 +23,6 @@ export default async function Page() {
     generadoEl,
   } = await getStoryData();
 
-  const snapshots = listSnapshots();
-  const delta =
-    snapshots.length >= 2
-      ? (() => {
-          const current = readSnapshot(snapshots[snapshots.length - 1]);
-          const previous = readSnapshot(snapshots[snapshots.length - 2]);
-          return current && previous ? compareSnapshots(previous, current) : null;
-        })()
-      : null;
-
   return (
     <>
       <main className={styles.main}>
@@ -50,8 +37,8 @@ export default async function Page() {
             <p className={styles.heroLead}>
               Hoy, más del <strong>{formatPercent(porcentajeErnc)}</strong> de la
               capacidad instalada del sistema corresponde a fuentes renovables no
-              convencionales. Esta historia se construye con datos agregados,
-              snapshots mensuales y rutas estáticas exportadas.
+              convencionales. Esta historia se construye con datos abiertos de la
+              Comisión Nacional de Energía.
             </p>
 
             <div className={styles.heroStats}>
@@ -73,23 +60,6 @@ export default async function Page() {
               <span className={styles.heroMetaDot} aria-hidden="true" />
               Datos al {generadoEl}
             </p>
-          </div>
-        </section>
-
-        <section className={styles.chapter} aria-labelledby="cap-cambios">
-          <div className={`container ${styles.chapterLayout}`}>
-            <div className={styles.chapterText}>
-              <p className={styles.chapterNum}>00</p>
-              <h2 id="cap-cambios">Registro mensual</h2>
-              <p>
-                El sitio ya no muestra solo una fotografía fija. También prepara una
-                capa de snapshots mensuales para registrar cambios de capacidad ERNC,
-                net billing y pipeline.
-              </p>
-            </div>
-            <div className={styles.chapterChart}>
-              <MonthlyChangeSummary delta={delta} />
-            </div>
           </div>
         </section>
 
@@ -191,6 +161,15 @@ export default async function Page() {
           </div>
         </section>
 
+        <section className={styles.chapter} aria-labelledby="cap-metodologia">
+          <div className="container">
+            <div className={styles.chapterFull} id="cap-metodologia">
+              <p className={styles.chapterNum}>05</p>
+              <MethodologyBlock />
+            </div>
+          </div>
+        </section>
+
         <section className={styles.cierre} aria-labelledby="cap-cierre">
           <div className="container">
             <h2 id="cap-cierre" className={styles.cierreTitle}>
@@ -198,21 +177,10 @@ export default async function Page() {
             </h2>
             <p className={styles.cierreLead}>
               Chile cuenta con una de las matrices eléctricas con mayor participación
-              renovable de América del Sur. Esta versión del proyecto ya no se limita
-              a una sola página: agrega rutas temáticas, snapshots mensuales,
-              comparación regional y artefactos públicos descargables.
+              renovable de América del Sur. Esta versión del proyecto agrega rutas
+              temáticas, snapshots mensuales, comparación regional y artefactos
+              públicos descargables.
             </p>
-          </div>
-        </section>
-
-        <section className={styles.chapter} aria-labelledby="cap-metodologia">
-          <div className={`container ${styles.chapterLayout}`}>
-            <div className={styles.chapterText}>
-              <p className={styles.chapterNum}>05</p>
-              <div id="cap-metodologia">
-                <MethodologyBlock />
-              </div>
-            </div>
           </div>
         </section>
       </main>

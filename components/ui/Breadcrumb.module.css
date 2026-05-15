@@ -1,0 +1,40 @@
+.nav {
+  padding-block: 0.5rem;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.link {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.current {
+  color: var(--text-dim);
+  font-size: var(--step--1);
+}
+
+.sep {
+  color: var(--text-dim);
+  font-size: var(--step--1);
+  user-select: none;
+}

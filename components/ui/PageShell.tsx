@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { Breadcrumb } from "./Breadcrumb";
 import styles from "./PageShell.module.css";
 
 type NavLink = {
@@ -7,11 +8,17 @@ type NavLink = {
   label: string;
 };
 
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
 type Props = {
   eyebrow?: string;
   title: string;
   lede: ReactNode;
   navLinks?: NavLink[];
+  breadcrumbs?: BreadcrumbItem[];
   asideTitle?: string;
   aside?: ReactNode;
   children: ReactNode;
@@ -22,6 +29,7 @@ export function PageShell({
   title,
   lede,
   navLinks = [],
+  breadcrumbs,
   asideTitle,
   aside,
   children,
@@ -38,6 +46,10 @@ export function PageShell({
                 </Link>
               ))}
             </nav>
+          ) : null}
+
+          {breadcrumbs && breadcrumbs.length > 0 ? (
+            <Breadcrumb items={breadcrumbs} />
           ) : null}
 
           <div className={styles.intro}>

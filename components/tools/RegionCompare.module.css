@@ -5,8 +5,19 @@
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-template-columns: 1fr auto 1fr;
   gap: 1rem;
+  align-items: end;
+}
+
+@media (max-width: 640px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .swapButton {
+    justify-self: start;
+  }
 }
 
 .label {
@@ -60,6 +71,32 @@
 }
 
 .card:hover {
+  border-color: var(--accent-dim);
+}
+
+.cardWinner {
+  border-color: var(--accent-dim);
+  background: color-mix(in srgb, var(--bg-surface) 92%, var(--accent) 8%);
+}
+
+.swapButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  align-self: end;
+  margin-bottom: 0;
+}
+
+.swapButton:hover {
+  color: var(--text);
   border-color: var(--accent-dim);
 }
 

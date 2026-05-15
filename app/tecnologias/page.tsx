@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InsightBlock } from "@/components/editorial/InsightBlock";
 import { StaticBarChart } from "@/components/story/StaticBarChart";
 import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
+import { formatCompactMw } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
 
 export const metadata: Metadata = {
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
 
 export default async function TecnologiasPage() {
   const data = await getStoryData();
+  const topTech = data.technologyProfiles[0];
   const chartRows = data.technologyProfiles.map((technology) => ({
     label: technology.nombre,
     value: technology.erncMw,
@@ -58,6 +61,14 @@ export default async function TecnologiasPage() {
     >
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Panorama por tecnología</h2>
+        {topTech ? (
+          <InsightBlock
+            title="Tecnología dominante"
+            value={`${topTech.nombre} — ${formatCompactMw(topTech.erncMw)}`}
+            context={`Representa el ${topTech.nationalSharePct.toFixed(1)}% del total ERNC instalado. Región líder: ${topTech.topRegion ?? "sin dato"}.`}
+            source="CNE"
+          />
+        ) : null}
         <DataViewTabs
           chart={
             <StaticBarChart

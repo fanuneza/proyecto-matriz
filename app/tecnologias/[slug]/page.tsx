@@ -60,6 +60,11 @@ export default async function TecnologiaPage({ params }: Props) {
     <PageShell
       eyebrow="Ficha tecnológica"
       title={technology.nombre}
+      breadcrumbs={[
+        { label: "Inicio", href: "/" },
+        { label: "Tecnologías", href: "/tecnologias" },
+        { label: technology.nombre },
+      ]}
       lede={<p>{technology.descripcion}</p>}
       navLinks={[
         { href: "/tecnologias", label: "Todas las tecnologías" },
