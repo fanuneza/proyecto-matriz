@@ -45,6 +45,10 @@
   align-items: start;
 }
 
+.introSingle {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .copy {
   display: grid;
   gap: 0.9rem;

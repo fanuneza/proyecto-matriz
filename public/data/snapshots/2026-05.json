@@ -134,7 +134,7 @@
       "nationalSharePct": 0.7027996068476675,
       "nbMw": 15.478656001299989,
       "pipelineMw": 214,
-      "mainTecnologia": "Hidráulica de Pasada"
+      "mainTecnologia": "Hidráulica de pasada"
     },
     {
       "nombre": "Aysén",
@@ -143,7 +143,7 @@
       "nationalSharePct": 0.14889865993318027,
       "nbMw": 0.8519099999999995,
       "pipelineMw": null,
-      "mainTecnologia": "Hidráulica de Pasada"
+      "mainTecnologia": "Hidráulica de pasada"
     },
     {
       "nombre": "Magallanes",
@@ -295,7 +295,7 @@
       ]
     },
     {
-      "nombre": "Hidráulica de Pasada",
+      "nombre": "Hidráulica de pasada",
       "slug": "hidraulica-de-pasada",
       "erncMw": 645.005675,
       "nationalSharePct": 3.334738911694319,

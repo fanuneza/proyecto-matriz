@@ -162,11 +162,8 @@ export default async function Page() {
         </section>
 
         <section className={styles.chapter} aria-labelledby="cap-metodologia">
-          <div className="container">
-            <div className={styles.chapterFull} id="cap-metodologia">
-              <p className={styles.chapterNum}>05</p>
-              <MethodologyBlock />
-            </div>
+          <div className="container" id="cap-metodologia">
+            <MethodologyBlock />
           </div>
         </section>
 

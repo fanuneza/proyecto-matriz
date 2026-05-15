@@ -28,13 +28,6 @@ export default async function CompararPage() {
         { href: "/regiones", label: "Regiones" },
         { href: "/datos", label: "Datos" },
       ]}
-      asideTitle="Cobertura"
-      aside={
-        <>
-          <p>Comparador construido con perfiles regionales agregados.</p>
-          <p>Los resultados mantienen el mismo corte metodológico que la portada.</p>
-        </>
-      }
     >
       <Suspense fallback={<p className="text-muted">Cargando comparador...</p>}>
         <RegionCompare profiles={data.regionProfiles} />

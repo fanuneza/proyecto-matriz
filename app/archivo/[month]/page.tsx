@@ -110,7 +110,7 @@ export default async function ArchivoMonthPage({ params }: Props) {
 
       {(topRegion || topTechnology) && (
         <section className={shell.section}>
-          <div className={shell.twoColumn}>
+          <div className={topRegion && topTechnology ? shell.twoColumn : undefined}>
             {topRegion ? (
               <InsightBlock
                 title="Región con mayor capacidad"

@@ -19,7 +19,7 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
     aliases: ["eolica", "eolica onshore", "viento"],
   },
   {
-    nombre: "Hidráulica de Pasada",
+    nombre: "Hidráulica de pasada",
     slug: "hidraulica-de-pasada",
     descripcion: "Centrales hidráulicas de pasada, incluidas variantes de menor escala.",
     aliases: [

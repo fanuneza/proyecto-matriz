@@ -20,7 +20,7 @@ const solar: PlantaOperacional = {
   potenciaNetaMw: 100, region: "Antofagasta", anioServicio: 2022,
 };
 const hidro: PlantaOperacional = {
-  nombre: "Hidro B", propietario: "Y", tecnologia: "Hidráulica de Pasada",
+  nombre: "Hidro B", propietario: "Y", tecnologia: "Hidráulica de pasada",
   clasificacion: "ERNC", estado: "Operación",
   potenciaNetaMw: 50, region: "Los Ríos", anioServicio: 2015,
 };
@@ -129,7 +129,7 @@ describe("capacidadPorTecnologia", () => {
     const result = capacidadPorTecnologia([solar, hidro]);
     expect(result[0].tecnologia).toBe("Solar");
     expect(result[0].mw).toBe(100);
-    expect(result[1].tecnologia).toBe("Hidráulica de Pasada");
+    expect(result[1].tecnologia).toBe("Hidráulica de pasada");
     expect(result[1].mw).toBe(50);
   });
 

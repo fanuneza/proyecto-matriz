@@ -52,7 +52,7 @@ export function PageShell({
             <Breadcrumb items={breadcrumbs} />
           ) : null}
 
-          <div className={styles.intro}>
+          <div className={`${styles.intro} ${!aside ? styles.introSingle : ""}`}>
             <div className={styles.copy}>
               {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
               <h1 className={styles.title}>{title}</h1>

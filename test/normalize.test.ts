@@ -112,11 +112,11 @@ describe("normalizePipeline", () => {
     const raw = {
       proyecto: "X", propietario: "Y",
       tipo_tecnologia: "Hidro",
-      tipo_tecnologia_final: "Hidráulica de Pasada",
+      tipo_tecnologia_final: "Hidráulica de pasada",
       potencia_neta_mw: "10", region: "Aysén",
       anio_puesta_en_servicio: 2026,
     };
-    expect(normalizePipeline(raw as any).tecnologia).toBe("Hidráulica de Pasada");
+    expect(normalizePipeline(raw as any).tecnologia).toBe("Hidráulica de pasada");
   });
 
   it("falls back to tipo_tecnologia when tipo_tecnologia_final is absent", () => {
