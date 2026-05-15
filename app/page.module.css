@@ -64,7 +64,6 @@
 .heroInner {
   position: relative;
   z-index: 1;
-  max-width: 780px;
 }
 
 .eyebrow {
@@ -98,15 +97,14 @@
 
 .heroStats {
   display: grid;
-  grid-template-columns: repeat(3, max-content);
-  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-md);
   align-items: start;
 }
 
 .heroStats > * + * {
   border-left: 1px solid var(--border);
-  padding-left: var(--space-lg);
-  margin-left: var(--space-lg);
+  padding-left: var(--space-md);
 }
 
 .heroMeta {
