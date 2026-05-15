@@ -1,30 +1,17 @@
-export function Logo({ size = 28 }: { size?: number }) {
+type Props = { size?: number };
+
+export function Logo({ size = 24 }: Props) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 24 24"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
-      focusable="false"
     >
-      {/* Outer ring */}
-      <circle cx="16" cy="16" r="13.5" stroke="#e8a020" strokeWidth="1.5" />
-
-      {/* 3×3 dot grid — the "matrix" */}
-      {/* Row 1 */}
-      <circle cx="10" cy="10" r="1.4" fill="#e8a020" fillOpacity="0.35" />
-      <circle cx="16" cy="10" r="1.4" fill="#e8a020" fillOpacity="0.7" />
-      <circle cx="22" cy="10" r="1.4" fill="#e8a020" fillOpacity="0.35" />
-      {/* Row 2 */}
-      <circle cx="10" cy="16" r="1.4" fill="#e8a020" fillOpacity="0.7" />
-      <circle cx="16" cy="16" r="2.6" fill="#e8a020" />
-      <circle cx="22" cy="16" r="1.4" fill="#e8a020" fillOpacity="0.7" />
-      {/* Row 3 */}
-      <circle cx="10" cy="22" r="1.4" fill="#e8a020" fillOpacity="0.35" />
-      <circle cx="16" cy="22" r="1.4" fill="#e8a020" fillOpacity="0.7" />
-      <circle cx="22" cy="22" r="1.4" fill="#e8a020" fillOpacity="0.35" />
+      <line x1="3" y1="7"  x2="21" y2="7"  stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" />
+      <line x1="3" y1="12" x2="21" y2="12" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" />
+      <line x1="3" y1="17" x2="18" y2="17" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

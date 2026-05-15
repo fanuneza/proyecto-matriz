@@ -16,7 +16,7 @@ export function StaticBarChart({
   title,
   unit = "MW",
   maxValue,
-  color = "var(--amber)",
+  color = "var(--accent)",
 }: Props) {
   const max = maxValue ?? Math.max(...data.map((item) => item.value), 1);
   const sorted = [...data].sort((a, b) => b.value - a.value);

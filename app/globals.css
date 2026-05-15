@@ -1,18 +1,18 @@
 /* ── Design tokens ──────────────────────────────────────────────────── */
 :root {
-  --bg:          #0e0f11;
-  --bg-surface:  #16181c;
-  --bg-subtle:   #1e2027;
+  --bg:          #0b0f14;
+  --bg-surface:  #111822;
+  --bg-subtle:   #162030;
 
-  --amber:       #e8a020;
-  --amber-light: #f5c25a;
-  --amber-dim:   #9a6a14;
+  --accent:       #2dd4bf;
+  --accent-light: #5eead4;
+  --accent-dim:   #1a5a52;
 
-  --text:        #e8e6e1;
-  --text-muted:  #8a8680;
-  --text-dim:    #5a5855;
+  --text:        #ddeef2;
+  --text-muted:  #6b7d8a;
+  --text-dim:    #3a4550;
 
-  --border:      #2a2c32;
+  --border:      #1e2833;
 
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
@@ -84,12 +84,12 @@ p {
 }
 
 a {
-  color: var(--amber);
+  color: var(--accent);
   text-decoration: none;
 }
-a:hover { color: var(--amber-light); text-decoration: underline; }
+a:hover { color: var(--accent-light); }
 a:focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -107,9 +107,9 @@ a:focus-visible {
   border: 0;
 }
 
-.text-muted  { color: var(--text-muted); }
-.text-amber  { color: var(--amber); }
-.text-small  { font-size: var(--step--1); }
+.text-muted   { color: var(--text-muted); }
+.text-accent  { color: var(--accent); }
+.text-small   { font-size: var(--step--1); }
 
 .container {
   width: 100%;

@@ -28,37 +28,45 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-image: url("/hero.jpg");
-  background-size: cover;
-  background-position: center;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
   padding-block: var(--space-xl);
+  overflow: hidden;
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.78);
+  top: -120px;
+  left: -120px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(transparent, var(--bg));
   pointer-events: none;
 }
 
 .heroInner {
-  position: relative; /* sit above the overlay */
+  position: relative;
   max-width: 780px;
-}
-
-/* Override muted text colours inside the hero so they read against the photo */
-.heroInner p {
-  color: #fff;
-}
-
-.heroInner p strong {
-  color: #fff;
 }
 
 .eyebrow {
   font-size: var(--step--1);
-  color: var(--amber-dim);
+  color: var(--accent-dim);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: var(--space-sm);
@@ -74,7 +82,7 @@
 }
 
 .accent {
-  color: var(--amber);
+  color: var(--accent);
 }
 
 .heroLead {
@@ -87,8 +95,14 @@
 
 .heroStats {
   display: flex;
-  gap: var(--space-lg);
+  gap: 0;
   flex-wrap: wrap;
+}
+
+.heroStats > * + * {
+  border-left: 1px solid var(--border);
+  padding-left: var(--space-lg);
+  margin-left: var(--space-lg);
 }
 
 .heroMeta {
@@ -105,7 +119,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--amber-dim);
+  background: var(--accent-dim);
   flex-shrink: 0;
 }
 
@@ -196,7 +210,7 @@
 
 .cierreTitle {
   font-size: var(--step-3);
-  color: var(--amber);
+  color: var(--accent);
   margin-bottom: var(--space-md);
   max-width: 22ch;
 }
@@ -278,6 +292,12 @@
   .heroStats {
     flex-direction: column;
     gap: var(--space-md);
+  }
+
+  .heroStats > * + * {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
   }
 
   .chapter {

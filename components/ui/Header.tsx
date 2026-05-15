@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "./Logo";
 import styles from "./Header.module.css";
@@ -16,8 +17,13 @@ const NAV_ITEMS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const close = () => setOpen(false);
+
+  function isActive(href: string) {
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  }
 
   return (
     <header className={styles.header} role="banner">
@@ -31,7 +37,11 @@ export function Header() {
           <ul className={styles.navList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>
-                <Link href={href} className={styles.navLink}>
+                <Link
+                  href={href}
+                  className={`${styles.navLink} ${isActive(href) ? styles.active : ""}`}
+                  aria-current={isActive(href) ? "page" : undefined}
+                >
                   {label}
                 </Link>
               </li>
@@ -61,7 +71,12 @@ export function Header() {
           <ul className={styles.mobileNavList}>
             {NAV_ITEMS.map(({ label, href }) => (
               <li key={href}>
-                <Link href={href} className={styles.mobileNavLink} onClick={close}>
+                <Link
+                  href={href}
+                  className={`${styles.mobileNavLink} ${isActive(href) ? styles.active : ""}`}
+                  aria-current={isActive(href) ? "page" : undefined}
+                  onClick={close}
+                >
                   {label}
                 </Link>
               </li>

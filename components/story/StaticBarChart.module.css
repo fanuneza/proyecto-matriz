@@ -29,7 +29,7 @@
 
 .bar {
   height: 100%;
-  background: var(--bar-color, var(--amber));
+  background: var(--bar-color, var(--accent));
 }
 
 .value {

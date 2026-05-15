@@ -34,7 +34,7 @@
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--amber);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -67,6 +67,17 @@
 .navLink:hover {
   color: var(--text);
   background: var(--bg-subtle);
+  text-decoration: none;
+}
+
+.active {
+  color: var(--accent);
+  background: rgba(45, 212, 191, 0.08);
+}
+
+.active:hover {
+  color: var(--accent-light);
+  background: rgba(45, 212, 191, 0.12);
   text-decoration: none;
 }
 

@@ -79,7 +79,7 @@ export function GraficoNetBilling({ porMes, porRegion }: Props) {
                       y: cumMes.map((entry) => entry.kw / 1000),
                       line: { color: CHART_COLORS.ernc, width: 2.5, shape: "spline" },
                       fill: "tozeroy",
-                      fillcolor: "#e8a02018",
+                      fillcolor: "rgba(45, 212, 191, 0.09)",
                       hovertemplate: "<b>%{x}</b><br>%{y:,.1f} MW acumulados<extra></extra>",
                     } as Plotly.Data,
                   ]}

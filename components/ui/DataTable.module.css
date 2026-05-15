@@ -16,6 +16,7 @@
 .wrap {
   overflow-x: auto;
   border: 1px solid var(--border);
+  border-radius: 6px;
   background: var(--bg);
 }
 
@@ -32,6 +33,7 @@
   color: var(--text-muted);
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
+  border-radius: 6px 6px 0 0;
 }
 
 .table th,
@@ -54,7 +56,7 @@
 }
 
 .row:hover td {
-  background: color-mix(in srgb, var(--bg-subtle) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
 }
 
 @media (max-width: 768px) {

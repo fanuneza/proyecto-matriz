@@ -13,7 +13,7 @@
 }
 
 .accent .value {
-  color: var(--amber);
+  color: var(--accent);
 }
 
 .label {

@@ -2,7 +2,7 @@
   display: grid;
   gap: 0.5rem;
   padding: 1rem;
-  border-left: 2px solid var(--amber);
+  border-left: 2px solid var(--accent);
   background: color-mix(in srgb, var(--bg-surface) 84%, var(--bg));
 }
 

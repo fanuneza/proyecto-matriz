@@ -137,7 +137,6 @@ export default async function Page() {
               <BarraHorizontal
                 data={tecnologias}
                 unit="MW"
-                color="#e8a020"
                 ariaLabel="Composición por tecnología ERNC."
                 height={360}
               />
