@@ -1,0 +1,35 @@
+.figure {
+  margin: 0;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gridLine {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.axis {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.tickLabel {
+  fill: var(--text-muted);
+  font-size: 11px;
+  font-family: var(--font-sans);
+}
+
+.barLabel {
+  fill: var(--text);
+  font-size: 12px;
+  font-family: var(--font-sans);
+}
+
+.track {
+  fill: var(--bg-subtle);
+}

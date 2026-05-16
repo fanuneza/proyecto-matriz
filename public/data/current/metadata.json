@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-05-15T02:15:24.601Z",
+  "generatedAt": "2026-05-16T03:21:13.290Z",
   "schemaVersion": 1,
   "endpoints": {
     "capacidad": {
       "name": "capacidad",
       "path": "/api/ea/capacidad/instaladagx",
-      "fetchedAt": "2026-05-15T02:15:23.607Z",
+      "fetchedAt": "2026-05-16T03:21:12.390Z",
       "recordCount": 1311
     },
     "pipeline": {
       "name": "pipeline",
       "path": "/api/ea/proyectosenconstrucciongx",
-      "fetchedAt": "2026-05-15T02:15:23.515Z",
+      "fetchedAt": "2026-05-16T03:21:12.089Z",
       "recordCount": 230
     },
     "netBilling": {
       "name": "netBilling",
       "path": "/api/ea/netbilling",
-      "fetchedAt": "2026-05-15T02:15:24.521Z",
+      "fetchedAt": "2026-05-16T03:21:13.217Z",
       "recordCount": 40494
     }
   }

@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+Host: https://matriz.fnunez.cl
+Sitemap: https://matriz.fnunez.cl/sitemap.xml

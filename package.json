@@ -16,10 +16,8 @@
   },
   "dependencies": {
     "next": "16.2.6",
-    "plotly.js": "3.5.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-plotly.js": "2.6.0",
     "zod": "4.4.3"
   },
   "devDependencies": {
@@ -28,7 +26,6 @@
     "@types/node": "25.7.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@types/react-plotly.js": "2.6.4",
     "eslint": "10.3.0",
     "eslint-config-next": "16.2.6",
     "tsx": "^4.20.6",

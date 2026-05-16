@@ -9,13 +9,13 @@
   --accent-dim:   #1a5a52;
 
   --text:        #ddeef2;
-  --text-muted:  #6b7d8a;
-  --text-dim:    #3a4550;
+  --text-muted:  #8a9baa;
+  --text-dim:    #5a6a7a;
 
   --border:      #1e2833;
 
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   --step--1: clamp(0.75rem,  0.72rem + 0.16vw, 0.875rem);
   --step-0:  clamp(0.9375rem, 0.9rem + 0.2vw,  1.0625rem);
