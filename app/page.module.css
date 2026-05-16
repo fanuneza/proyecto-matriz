@@ -113,7 +113,7 @@
   gap: 0.5rem;
   margin-top: var(--space-md);
   font-size: var(--step--1);
-  color: var(--text-dim);
+  color: var(--text-muted);
   max-width: none;
 }
 

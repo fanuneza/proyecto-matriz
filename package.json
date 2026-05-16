@@ -20,6 +20,13 @@
     "react-dom": "19.2.6",
     "zod": "4.4.3"
   },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@eslint/compat": "2.1.0",
     "@next/bundle-analyzer": "16.2.6",
