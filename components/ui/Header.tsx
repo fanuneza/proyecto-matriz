@@ -75,6 +75,7 @@ export function Header() {
                   href={href}
                   className={`${styles.mobileNavLink} ${isActive(href) ? styles.active : ""}`}
                   aria-current={isActive(href) ? "page" : undefined}
+                  tabIndex={open ? undefined : -1}
                   onClick={close}
                 >
                   {label}
