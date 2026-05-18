@@ -1,11 +1,24 @@
-import { GraficoCrecimiento } from "@/components/story/GraficoCrecimiento";
-import { GraficoNetBilling } from "@/components/story/GraficoNetBilling";
-import { BarraHorizontal } from "@/components/story/BarraHorizontal";
+import dynamic from "next/dynamic";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
 import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
 import styles from "./page.module.css";
+
+const BarraHorizontal = dynamic(
+  () => import("@/components/story/BarraHorizontal").then((m) => m.BarraHorizontal),
+  { ssr: true }
+);
+
+const GraficoCrecimiento = dynamic(
+  () => import("@/components/story/GraficoCrecimiento").then((m) => m.GraficoCrecimiento),
+  { ssr: true }
+);
+
+const GraficoNetBilling = dynamic(
+  () => import("@/components/story/GraficoNetBilling").then((m) => m.GraficoNetBilling),
+  { ssr: true }
+);
 
 export default async function Page() {
   const {
