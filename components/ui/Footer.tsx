@@ -76,7 +76,7 @@ export function Footer() {
           </a>
         </p>
         <Link href="/" className={styles.homeLink}>
-          proyectomatriz.cl
+          Proyecto Matriz
         </Link>
       </div>
     </footer>
