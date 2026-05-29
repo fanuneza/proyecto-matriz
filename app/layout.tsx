@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import "./globals.css";
@@ -98,8 +97,6 @@ export default function RootLayout({
   return (
     <html lang="es-CL">
       <head>
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -109,13 +106,6 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-9XSP6Z6MQW"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9XSP6Z6MQW');`}
-        </Script>
       </body>
     </html>
   );

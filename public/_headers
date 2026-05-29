@@ -2,9 +2,16 @@
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML pages: always revalidate (CDN may serve stale)
 /*
   Cache-Control: public, max-age=0, must-revalidate
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; script-src-elem 'self' 'unsafe-inline'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; font-src 'self' data:; worker-src 'self' blob:; manifest-src 'self'; form-action 'self'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
 
 # OG image: immutable (only changes on deliberate redeploy)
 /og-image.jpg
