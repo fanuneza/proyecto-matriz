@@ -1,11 +1,12 @@
 # Proyecto Matriz
 
-Proyecto Matriz es un sitio estático en Next.js sobre la transición energética
-chilena. Durante el build transforma datos de la CNE en páginas editoriales,
-artefactos descargables y salida estática lista para publicar en Cloudflare
-Pages.
+Proyecto Matriz es un sitio estático en [Next.js](https://nextjs.org/) sobre la
+transición energética chilena. Durante el build transforma datos de la
+[Comisión Nacional de Energía](https://www.cne.cl/) en páginas editoriales,
+artefactos descargables y salida estática lista para publicar en
+[Cloudflare Pages](https://pages.cloudflare.com/).
 
-Sitio canónico: `https://matriz.fnunez.cl`
+Sitio canónico: [matriz.fnunez.cl](https://matriz.fnunez.cl/)
 
 ## Qué hace este repositorio
 
