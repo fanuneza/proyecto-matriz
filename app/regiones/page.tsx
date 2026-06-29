@@ -7,11 +7,13 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { formatCompactMw } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Energías renovables por región",
   description: "Distribución regional de la capacidad ERNC instalada en Chile.",
-};
+  path: "/regiones",
+});
 
 export default async function RegionesPage() {
   const data = await getStoryData();

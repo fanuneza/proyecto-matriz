@@ -3,11 +3,13 @@ import { Suspense } from "react";
 import { RegionCompare } from "@/components/tools/RegionCompare";
 import { PageShell } from "@/components/ui/PageShell";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Comparar regiones",
   description: "Compara capacidad ERNC, net billing y pipeline entre regiones de Chile.",
-};
+  path: "/comparar",
+});
 
 export default async function CompararPage() {
   const data = await getStoryData();

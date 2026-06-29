@@ -68,7 +68,7 @@ export function Footer() {
         <p className={styles.credit}>
           Desarrollo:{" "}
           <a
-            href="https://agenciachucao.cl/?utm_source=proyecto-matriz&utm_medium=referral&utm_campaign=credit_footer"
+            href="https://fnunez.cl/?utm_source=proyecto-matriz&utm_medium=referral&utm_campaign=credit_footer"
             target="_blank"
             rel="noopener noreferrer"
           >

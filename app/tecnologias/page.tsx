@@ -7,11 +7,13 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { formatCompactMw } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Energías renovables por tecnología",
   description: "Distribución de la capacidad ERNC por tecnología en Chile.",
-};
+  path: "/tecnologias",
+});
 
 export default async function TecnologiasPage() {
   const data = await getStoryData();

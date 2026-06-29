@@ -6,11 +6,13 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { listSnapshots } from "@/lib/snapshots";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Datos y metodología",
   description: "Fuentes, metodología, glosario y descargas públicas del proyecto.",
-};
+  path: "/datos",
+});
 
 const downloads = [
   { label: "Resumen nacional", type: "CSV", href: "/data/downloads/matriz-current.csv" },

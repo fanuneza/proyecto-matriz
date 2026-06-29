@@ -1,9 +1,19 @@
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
 import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "./seo";
 import styles from "./page.module.css";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Chile y la nueva matriz energética",
+  description:
+    "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la CNE.",
+  path: "/",
+  type: "article",
+});
 
 const BarraHorizontal = dynamic(
   () => import("@/components/story/BarraHorizontal").then((m) => m.BarraHorizontal),

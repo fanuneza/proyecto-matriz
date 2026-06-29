@@ -7,6 +7,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { slugToTecnologia } from "@/lib/slugs";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../../seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -23,10 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const nombre = slugToTecnologia(slug) ?? "Tecnología renovable";
 
-  return {
+  return buildPageMetadata({
     title: `${nombre} | Tecnologías`,
     description: `Capacidad instalada, distribución regional y trayectoria anual para ${nombre}.`,
-  };
+    path: `/tecnologias/${slug}`,
+  });
 }
 
 export default async function TecnologiaPage({ params }: Props) {

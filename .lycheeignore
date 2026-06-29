@@ -1,0 +1,9 @@
+# Local development URLs
+http://localhost:3000/.*
+http://localhost:4321/.*
+
+# Known rate-limited or non-navigable hosts
+https://(www\.)?instagram\.(com|cl)/.*
+https://www\.googletagmanager\.com/ns\.html\?id=\$\{gtmContainerId\}
+https://www\.googletagmanager\.com/
+https://static\.cloudflareinsights\.com/

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import "./globals.css";
+import { siteSchema } from "./seo";
 import { SITE_URL } from "./site";
 
 export const metadata: Metadata = {
@@ -25,34 +26,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Fabián Núñez", url: "https://github.com/fanuneza" }],
   creator: "Fabián Núñez",
-  alternates: {
-    canonical: SITE_URL,
-  },
-  openGraph: {
-    title: "Chile y la nueva matriz energética",
-    description:
-      "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la CNE.",
-    url: SITE_URL,
-    siteName: "Proyecto Matriz",
-    locale: "es_CL",
-    type: "article",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Proyecto Matriz: Chile y la nueva matriz energética",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Chile y la nueva matriz energética",
-    description:
-      "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la CNE.",
-    images: ["/og-image.jpg"],
-    creator: "@fanuneza",
-  },
   robots: {
     index: true,
     follow: true,
@@ -65,32 +38,6 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "Chile y la nueva matriz energética",
-  description:
-    "Una exploración visual de la expansión renovable en Chile a partir de datos abiertos de la Comisión Nacional de Energía.",
-  url: SITE_URL,
-  image: `${SITE_URL}/og-image.jpg`,
-  author: {
-    "@type": "Person",
-    name: "Fabián Núñez",
-    url: "https://github.com/fanuneza",
-  },
-  publisher: {
-    "@type": "Person",
-    name: "Fabián Núñez",
-    url: "https://github.com/fanuneza",
-  },
-  inLanguage: "es-CL",
-  about: [
-    { "@type": "Thing", name: "Energía renovable" },
-    { "@type": "Thing", name: "Transición energética" },
-    { "@type": "Place", name: "Chile" },
-  ],
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -99,7 +46,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
         />
       </head>
       <body>

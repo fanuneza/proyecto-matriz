@@ -7,6 +7,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { slugToRegion } from "@/lib/slugs";
 import { getStoryData } from "@/lib/story-data";
+import { buildPageMetadata } from "../../seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -23,10 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const nombre = slugToRegion(slug) ?? "Región";
 
-  return {
+  return buildPageMetadata({
     title: `${nombre} | Energías renovables`,
     description: `Capacidad ERNC, net billing, tecnología dominante y pipeline en ${nombre}.`,
-  };
+    path: `/regiones/${slug}`,
+  });
 }
 
 export default async function RegionPage({ params }: Props) {

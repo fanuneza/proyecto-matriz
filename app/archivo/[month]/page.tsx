@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InsightBlock } from "@/components/editorial/InsightBlock";
@@ -8,6 +9,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { compareSnapshots } from "@/lib/snapshot-compare";
 import { getPreviousSnapshot, listSnapshots, readSnapshot } from "@/lib/snapshots";
+import { buildPageMetadata } from "../../seo";
 
 type Props = {
   params: Promise<{ month: string }>;
@@ -18,6 +20,16 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const months = listSnapshots();
   return months.length > 0 ? months.map((month) => ({ month })) : [{ month: "__placeholder__" }];
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { month } = await params;
+
+  return buildPageMetadata({
+    title: `Snapshot ${month}`,
+    description: `Resumen mensual agregado de capacidad ERNC, net billing y pipeline para ${month}.`,
+    path: `/archivo/${month}`,
+  });
 }
 
 export default async function ArchivoMonthPage({ params }: Props) {
