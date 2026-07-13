@@ -16,7 +16,6 @@
 .hero {
   --hero-map-column: clamp(25rem, 31vw, 29rem);
   --hero-column-gap: clamp(2rem, 5vw, 5rem);
-  --hero-half-gap: clamp(1rem, 2.5vw, 2.5rem);
   min-height: calc(100svh - 56px);
   display: flex;
   align-items: center;
@@ -24,19 +23,6 @@
   background-color: var(--bg);
   padding-block: clamp(3rem, 7vh, 5.5rem);
   overflow: hidden;
-}
-
-.heroInner::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: calc(100% - var(--hero-map-column) - var(--hero-half-gap));
-  width: 1px;
-  height: 100svh;
-  background: var(--border);
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
 }
 
 .heroInner {
@@ -150,18 +136,25 @@
   text-transform: uppercase;
 }
 
+.mapMarkerBar {
+  display: block;
+  width: clamp(2.75rem, 5vw, 4.5rem);
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+.mapMarkerBar span {
+  display: block;
+  min-width: 2px;
+  height: 100%;
+  background: var(--accent);
+}
+
 .mapMarkers strong {
   color: var(--text);
   font-size: var(--step--1);
   font-weight: 600;
   letter-spacing: 0;
-}
-
-.mapMarkers li::before {
-  content: "";
-  width: clamp(1rem, 2vw, 2.5rem);
-  height: 1px;
-  background: var(--accent);
 }
 
 .heroMap > figcaption {
@@ -408,19 +401,15 @@
     grid-template-columns: 1fr;
   }
 
-  .heroInner::after {
-    display: none;
-  }
-
   .heroMap {
-    min-height: 24rem;
-    max-width: 23rem;
+    min-height: clamp(32rem, 100vw, 42rem);
+    max-width: none;
     width: 100%;
     justify-self: end;
   }
 
   .mapImage {
-    height: 24rem;
+    height: clamp(32rem, 100vw, 42rem);
     max-width: 100%;
   }
 
@@ -504,13 +493,13 @@
   }
 
   .heroMap {
-    min-height: 21rem;
+    min-height: clamp(30rem, 145vw, 38rem);
     width: 100%;
     grid-template-columns: minmax(0, 1fr) 7rem;
   }
 
   .mapImage {
-    height: 21rem;
+    height: clamp(30rem, 145vw, 38rem);
     max-width: 100%;
   }
 

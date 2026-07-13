@@ -66,6 +66,7 @@ export default async function Page() {
     nbPorRegion,
     generadoEl,
   } = await getStoryData();
+  const maxZonaMw = Math.max(...zonasEnergeticas.map((zona) => zona.mw), 1);
 
   return (
     <>
@@ -76,7 +77,7 @@ export default async function Page() {
               <p className={styles.eyebrow}>Una lectura nacional con datos CNE</p>
               <h1 id="titulo-principal" className={styles.heroTitle}>
                 La transición ya cambió la <span className={styles.accent}>capacidad</span>{" "}
-                eléctrica de Chile.
+                eléctrica de Chile
               </h1>
               <p className={styles.heroLead}>
                 Las renovables no convencionales ya reúnen <strong>{formatPercent(porcentajeErnc)}</strong>{" "}
@@ -116,6 +117,9 @@ export default async function Page() {
               <ol className={styles.mapMarkers}>
                 {zonasEnergeticas.map(({ zona, mw }) => (
                   <li key={zona}>
+                    <span className={styles.mapMarkerBar} aria-hidden="true">
+                      <span style={{ width: `${(mw / maxZonaMw) * 100}%` }} />
+                    </span>
                     <span>{zona}</span>
                     <strong>{formatCompactMw(mw)}</strong>
                   </li>
