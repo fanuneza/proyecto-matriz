@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "./Logo";
+import { HomeLink } from "./HomeLink";
 import styles from "./Header.module.css";
 
 const NAV_ITEMS = [
@@ -28,10 +29,10 @@ export function Header() {
   return (
     <header className={styles.header} role="banner">
       <div className={`container ${styles.inner}`}>
-        <Link href="/" className={styles.brand} onClick={close}>
+        <HomeLink className={styles.brand} onClick={close}>
           <Logo size={26} />
           <span className={styles.wordmark}>Proyecto Matriz</span>
-        </Link>
+        </HomeLink>
 
         <nav className={styles.nav} aria-label="Navegación principal">
           <ul className={styles.navList}>

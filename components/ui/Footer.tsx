@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HomeLink } from "./HomeLink";
 import { Logo } from "./Logo";
 import styles from "./Footer.module.css";
 
@@ -18,10 +19,10 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.brandCol}>
-          <Link href="/" className={styles.brand}>
+          <HomeLink className={styles.brand}>
             <Logo size={20} />
             <span className={styles.wordmark}>Proyecto Matriz</span>
-          </Link>
+          </HomeLink>
           <p className={styles.tagline}>
             Exploración visual de la transición energética chilena a partir de
             datos abiertos de la CNE.
@@ -76,9 +77,9 @@ export function Footer() {
             Fabián Núñez
           </a>
         </p>
-        <Link href="/" className={styles.homeLink}>
+        <HomeLink className={styles.homeLink}>
           Proyecto Matriz
-        </Link>
+        </HomeLink>
       </div>
     </footer>
   );

@@ -3,6 +3,7 @@ import {
   filtrarErnc,
   totalNetaMw,
   capacidadPorRegion,
+  capacidadPorZona,
   capacidadPorTecnologia,
   capacidadPorAnio,
   pipelinePorAnio,
@@ -119,6 +120,27 @@ describe("capacidadPorRegion", () => {
 
   it("returns empty array for empty input", () => {
     expect(capacidadPorRegion([])).toHaveLength(0);
+  });
+});
+
+describe("capacidadPorZona", () => {
+  it("aggregates capacity into the five geographic energy zones", () => {
+    const result = capacidadPorZona([solar, hidro, carbon]);
+
+    expect(result).toEqual([
+      { zona: "Norte Grande", count: 1, mw: 100 },
+      { zona: "Norte Chico", count: 0, mw: 0 },
+      { zona: "Zona Central", count: 1, mw: 200 },
+      { zona: "Zona Sur", count: 1, mw: 50 },
+      { zona: "Zona Austral", count: 0, mw: 0 },
+    ]);
+  });
+
+  it("recognizes regional aliases before assigning a zone", () => {
+    const rmPlant = { ...solar, region: "Región Metropolitana de Santiago", potenciaNetaMw: 25 };
+    const central = capacidadPorZona([rmPlant]).find((entry) => entry.zona === "Zona Central");
+
+    expect(central).toMatchObject({ count: 1, mw: 25 });
   });
 });
 

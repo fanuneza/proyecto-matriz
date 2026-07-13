@@ -14,6 +14,9 @@
 
 /* ── Hero ───────────────────────────────────────────────────────────── */
 .hero {
+  --hero-map-column: clamp(25rem, 31vw, 29rem);
+  --hero-column-gap: clamp(2rem, 5vw, 5rem);
+  --hero-half-gap: clamp(1rem, 2.5vw, 2.5rem);
   min-height: calc(100svh - 56px);
   display: flex;
   align-items: center;
@@ -23,11 +26,15 @@
   overflow: hidden;
 }
 
-.hero::after {
+.heroInner::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: linear-gradient(90deg, transparent 49.95%, var(--border) 50%, transparent 50.05%);
+  top: 50%;
+  left: calc(100% - var(--hero-map-column) - var(--hero-half-gap));
+  width: 1px;
+  height: 100svh;
+  background: var(--border);
+  transform: translateY(-50%);
   pointer-events: none;
   z-index: 0;
 }
@@ -36,12 +43,14 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 18rem;
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) var(--hero-map-column);
+  gap: var(--hero-column-gap);
   align-items: center;
 }
 
 .heroCopy {
+  position: relative;
+  z-index: 1;
   max-width: 42rem;
 }
 
@@ -97,12 +106,13 @@
 }
 
 .heroMap {
+  z-index: 1;
   align-self: center;
-  min-height: 28rem;
-  width: 18rem;
+  min-height: clamp(34rem, 45vw, 40rem);
+  width: 100%;
   display: grid;
-  grid-template-columns: 9rem 7.5rem;
-  column-gap: 1.5rem;
+  grid-template-columns: minmax(9rem, 1fr) minmax(12rem, 1.1fr);
+  column-gap: clamp(1rem, 2vw, 2rem);
   align-items: center;
   position: relative;
 }
@@ -110,7 +120,7 @@
 .mapImage {
   grid-column: 1;
   width: auto;
-  height: 28rem;
+  height: clamp(34rem, 45vw, 40rem);
   max-width: none;
   justify-self: center;
   object-fit: contain;
@@ -122,20 +132,29 @@
   grid-row: 1;
   align-self: stretch;
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: 1.6fr 1.15fr 1.45fr 1.05fr 2.3fr;
   list-style: none;
-  padding-block: 10%;
+  padding-block: 3%;
 }
 
 .mapMarkers li {
   display: flex;
-  align-items: center;
-  gap: 0.45rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.2rem;
   color: var(--text-muted);
   font-family: var(--font-sans);
   font-size: 0.625rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.mapMarkers strong {
+  color: var(--text);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .mapMarkers li::before {
@@ -148,9 +167,9 @@
 
 .heroMap > p {
   position: absolute;
-  bottom: -0.25rem;
+  bottom: -0.5rem;
   right: 0;
-  max-width: 22ch;
+  max-width: 25ch;
   color: var(--text-muted);
   font-size: var(--step--1);
   line-height: 1.5;
@@ -357,7 +376,7 @@
 ══════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .heroInner {
-    grid-template-columns: minmax(0, 1fr) 16rem;
+    --hero-map-column: 22rem;
     gap: var(--space-md);
   }
 
@@ -390,15 +409,19 @@
     grid-template-columns: 1fr;
   }
 
+  .heroInner::after {
+    display: none;
+  }
+
   .heroMap {
-    min-height: 20rem;
-    max-width: 18rem;
+    min-height: 24rem;
+    max-width: 23rem;
     width: 100%;
     justify-self: end;
   }
 
   .mapImage {
-    height: 22rem;
+    height: 24rem;
     max-width: 100%;
   }
 
@@ -482,13 +505,13 @@
   }
 
   .heroMap {
-    min-height: 18rem;
+    min-height: 21rem;
     width: 100%;
-    grid-template-columns: minmax(0, 1fr) 6rem;
+    grid-template-columns: minmax(0, 1fr) 7rem;
   }
 
   .mapImage {
-    height: 19rem;
+    height: 21rem;
     max-width: 100%;
   }
 

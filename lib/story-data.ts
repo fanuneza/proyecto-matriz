@@ -5,6 +5,7 @@ import {
 } from "@/lib/cne-client";
 import {
   capacidadPorAnio,
+  capacidadPorZona,
   filtrarErnc,
   netBillingPorMes,
   netBillingPorRegion,
@@ -109,6 +110,7 @@ export async function getStoryData() {
     totalNbMw: netBillingRecords.reduce((sum, entry) => sum + entry.potenciaKw, 0) / 1000,
     pipelineMwTotal: porAnioPipe.reduce((sum, entry) => sum + entry.mw, 0),
     erncCount: ernc.length,
+    zonasEnergeticas: capacidadPorZona(ernc),
     regiones: regionProfiles
       .slice(0, 12)
       .map((region) => ({ label: region.nombre, value: region.erncMw })),

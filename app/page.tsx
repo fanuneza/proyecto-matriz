@@ -57,6 +57,7 @@ export default async function Page() {
     totalNbMw,
     pipelineMwTotal,
     erncCount,
+    zonasEnergeticas,
     regiones,
     tecnologias,
     porAnioOp,
@@ -113,9 +114,14 @@ export default async function Page() {
                 priority
               />
               <ol className={styles.mapMarkers}>
-                {["Norte", "Centro", "Sur", "Austral"].map((label) => <li key={label}>{label}</li>)}
+                {zonasEnergeticas.map(({ zona, mw }) => (
+                  <li key={zona}>
+                    <span>{zona}</span>
+                    <strong>{formatCompactMw(mw)}</strong>
+                  </li>
+                ))}
               </ol>
-              <p>La geografía decide dónde se concentra el cambio.</p>
+              <p>Capacidad ERNC operacional por zona geográfica.</p>
             </div>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import type { PlantaOperacional, ProyectoPipeline } from "./normalize-ernc";
 import type { NetBillingRecord } from "./normalize-netbilling";
+import { canonicalRegionName } from "./regions";
 
 /* ── Helpers ────────────────────────────────────────────────────────── */
 
@@ -33,6 +34,45 @@ export function capacidadPorRegion(plantas: PlantaOperacional[]) {
       mw: ps.reduce((s, p) => s + (p.potenciaNetaMw ?? 0), 0),
     }))
     .sort((a, b) => b.mw - a.mw);
+}
+
+export const ZONAS_ENERGETICAS = [
+  {
+    nombre: "Norte Grande",
+    regiones: ["Arica y Parinacota", "Tarapacá", "Antofagasta"],
+  },
+  {
+    nombre: "Norte Chico",
+    regiones: ["Atacama", "Coquimbo"],
+  },
+  {
+    nombre: "Zona Central",
+    regiones: ["Valparaíso", "Metropolitana", "O'Higgins", "Maule", "Ñuble", "Biobío"],
+  },
+  {
+    nombre: "Zona Sur",
+    regiones: ["La Araucanía", "Los Ríos", "Los Lagos"],
+  },
+  {
+    nombre: "Zona Austral",
+    regiones: ["Aysén", "Magallanes"],
+  },
+] as const;
+
+/** Sums operational capacity using Chile's five geographic energy zones. */
+export function capacidadPorZona(plantas: PlantaOperacional[]) {
+  return ZONAS_ENERGETICAS.map(({ nombre, regiones }) => {
+    const regionSet = new Set<string>(regiones);
+    const centrales = plantas.filter((planta) =>
+      planta.region ? regionSet.has(canonicalRegionName(planta.region)) : false,
+    );
+
+    return {
+      zona: nombre,
+      count: centrales.length,
+      mw: totalNetaMw(centrales),
+    };
+  });
 }
 
 export function capacidadPorTecnologia(plantas: PlantaOperacional[]) {
