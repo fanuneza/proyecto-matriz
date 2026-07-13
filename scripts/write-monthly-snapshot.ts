@@ -7,7 +7,15 @@ import { SNAPSHOT_SCHEMA_VERSION, type MonthlySnapshot } from "../lib/snapshot-t
 async function main() {
   const force = process.argv.includes("--force");
   const now = new Date();
-  const month = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+
+  const monthArg = process.argv.find((arg) => arg.startsWith("--month="));
+  const month = monthArg ? monthArg.slice("--month=".length) : currentMonth;
+  if (!/^\d{4}-\d{2}$/.test(month)) {
+    throw new Error(`Invalid --month value: ${month}. Expected format YYYY-MM.`);
+  }
+  const backfilled = month !== currentMonth;
+
   const outPath = path.join(process.cwd(), "data/snapshots", `${month}.json`);
 
   if (fs.existsSync(outPath) && !force) {
@@ -22,6 +30,7 @@ async function main() {
     schemaVersion: SNAPSHOT_SCHEMA_VERSION,
     snapshotMonth: month,
     generatedAt: now.toISOString(),
+    ...(backfilled ? { backfilled: true } : {}),
     national: {
       totalErncMw: data.totalErncMw,
       porcentajeErnc: data.porcentajeErnc,
@@ -100,7 +109,11 @@ async function main() {
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(validated.data, null, 2));
-  console.log(`Snapshot written: ${outPath}`);
+  console.log(
+    backfilled
+      ? `Snapshot written: ${outPath} (backfilled — reflects data fetched on ${now.toISOString()}, not true ${month} state)`
+      : `Snapshot written: ${outPath}`,
+  );
 }
 
 main().catch((error: unknown) => {

@@ -40,6 +40,7 @@ export const MonthlySnapshotSchema = z.object({
   schemaVersion: z.number(),
   snapshotMonth: z.string().regex(/^\d{4}-\d{2}$/),
   generatedAt: z.string(),
+  backfilled: z.boolean().optional(),
   national: z.object({
     totalErncMw: z.number(),
     porcentajeErnc: z.number(),

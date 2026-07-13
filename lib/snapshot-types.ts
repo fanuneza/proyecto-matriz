@@ -41,6 +41,7 @@ export type MonthlySnapshot = {
   schemaVersion: number;
   snapshotMonth: string;
   generatedAt: string;
+  backfilled?: boolean;
   national: {
     totalErncMw: number;
     porcentajeErnc: number;
