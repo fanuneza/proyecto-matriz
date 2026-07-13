@@ -104,11 +104,11 @@ export default async function Page() {
               <EvidenceNote generatedEl={generadoEl} label="Capacidad instalada neta" />
             </div>
 
-            <div className={styles.heroMap} aria-hidden="true">
+            <figure className={styles.heroMap}>
               <Image
                 className={styles.mapImage}
                 src="/maps/chile.svg"
-                alt=""
+                alt="Mapa de Chile con cinco zonas geográficas de capacidad ERNC."
                 width={220}
                 height={910}
                 priority
@@ -121,8 +121,8 @@ export default async function Page() {
                   </li>
                 ))}
               </ol>
-              <p>Capacidad ERNC operacional por zona geográfica.</p>
-            </div>
+              <figcaption>Capacidad ERNC operacional por zona geográfica.</figcaption>
+            </figure>
           </div>
         </section>
 

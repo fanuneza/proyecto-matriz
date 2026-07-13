@@ -161,11 +161,10 @@
   content: "";
   width: clamp(1rem, 2vw, 2.5rem);
   height: 1px;
-  background: var(--accent-dim);
-  box-shadow: -0.25rem 0 0 var(--accent);
+  background: var(--accent);
 }
 
-.heroMap > p {
+.heroMap > figcaption {
   position: absolute;
   bottom: -0.5rem;
   right: 0;
