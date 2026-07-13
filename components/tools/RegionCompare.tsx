@@ -100,6 +100,9 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
               <option key={p.slug} value={p.slug}>{p.nombre}</option>
             ))}
           </select>
+          <svg className={styles.selectChevron} width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+          </svg>
         </label>
 
         <button
@@ -124,6 +127,9 @@ export function RegionCompare({ profiles, initialA, initialB }: Props) {
               <option key={p.slug} value={p.slug}>{p.nombre}</option>
             ))}
           </select>
+          <svg className={styles.selectChevron} width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+          </svg>
         </label>
       </div>
 
