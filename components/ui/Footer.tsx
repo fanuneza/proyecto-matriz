@@ -58,8 +58,9 @@ export function Footer() {
             <a href="https://api.cne.cl" target="_blank" rel="noopener noreferrer">
               Comisión Nacional de Energía
             </a>
-            . Capacidad instalada operacional, proyectos en construcción y
-            generación distribuida agregada.
+            : capacidad instalada operacional (<em>capacidad/instaladagx</em>),
+            proyectos en construcción (<em>proyectosenconstrucciongx</em>) y
+            generación distribuida (<em>netbilling</em>).
           </p>
         </div>
       </div>

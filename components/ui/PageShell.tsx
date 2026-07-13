@@ -35,7 +35,7 @@ export function PageShell({
   children,
 }: Props) {
   return (
-    <main className={styles.main}>
+    <main id="main-content" className={styles.main}>
       <div className={`container ${styles.inner}`}>
         <header className={styles.header}>
           {navLinks.length > 0 ? (

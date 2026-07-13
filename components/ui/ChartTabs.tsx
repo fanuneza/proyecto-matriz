@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import type { KeyboardEvent, ReactNode } from "react";
 import styles from "./ChartTabs.module.css";
 
@@ -17,23 +17,37 @@ type Props = {
 export function ChartTabs({ items }: Props) {
   const [activeId, setActiveId] = useState(items[0].id);
   const instanceId = useId();
-  const activeIndex = items.findIndex((item) => item.id === activeId);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  function focusTab(index: number) {
+    setActiveId(items[index].id);
+    tabRefs.current[index]?.focus();
+  }
 
   function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      focusTab((index + direction + items.length) % items.length);
       return;
     }
 
-    event.preventDefault();
-    const direction = event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = (index + direction + items.length) % items.length;
-    setActiveId(items[nextIndex].id);
+    if (event.key === "Home") {
+      event.preventDefault();
+      focusTab(0);
+      return;
+    }
+
+    if (event.key === "End") {
+      event.preventDefault();
+      focusTab(items.length - 1);
+    }
   }
 
   return (
     <div className={styles.root}>
       <div className={styles.tabList} role="tablist" aria-label="Vista de gráfico y tabla">
-        {items.map((item) => {
+        {items.map((item, index) => {
           const isActive = item.id === activeId;
           const tabId = `${instanceId}-${item.id}-tab`;
           const panelId = `${instanceId}-${item.id}-panel`;
@@ -41,6 +55,9 @@ export function ChartTabs({ items }: Props) {
           return (
             <button
               key={item.id}
+              ref={(el) => {
+                tabRefs.current[index] = el;
+              }}
               id={tabId}
               type="button"
               role="tab"
@@ -49,7 +66,7 @@ export function ChartTabs({ items }: Props) {
               tabIndex={isActive ? 0 : -1}
               className={`${styles.tab} ${isActive ? styles.active : ""}`}
               onClick={() => setActiveId(item.id)}
-              onKeyDown={(event) => handleKeyDown(event, activeIndex)}
+              onKeyDown={(event) => handleKeyDown(event, index)}
             >
               {item.label}
             </button>

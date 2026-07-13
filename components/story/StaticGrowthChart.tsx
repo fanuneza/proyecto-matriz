@@ -42,6 +42,8 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
     Math.round((maxVal / yTicks) * i)
   );
 
+  const labelStep = allAnios.length > 12 ? 2 : 1;
+
   return (
     <figure aria-label={ariaLabel} className={styles.figure}>
       <figcaption className="sr-only">{ariaLabel}</figcaption>
@@ -103,14 +105,16 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
                 )}
 
                 {/* X label */}
-                <text
-                  x={cx}
-                  y={innerH + 20}
-                  className={styles.tickLabel}
-                  textAnchor="middle"
-                >
-                  {anio}
-                </text>
+                {i % labelStep === 0 && (
+                  <text
+                    x={cx}
+                    y={innerH + 20}
+                    className={styles.tickLabel}
+                    textAnchor="middle"
+                  >
+                    {anio}
+                  </text>
+                )}
               </g>
             );
           })}

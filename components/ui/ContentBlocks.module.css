@@ -12,6 +12,12 @@
   line-height: 1.7;
 }
 
+.cite {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+  font-size: var(--step--1);
+}
+
 .glossary {
   display: grid;
   gap: 1rem;

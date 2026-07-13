@@ -7,8 +7,8 @@ type Props = {
 
 export function MethodologyBlock({ showDatosLink = true }: Props) {
   return (
-    <section aria-label="Metodología y fuente" className={styles.section}>
-      <h2>Fuente y metodología</h2>
+    <section aria-labelledby="metodologia-titulo" className={styles.section}>
+      <h2 id="metodologia-titulo">Fuente y metodología</h2>
       <p>
         Los datos provienen del sistema de información pública de la{" "}
         <strong>Comisión Nacional de Energía (CNE)</strong>. Se consultan tres
@@ -18,16 +18,20 @@ export function MethodologyBlock({ showDatosLink = true }: Props) {
       <p>
         Los valores reflejan <strong>capacidad instalada</strong>, no generación
         real. Una central solar de 100 MW no produce 100 MW en todo momento: la
-        produccion depende de la radiacion, el viento u otras condiciones. El
-        factor de planta varia segun tecnología y ubicación.
+        producción depende de la radiación, el viento u otras condiciones. El
+        factor de planta varía según tecnología y ubicación.
       </p>
       <p>
-        Los datos se actualizan en cada compilacion del sitio y corresponden a la
+        Los datos se actualizan en cada compilación del sitio y corresponden a la
         fecha indicada en el pie de página.
+      </p>
+      <p className={styles.cite}>
+        <strong>Cómo citar:</strong> Proyecto Matriz, a partir de datos de la
+        Comisión Nacional de Energía (CNE), {new Date().getFullYear()}.
       </p>
       {showDatosLink ? (
         <p>
-          <Link href="/datos">Ver metodologia completa, glosario y archivos descargables</Link>
+          <Link href="/datos">Ver metodología completa, glosario y archivos descargables</Link>
         </p>
       ) : null}
     </section>

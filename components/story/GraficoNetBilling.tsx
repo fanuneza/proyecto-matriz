@@ -5,6 +5,7 @@ import { StaticHorizontalBarChart } from "@/components/story/StaticHorizontalBar
 import { ChartTabs } from "@/components/ui/ChartTabs";
 import { DataTable } from "@/components/ui/DataTable";
 import { CHART_COLORS } from "@/lib/chart-theme";
+import styles from "./GraficoNetBilling.module.css";
 
 type MesData = { periodo: string; kw: number };
 type RegionData = { region: string; kw: number };
@@ -23,7 +24,7 @@ export function GraficoNetBilling({ porMes, porRegion }: Props) {
   const sortedRegions = [...porRegion].sort((a, b) => a.kw - b.kw);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+    <div className={styles.stack}>
       <ChartTabs
         items={[
           {

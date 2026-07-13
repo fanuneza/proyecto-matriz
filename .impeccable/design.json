@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-13T17:14:20Z",
+  "title": "Design System: Proyecto Matriz",
+  "extensions": {
+    "colorMeta": {
+      "bg": { "role": "neutral", "displayName": "Base", "canonical": "#0b0f14", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
+      "bg-surface": { "role": "neutral", "displayName": "Surface", "canonical": "#111822", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
+      "bg-subtle": { "role": "neutral", "displayName": "Subtle", "canonical": "#162030", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
+      "signal-teal": { "role": "primary", "displayName": "Signal Teal", "canonical": "#2dd4bf", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
+      "signal-teal-light": { "role": "primary", "displayName": "Signal Teal Light", "canonical": "#5eead4", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
+      "signal-teal-dim": { "role": "primary", "displayName": "Signal Teal Dim", "canonical": "#1a5a52", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#ddeef2", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
+      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#8a9baa", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
+      "ink-dim": { "role": "neutral", "displayName": "Ink Dim", "canonical": "#5a6a7a", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
+      "border": { "role": "neutral", "displayName": "Border", "canonical": "#1e2833", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero title (h1) and the closing chapter headline only." },
+      "headline": { "displayName": "Headline", "purpose": "Chapter h2 headings." },
+      "title": { "displayName": "Title", "purpose": "Chart titles, card titles, h3." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, capped at 62ch measure." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, stat labels, table headers — always uppercase, tracked." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-standard", "value": "ease", "purpose": "Default transition timing for color/background/border state changes (0.15s-0.25s)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "960px" },
+      { "name": "xl", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Nav Link (active)",
+      "kind": "nav",
+      "refersTo": "nav-link-active",
+      "description": "Desktop header nav link in its active/current-page state.",
+      "html": "<a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Regiones</a>",
+      "css": ".ds-nav-link { display: block; padding: 0.35rem 0.65rem; font-size: 0.8125rem; font-weight: 500; color: #8a9baa; text-decoration: none; border-radius: 4px; transition: color 0.15s, background 0.15s; } .ds-nav-link:hover { color: #ddeef2; background: #162030; } .ds-nav-link-active { color: #2dd4bf; background: rgba(45, 212, 191, 0.08); } .ds-nav-link-active:hover { color: #5eead4; background: rgba(45, 212, 191, 0.12); }"
+    },
+    {
+      "name": "Stat",
+      "kind": "custom",
+      "refersTo": "stat",
+      "description": "Big-number stat block used in the hero and summary sections.",
+      "html": "<div class=\"ds-stat ds-stat-accent\"><span class=\"ds-stat-value\">8.4 GW</span><span class=\"ds-stat-label\">Capacidad ERNC instalada</span><span class=\"ds-stat-sub\">42% del sistema eléctrico</span></div>",
+      "css": ".ds-stat { display: flex; flex-direction: column; gap: 0.25rem; } .ds-stat-value { font-size: clamp(2.125rem, 1.825rem + 1.5vw, 3.125rem); font-weight: 700; line-height: 1; color: #ddeef2; } .ds-stat-accent .ds-stat-value { color: #2dd4bf; } .ds-stat-label { font-size: clamp(0.75rem, 0.72rem + 0.16vw, 0.875rem); color: #8a9baa; text-transform: uppercase; letter-spacing: 0.06em; } .ds-stat-sub { font-size: clamp(0.75rem, 0.72rem + 0.16vw, 0.875rem); color: #8a9baa; }"
+    },
+    {
+      "name": "Card (default / winner)",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Comparison card used in the region-compare tool, with a highlighted 'winner' state.",
+      "html": "<div class=\"ds-card ds-card-winner\"><h3 class=\"ds-card-title\">Antofagasta</h3></div>",
+      "css": ".ds-card { display: grid; gap: 1rem; padding: 1rem; border: 1px solid #1e2833; border-radius: 6px; background: #111822; transition: border-color 0.15s ease; } .ds-card:hover { border-color: #1a5a52; } .ds-card-winner { border-color: #1a5a52; background: color-mix(in srgb, #111822 92%, #2dd4bf 8%); } .ds-card-title { font-size: clamp(1.125rem, 1.05rem + 0.38vw, 1.375rem); color: #ddeef2; }"
+    },
+    {
+      "name": "Callout / Insight Block",
+      "kind": "custom",
+      "refersTo": "callout",
+      "description": "Left-accented panel for a sourced editorial insight or aside — the system's one deliberate exception to the no-side-stripe rule.",
+      "html": "<div class=\"ds-callout\"><span class=\"ds-callout-title\">Dato clave</span><span class=\"ds-callout-value\">+18% interanual</span><p class=\"ds-callout-context\">Crecimiento de capacidad ERNC respecto al año anterior.</p></div>",
+      "css": ".ds-callout { display: grid; gap: 0.5rem; padding: 1rem; border-left: 2px solid #2dd4bf; background: color-mix(in srgb, #111822 84%, #0b0f14); } .ds-callout-title { font-size: clamp(0.75rem, 0.72rem + 0.16vw, 0.875rem); color: #8a9baa; text-transform: uppercase; letter-spacing: 0.06em; } .ds-callout-value { font-size: clamp(1.125rem, 1.05rem + 0.38vw, 1.375rem); color: #ddeef2; } .ds-callout-context { color: #8a9baa; line-height: 1.7; }"
+    },
+    {
+      "name": "Select Field",
+      "kind": "input",
+      "refersTo": "select-field",
+      "description": "Region/technology dropdown used in the compare tool.",
+      "html": "<select class=\"ds-select\"><option>Región Metropolitana</option></select>",
+      "css": ".ds-select { width: 100%; min-height: 2.75rem; padding: 0.75rem 2.5rem 0.75rem 0.85rem; border: 1px solid #1e2833; border-radius: 4px; background-color: #0b0f14; color: #ddeef2; appearance: none; cursor: pointer; transition: border-color 0.15s ease; } .ds-select:hover { border-color: #1a5a52; } .ds-select:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tabs (underline)",
+      "kind": "custom",
+      "refersTo": "tab",
+      "description": "Underline-style tab used for chart view switching.",
+      "html": "<div class=\"ds-tablist\"><button class=\"ds-tab ds-tab-active\">Región</button><button class=\"ds-tab\">Tecnología</button></div>",
+      "css": ".ds-tablist { display: inline-flex; align-items: center; width: fit-content; border-bottom: 1px solid #1e2833; } .ds-tab { min-height: 2rem; padding: 0.45rem 1rem 0.55rem; border: 0; background: transparent; color: #8a9baa; font-size: clamp(0.75rem, 0.72rem + 0.16vw, 0.875rem); cursor: pointer; transition: background-color 0.15s ease, color 0.15s ease; } .ds-tab:hover { color: #ddeef2; } .ds-tab-active { color: #ddeef2; box-shadow: inset 0 -2px 0 #2dd4bf; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Data Desk",
+    "overview": "Proyecto Matriz reads like a newsroom data analyst's terminal at night: a dark canvas, a faint instrument-grid glowing behind the hero, and one signal color that marks what matters. Nothing here is decorative for its own sake — every visual choice exists to make sourced, verifiable numbers easier to trust and easier to scan. The system rejects marketing-site polish: no gradient text, no glassmorphism, no hero-metric SaaS templates, no cheerful illustration. Warmth and optimism about the transition come from the numbers themselves and the narrative arc of the chapters, not from decorative flourish.",
+    "keyCharacteristics": [
+      "Near-black base with a cool blue-green undertone, never a warm neutral",
+      "A single signal color (teal) used generously across active states, links, and key figures, but never applied to bulk surface",
+      "Flat by doctrine: depth comes from tonal layering and hairline borders, never shadows",
+      "Chapter-numbered storytelling (01–04) because the homepage genuinely is a sequence of findings, not decorative scaffolding",
+      "Fluid type scale (clamp()-based steps) so hierarchy holds from phone to desktop without breakpoint-specific overrides"
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Teal is the only saturated color in the system. It marks emphasis and interactivity; it never fills a surface. A second semantic meaning is expressed via color-mix() tints of teal, not a new hue.", "section": "colors" },
+      { "name": "The Cool-Black Rule", "body": "The base is a blue-green-tinted near-black (#0b0f14), never a true black and never warm. Every neutral in the ramp keeps that same cool undertone.", "section": "colors" },
+      { "name": "The One Family Rule", "body": "No serif, no display webfont, no second sans is ever introduced. Hierarchy is built entirely from weight, size, and letter-spacing within the system-sans stack.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces never lift. A card, callout, or panel signals 'layer above' purely by moving one step up the tonal ramp plus a 1px border — never a shadow, however subtle.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the base cool and near-black (#0b0f14) — never substitute a warm or true-black neutral.",
+      "Do use Signal Teal generously across interactive and emphasis states (active nav, hovers, multiple stats in one view).",
+      "Do build depth with tonal layering (Base → Surface → Subtle) and hairline borders only.",
+      "Do cap body copy at the existing --measure (62ch) for readability.",
+      "Do use numbered chapter markers (01, 02, 03…) only where the content is a genuine sequence of findings, as on the homepage."
+    ],
+    "donts": [
+      "Don't introduce a warm neutral, cream, or sand background anywhere in the system.",
+      "Don't add box-shadow-based elevation to cards, panels, or modals.",
+      "Don't add a second saturated color.",
+      "Don't use border-left accent stripes as generic card/list decoration — reserved for the Callout component only.",
+      "Don't add gradient text, glassmorphism-as-decoration, or hero-metric SaaS templates.",
+      "Don't pair a second typeface."
+    ]
+  }
+}

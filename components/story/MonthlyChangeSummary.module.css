@@ -30,7 +30,7 @@
 }
 
 .negative {
-  color: #f87171;
+  color: var(--negative);
 }
 
 .label {

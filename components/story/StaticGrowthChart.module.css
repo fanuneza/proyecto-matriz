@@ -20,7 +20,7 @@
 
 .tickLabel {
   fill: var(--text-muted);
-  font-size: 11px;
+  font-size: 14px;
   font-family: var(--font-sans);
 }
 
@@ -37,7 +37,7 @@
 
 .legendText {
   fill: var(--text-muted);
-  font-size: 12px;
+  font-size: 15px;
   font-family: var(--font-sans);
 }
 

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
@@ -17,17 +18,17 @@ export const metadata: Metadata = buildPageMetadata({
 
 const BarraHorizontal = dynamic(
   () => import("@/components/story/BarraHorizontal").then((m) => m.BarraHorizontal),
-  { ssr: true }
+  { ssr: true, loading: () => <div className="chart-loading" /> }
 );
 
 const GraficoCrecimiento = dynamic(
   () => import("@/components/story/GraficoCrecimiento").then((m) => m.GraficoCrecimiento),
-  { ssr: true }
+  { ssr: true, loading: () => <div className="chart-loading" /> }
 );
 
 const GraficoNetBilling = dynamic(
   () => import("@/components/story/GraficoNetBilling").then((m) => m.GraficoNetBilling),
-  { ssr: true }
+  { ssr: true, loading: () => <div className="chart-loading" /> }
 );
 
 export default async function Page() {
@@ -48,7 +49,7 @@ export default async function Page() {
 
   return (
     <>
-      <main className={styles.main}>
+      <main id="main-content" className={styles.main}>
         <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
           <div className={`container ${styles.heroInner}`}>
             <p className={styles.eyebrow}>Chile · Energía · Datos CNE</p>
@@ -59,9 +60,9 @@ export default async function Page() {
             </h1>
             <p className={styles.heroLead}>
               Hoy, más del <strong>{formatPercent(porcentajeErnc)}</strong> de la
-              capacidad instalada del sistema corresponde a fuentes renovables no
-              convencionales. Esta historia se construye con datos abiertos de la
-              Comisión Nacional de Energía.
+              capacidad instalada del sistema corresponde a Energías Renovables No
+              Convencionales (ERNC). Esta historia se construye con datos abiertos
+              de la Comisión Nacional de Energía.
             </p>
 
             <div className={styles.heroStats}>
@@ -104,7 +105,6 @@ export default async function Page() {
                 data={regiones}
                 unit="MW"
                 ariaLabel="Capacidad ERNC instalada por región, en megawatts."
-                height={420}
               />
             </div>
           </div>
@@ -131,7 +131,6 @@ export default async function Page() {
                 data={tecnologias}
                 unit="MW"
                 ariaLabel="Composición por tecnología ERNC."
-                height={360}
               />
             </div>
           </div>
@@ -184,11 +183,9 @@ export default async function Page() {
           </div>
         </section>
 
-        <section className={styles.chapter} aria-labelledby="cap-metodologia">
-          <div className="container" id="cap-metodologia">
-            <MethodologyBlock />
-          </div>
-        </section>
+        <div className={`${styles.chapter} container`}>
+          <MethodologyBlock />
+        </div>
 
         <section className={styles.cierre} aria-labelledby="cap-cierre">
           <div className="container">
@@ -197,10 +194,23 @@ export default async function Page() {
             </h2>
             <p className={styles.cierreLead}>
               Chile cuenta con una de las matrices eléctricas con mayor participación
-              renovable de América del Sur. Esta versión del proyecto agrega rutas
-              temáticas, snapshots mensuales, comparación regional y artefactos
-              públicos descargables.
+              renovable de América del Sur, y la tendencia se sostiene región por
+              región, tecnología por tecnología. Sigue explorando:
             </p>
+            <ul className={styles.cierreLinks}>
+              <li>
+                <Link href="/regiones">Comparación por región →</Link>
+              </li>
+              <li>
+                <Link href="/archivo">Archivo mensual →</Link>
+              </li>
+              <li>
+                <Link href="/comparar">Herramienta de comparación →</Link>
+              </li>
+              <li>
+                <Link href="/datos">Datos y metodología →</Link>
+              </li>
+            </ul>
           </div>
         </section>
       </main>

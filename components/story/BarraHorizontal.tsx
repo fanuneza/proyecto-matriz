@@ -11,7 +11,6 @@ type Props = {
   data: Bar[];
   unit?: string;
   color?: string;
-  height?: number;
   ariaLabel: string;
 };
 
@@ -19,11 +18,8 @@ export function BarraHorizontal({
   data,
   unit = "MW",
   color = CHART_COLORS.ernc,
-  height = 380,
   ariaLabel,
 }: Props) {
-  void height;
-
   return (
     <ChartTabs
       items={[

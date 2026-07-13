@@ -12,16 +12,6 @@
   padding-top: 56px;
 }
 
-.error {
-  display: grid;
-  place-items: center;
-  min-height: 60vh;
-  color: var(--text-muted);
-  font-size: var(--step-1);
-  padding: var(--space-lg);
-  text-align: center;
-}
-
 /* ── Hero ───────────────────────────────────────────────────────────── */
 .hero {
   min-height: calc(100svh - 56px);
@@ -35,18 +25,6 @@
   background-size: 40px 40px;
   padding-block: var(--space-lg) var(--space-xl);
   overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: -40px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.09) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
 }
 
 .hero::after {
@@ -222,6 +200,20 @@
   font-size: var(--step-1);
   color: var(--text-muted);
   line-height: 1.75;
+}
+
+.cierreLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.cierreLinks a {
+  font-weight: 500;
 }
 
 /* ══════════════════════════════════════════════════════════════════════

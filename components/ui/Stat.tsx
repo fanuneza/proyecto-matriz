@@ -10,9 +10,7 @@ type Props = {
 export function Stat({ value, label, sub, accent }: Props) {
   return (
     <div className={`${styles.stat} ${accent ? styles.accent : ""}`}>
-      <p className={styles.value} aria-label={`${value} ${label}`}>
-        {value}
-      </p>
+      <p className={styles.value}>{value}</p>
       <p className={styles.label}>{label}</p>
       {sub && <p className={styles.sub}>{sub}</p>}
     </div>

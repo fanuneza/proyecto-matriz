@@ -113,15 +113,25 @@
 
 /* ── Mobile menu ────────────────────────────────────────────────────── */
 .mobileMenu {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.25s ease;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease-out;
 }
 
 .mobileMenuOpen {
-  max-height: 320px;
+  transform: scaleY(1);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobileNavList {
