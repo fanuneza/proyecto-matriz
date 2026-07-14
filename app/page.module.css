@@ -16,6 +16,7 @@
 .hero {
   --hero-map-column: clamp(25rem, 31vw, 29rem);
   --hero-column-gap: clamp(2rem, 5vw, 5rem);
+  --hero-map-height: clamp(28rem, 38vw, 34rem);
   min-height: calc(100svh - 56px);
   display: flex;
   align-items: center;
@@ -94,7 +95,7 @@
 .heroMap {
   z-index: 1;
   align-self: center;
-  min-height: clamp(34rem, 45vw, 40rem);
+  min-height: var(--hero-map-height);
   width: 100%;
   display: grid;
   grid-template-columns: minmax(9rem, 1fr) minmax(12rem, 1.1fr);
@@ -106,7 +107,7 @@
 .mapImage {
   grid-column: 1;
   width: auto;
-  height: clamp(34rem, 45vw, 40rem);
+  height: var(--hero-map-height);
   max-width: none;
   justify-self: center;
   object-fit: contain;
