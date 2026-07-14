@@ -8,6 +8,7 @@
     "build": "next build && node scripts/inline-critical-css.mjs",
     "lint": "eslint",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "generate-artifacts": "tsx scripts/generate-data-artifacts.ts",
     "check-output": "tsx scripts/check-output.ts",
     "check-routes": "tsx scripts/check-static-routes.ts",

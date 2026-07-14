@@ -9,6 +9,9 @@
   --accent-dim:   #1a5a52;
   --negative:     #f87171;
 
+  --chart-ernc:        var(--accent);
+  --chart-net-billing: var(--accent);
+
   --text:        #ddeef2;
   --text-muted:  #8a9baa;
   --text-dim:    #768a99;

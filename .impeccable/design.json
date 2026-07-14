@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-07-13T17:14:20Z",
+  "generatedAt": "2026-07-13T20:50:00Z",
   "title": "Design System: Proyecto Matriz",
   "extensions": {
     "colorMeta": {
@@ -102,6 +102,7 @@
     "dos": [
       "Do keep the base cool and near-black (#0b0f14) — never substitute a warm or true-black neutral.",
       "Do use Signal Teal generously across interactive and emphasis states (active nav, hovers, multiple stats in one view).",
+      "Do route every non-directional chart series through the Signal Teal aliases --chart-ernc and --chart-net-billing.",
       "Do build depth with tonal layering (Base → Surface → Subtle) and hairline borders only.",
       "Do cap body copy at the existing --measure (62ch) for readability.",
       "Do use numbered chapter markers (01, 02, 03…) only where the content is a genuine sequence of findings, as on the homepage."

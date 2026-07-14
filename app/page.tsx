@@ -70,7 +70,7 @@ export default async function Page() {
 
   return (
     <>
-      <main id="main-content" className={styles.main}>
+      <main id="main-content" className={styles.main} tabIndex={-1}>
         <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroCopy}>

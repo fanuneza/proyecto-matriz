@@ -16,7 +16,7 @@ export default function ErrorBoundary({
   }, [error]);
 
   return (
-    <main id="main-content" className={styles.wrap}>
+    <main id="main-content" className={styles.wrap} tabIndex={-1}>
       <div className={`container ${styles.inner}`}>
         <h1 className={styles.title}>No pudimos cargar estos datos</h1>
         <p className={styles.lead}>

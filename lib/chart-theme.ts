@@ -1,8 +1,4 @@
 export const CHART_COLORS = {
-  ernc: "#2dd4bf",
-  pipeline: "#78716c",
-  netBilling: "#a3e635",
-  grid: "#1e2833",
-  text: "#ddeef2",
-  bg: "transparent",
+  ernc: "var(--chart-ernc)",
+  netBilling: "var(--chart-net-billing)",
 } as const;
