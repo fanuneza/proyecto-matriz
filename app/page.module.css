@@ -16,7 +16,7 @@
 .hero {
   --hero-map-column: clamp(25rem, 31vw, 29rem);
   --hero-column-gap: clamp(2rem, 5vw, 5rem);
-  --hero-map-height: clamp(28rem, 38vw, 34rem);
+  --hero-map-height: clamp(34rem, 45vw, 40rem);
   min-height: calc(100svh - 56px);
   display: flex;
   align-items: center;
