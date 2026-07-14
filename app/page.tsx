@@ -271,7 +271,7 @@ export default async function Page() {
         <section className={styles.cierre} aria-labelledby="cap-cierre">
           <div className="container">
             <h2 id="cap-cierre" className={styles.cierreTitle}>
-              El avance es verificable. La pregunta es cómo se distribuye.
+              El avance es verificable. La pregunta es cómo se distribuye
             </h2>
             <p className={styles.cierreLead}>
               Los datos muestran una transición en marcha, concentrada en ciertas regiones,
