@@ -26,3 +26,33 @@ test("mobile navigation reaches the comparison tool", async ({ page }) => {
   await expect(page).toHaveURL(/\/comparar$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Comparar");
 });
+
+test("chart tabs expose the data table to keyboard users", async ({ page }) => {
+  await page.goto("/");
+
+  const tabList = page.getByRole("tablist", { name: "Vista de gráfico y tabla" }).first();
+  const chartTab = tabList.getByRole("tab", { name: "Gráfico" });
+  const tableTab = tabList.getByRole("tab", { name: "Tabla" });
+
+  await chartTab.focus();
+  await page.keyboard.press("ArrowRight");
+
+  await expect(tableTab).toBeFocused();
+  await expect(tableTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("table").first()).toBeVisible();
+});
+
+test("region comparison swaps the selected regions", async ({ page }) => {
+  await page.goto("/comparar?a=antofagasta&b=atacama");
+
+  const regionA = page.getByRole("combobox", { name: "Región A" });
+  const regionB = page.getByRole("combobox", { name: "Región B" });
+  await expect(regionA).toHaveValue("antofagasta");
+  await expect(regionB).toHaveValue("atacama");
+
+  await page.getByRole("button", { name: "Intercambiar regiones" }).click();
+
+  await expect(page).toHaveURL(/a=atacama&b=antofagasta/);
+  await expect(regionA).toHaveValue("atacama");
+  await expect(regionB).toHaveValue("antofagasta");
+});
