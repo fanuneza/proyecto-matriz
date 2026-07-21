@@ -19,7 +19,9 @@ type StatCardProps = {
 function StatCard({ value, label, positive }: StatCardProps) {
   return (
     <div className={styles.card}>
-      <p className={`${styles.value} ${positive ? styles.positive : styles.negative}`}>
+      <p
+        className={`${styles.value} ${positive ? styles.positive : styles.negative}`}
+      >
         {value}
       </p>
       <p className={styles.label}>{label}</p>
@@ -31,8 +33,8 @@ export function MonthlyChangeSummary({ delta }: Props) {
   if (!delta) {
     return (
       <p className={styles.notice}>
-        La comparación mensual estará disponible una vez que existan al menos dos
-        registros históricos.
+        La comparación mensual estará disponible una vez que existan al menos
+        dos registros históricos.
       </p>
     );
   }
@@ -61,14 +63,15 @@ export function MonthlyChangeSummary({ delta }: Props) {
       </div>
       {delta.regiones[0] ? (
         <p className={styles.detail}>
-          Mayor cambio regional: <strong>{delta.regiones[0].nombre}</strong>{" "}
-          ({formatDelta(delta.regiones[0].deltaMw)}).
+          Mayor cambio regional: <strong>{delta.regiones[0].nombre}</strong> (
+          {formatDelta(delta.regiones[0].deltaMw)}).
         </p>
       ) : null}
       {delta.tecnologias[0] ? (
         <p className={styles.detail}>
-          Mayor cambio por tecnología: <strong>{delta.tecnologias[0].nombre}</strong>{" "}
-          ({formatDelta(delta.tecnologias[0].deltaMw)}).
+          Mayor cambio por tecnología:{" "}
+          <strong>{delta.tecnologias[0].nombre}</strong> (
+          {formatDelta(delta.tecnologias[0].deltaMw)}).
         </p>
       ) : null}
     </section>

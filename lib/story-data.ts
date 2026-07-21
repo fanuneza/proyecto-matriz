@@ -15,7 +15,10 @@ import {
 import type { DataMetadata } from "@/lib/data-types";
 import { normalizeNetBilling } from "@/lib/normalize-netbilling";
 import { normalizePlanta, normalizePipeline } from "@/lib/normalize-ernc";
-import { buildRegionProfiles, buildTechnologyProfiles } from "@/lib/region-profiles";
+import {
+  buildRegionProfiles,
+  buildTechnologyProfiles,
+} from "@/lib/region-profiles";
 import { canonicalRegionName, nombreRegion } from "@/lib/regions";
 import {
   CapacidadArraySchema,
@@ -31,9 +34,15 @@ export async function getStoryData() {
     fetchNetBillingRaw(),
   ]);
 
-  const capParsed = CapacidadArraySchema.safeParse(unwrapCneData(capResult.data));
-  const pipeParsed = PipelineArraySchema.safeParse(unwrapCneData(pipeResult.data));
-  const nbParsed = NetBillingArraySchema.safeParse(unwrapCneData(nbResult.data));
+  const capParsed = CapacidadArraySchema.safeParse(
+    unwrapCneData(capResult.data),
+  );
+  const pipeParsed = PipelineArraySchema.safeParse(
+    unwrapCneData(pipeResult.data),
+  );
+  const nbParsed = NetBillingArraySchema.safeParse(
+    unwrapCneData(nbResult.data),
+  );
 
   if (!capParsed.success) {
     throw new Error(
@@ -59,7 +68,8 @@ export async function getStoryData() {
 
   const totalErncMw = totalNetaMw(ernc);
   const totalMwGeneral = totalNetaMw(operationalPlants);
-  const porcentajeErnc = totalMwGeneral > 0 ? (totalErncMw / totalMwGeneral) * 100 : 0;
+  const porcentajeErnc =
+    totalMwGeneral > 0 ? (totalErncMw / totalMwGeneral) * 100 : 0;
   const porAnioPipe = pipelinePorAnio(pipelineProjects).filter(
     (entry) => entry.anio >= currentYear,
   );
@@ -107,7 +117,9 @@ export async function getStoryData() {
   return {
     totalErncMw,
     porcentajeErnc,
-    totalNbMw: netBillingRecords.reduce((sum, entry) => sum + entry.potenciaKw, 0) / 1000,
+    totalNbMw:
+      netBillingRecords.reduce((sum, entry) => sum + entry.potenciaKw, 0) /
+      1000,
     pipelineMwTotal: porAnioPipe.reduce((sum, entry) => sum + entry.mw, 0),
     erncCount: ernc.length,
     zonasEnergeticas: capacidadPorZona(ernc),

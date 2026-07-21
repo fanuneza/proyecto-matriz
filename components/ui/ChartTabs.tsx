@@ -24,7 +24,10 @@ export function ChartTabs({ items }: Props) {
     tabRefs.current[index]?.focus();
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+  function handleKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
     if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
       event.preventDefault();
       const direction = event.key === "ArrowRight" ? 1 : -1;
@@ -46,7 +49,11 @@ export function ChartTabs({ items }: Props) {
 
   return (
     <div className={styles.root}>
-      <div className={styles.tabList} role="tablist" aria-label="Vista de gráfico y tabla">
+      <div
+        className={styles.tabList}
+        role="tablist"
+        aria-label="Vista de gráfico y tabla"
+      >
         {items.map((item, index) => {
           const isActive = item.id === activeId;
           const tabId = `${instanceId}-${item.id}-tab`;

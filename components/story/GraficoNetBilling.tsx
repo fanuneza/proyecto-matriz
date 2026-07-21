@@ -16,10 +16,13 @@ type Props = {
 };
 
 export function GraficoNetBilling({ porMes, porRegion }: Props) {
-  const cumMes = porMes.reduce<{ periodo: string; kw: number }[]>((items, entry) => {
-    const previous = items.at(-1)?.kw ?? 0;
-    return [...items, { periodo: entry.periodo, kw: previous + entry.kw }];
-  }, []);
+  const cumMes = porMes.reduce<{ periodo: string; kw: number }[]>(
+    (items, entry) => {
+      const previous = items.at(-1)?.kw ?? 0;
+      return [...items, { periodo: entry.periodo, kw: previous + entry.kw }];
+    },
+    [],
+  );
 
   const sortedRegions = [...porRegion].sort((a, b) => a.kw - b.kw);
 

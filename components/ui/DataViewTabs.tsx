@@ -23,7 +23,9 @@ export function DataViewTabs<T>({ chart, caption, columns, rows }: Props<T>) {
         {
           id: "tabla",
           label: "Tabla",
-          content: <DataTable caption={caption} columns={columns} rows={rows} />,
+          content: (
+            <DataTable caption={caption} columns={columns} rows={rows} />
+          ),
         },
       ]}
     />

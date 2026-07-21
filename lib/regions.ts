@@ -86,7 +86,12 @@ export const REGION_ENTRIES: RegionEntry[] = [
     nombre: "Ñuble",
     shortName: "Ñuble",
     slug: "nuble",
-    aliases: ["nuble", "region de nuble", "region del nuble", "region de ñuble"],
+    aliases: [
+      "nuble",
+      "region de nuble",
+      "region del nuble",
+      "region de ñuble",
+    ],
   },
   {
     code: "VIII",
@@ -150,7 +155,9 @@ export const REGION_SLUGS: Record<string, string> = Object.fromEntries(
   REGION_ENTRIES.map((entry) => [entry.nombre, entry.slug]),
 );
 
-const REGION_BY_SLUG = new Map(REGION_ENTRIES.map((entry) => [entry.slug, entry]));
+const REGION_BY_SLUG = new Map(
+  REGION_ENTRIES.map((entry) => [entry.slug, entry]),
+);
 
 function normalizeRegionToken(value: string): string {
   return value
@@ -188,7 +195,10 @@ function findRegionByAlias(normalized: string): RegionEntry | null {
   for (const entry of REGION_ENTRIES) {
     for (const alias of [entry.nombre, entry.shortName, ...entry.aliases]) {
       const normalizedAlias = normalizeRegionToken(alias);
-      if (normalized.includes(normalizedAlias) || normalizedAlias.includes(normalized)) {
+      if (
+        normalized.includes(normalizedAlias) ||
+        normalizedAlias.includes(normalized)
+      ) {
         return entry;
       }
     }
@@ -223,7 +233,10 @@ export function nombreRegion(codeOrName: string): string {
 
 export function nombreRegionCorto(nombre: string): string {
   const canonical = canonicalRegionName(nombre);
-  return REGION_ENTRIES.find((entry) => entry.nombre === canonical)?.shortName ?? canonical;
+  return (
+    REGION_ENTRIES.find((entry) => entry.nombre === canonical)?.shortName ??
+    canonical
+  );
 }
 
 export function regionEntryBySlug(slug: string): RegionEntry | undefined {

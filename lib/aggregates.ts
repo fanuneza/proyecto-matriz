@@ -47,7 +47,14 @@ export const ZONAS_ENERGETICAS = [
   },
   {
     nombre: "Zona Central",
-    regiones: ["Valparaíso", "Metropolitana", "O'Higgins", "Maule", "Ñuble", "Biobío"],
+    regiones: [
+      "Valparaíso",
+      "Metropolitana",
+      "O'Higgins",
+      "Maule",
+      "Ñuble",
+      "Biobío",
+    ],
   },
   {
     nombre: "Zona Sur",
@@ -89,7 +96,7 @@ export function capacidadPorTecnologia(plantas: PlantaOperacional[]) {
 export function capacidadPorAnio(plantas: PlantaOperacional[]) {
   const map = groupBy(
     plantas.filter((p) => p.anioServicio != null),
-    (p) => String(p.anioServicio)
+    (p) => String(p.anioServicio),
   );
   return [...map.entries()]
     .map(([anio, ps]) => ({

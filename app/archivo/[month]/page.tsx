@@ -8,7 +8,11 @@ import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { compareSnapshots } from "@/lib/snapshot-compare";
-import { getPreviousSnapshot, listSnapshots, readSnapshot } from "@/lib/snapshots";
+import {
+  getPreviousSnapshot,
+  listSnapshots,
+  readSnapshot,
+} from "@/lib/snapshots";
 import { buildPageMetadata } from "../../seo";
 
 type Props = {
@@ -19,7 +23,9 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const months = listSnapshots();
-  return months.length > 0 ? months.map((month) => ({ month })) : [{ month: "__placeholder__" }];
+  return months.length > 0
+    ? months.map((month) => ({ month }))
+    : [{ month: "__placeholder__" }];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -68,8 +74,8 @@ export default async function ArchivoMonthPage({ params }: Props) {
       ]}
       lede={
         <p>
-          Este corte conserva agregados publicables de capacidad ERNC, net billing,
-          pipeline y metadatos de fuentes para ese mes.
+          Este corte conserva agregados publicables de capacidad ERNC, net
+          billing, pipeline y metadatos de fuentes para ese mes.
         </p>
       }
       navLinks={[
@@ -106,7 +112,9 @@ export default async function ArchivoMonthPage({ params }: Props) {
           </div>
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Net billing</span>
-            <strong className={shell.metaValue}>{snapshot.national.totalNbMw.toFixed(1)} MW</strong>
+            <strong className={shell.metaValue}>
+              {snapshot.national.totalNbMw.toFixed(1)} MW
+            </strong>
           </div>
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Proyectos en construcción</span>
@@ -122,13 +130,18 @@ export default async function ArchivoMonthPage({ params }: Props) {
 
       {(topRegion || topTechnology) && (
         <section className={shell.section}>
-          <div className={topRegion && topTechnology ? shell.twoColumn : undefined}>
+          <div
+            className={topRegion && topTechnology ? shell.twoColumn : undefined}
+          >
             {topRegion ? (
               <InsightBlock
                 title="Región con mayor capacidad"
-                value={`${topRegion.nombre}: ${topRegion.erncMw.toLocaleString("es-CL", {
-                  maximumFractionDigits: 0,
-                })} MW`}
+                value={`${topRegion.nombre}: ${topRegion.erncMw.toLocaleString(
+                  "es-CL",
+                  {
+                    maximumFractionDigits: 0,
+                  },
+                )} MW`}
                 context={`Equivale a ${topRegion.nationalSharePct.toFixed(1)}% del total ERNC del snapshot.`}
                 source="Fuente: agregados CNE procesados en build"
               />
@@ -136,9 +149,12 @@ export default async function ArchivoMonthPage({ params }: Props) {
             {topTechnology ? (
               <InsightBlock
                 title="Tecnología dominante"
-                value={`${topTechnology.nombre}: ${topTechnology.erncMw.toLocaleString("es-CL", {
-                  maximumFractionDigits: 0,
-                })} MW`}
+                value={`${topTechnology.nombre}: ${topTechnology.erncMw.toLocaleString(
+                  "es-CL",
+                  {
+                    maximumFractionDigits: 0,
+                  },
+                )} MW`}
                 context="La página agrupa variantes menores bajo slugs editoriales estables."
                 source="Fuente: snapshot mensual del proyecto"
               />
@@ -173,7 +189,8 @@ export default async function ArchivoMonthPage({ params }: Props) {
           <MonthlySummary delta={delta} />
         ) : (
           <p className={shell.notice}>
-            El resumen comparativo aparecerá cuando exista un snapshot previo válido.
+            El resumen comparativo aparecerá cuando exista un snapshot previo
+            válido.
           </p>
         )}
       </section>

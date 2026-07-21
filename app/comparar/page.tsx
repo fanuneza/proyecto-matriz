@@ -7,7 +7,8 @@ import { buildPageMetadata } from "../seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Comparar regiones",
-  description: "Compara capacidad ERNC, net billing y pipeline entre regiones de Chile.",
+  description:
+    "Compara capacidad ERNC, net billing y pipeline entre regiones de Chile.",
   path: "/comparar",
 });
 
@@ -20,9 +21,9 @@ export default async function CompararPage() {
       title="Comparar regiones"
       lede={
         <p>
-          Contrasta dos regiones con el mismo marco visual del sitio: capacidad ERNC
-          instalada, participación nacional, tecnología dominante, net billing y
-          pipeline en construcción.
+          Contrasta dos regiones con el mismo marco visual del sitio: capacidad
+          ERNC instalada, participación nacional, tecnología dominante, net
+          billing y pipeline en construcción.
         </p>
       }
       navLinks={[

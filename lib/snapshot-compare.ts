@@ -72,7 +72,8 @@ export function compareSnapshots(
     national: {
       totalErncMwDelta: curr.national.totalErncMw - prev.national.totalErncMw,
       totalNbMwDelta: curr.national.totalNbMw - prev.national.totalNbMw,
-      pipelineMwDelta: curr.national.pipelineMwTotal - prev.national.pipelineMwTotal,
+      pipelineMwDelta:
+        curr.national.pipelineMwTotal - prev.national.pipelineMwTotal,
     },
     regiones: buildDeltaCollection<SnapshotRegionEntry>(
       prev.regiones,

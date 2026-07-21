@@ -53,7 +53,9 @@ export default async function RegionesPage() {
       aside={
         <>
           <p>Capacidad instalada, no generación horaria.</p>
-          <p>Cada región tiene una ficha con desglose tecnológico y contexto.</p>
+          <p>
+            Cada región tiene una ficha con desglose tecnológico y contexto.
+          </p>
         </>
       }
     >

@@ -16,37 +16,82 @@ import type { NetBillingRecord } from "@/lib/normalize-netbilling";
 /* ── Fixtures ──────────────────────────────────────────────────────── */
 
 const solar: PlantaOperacional = {
-  nombre: "Solar A", propietario: "X", tecnologia: "Solar",
-  clasificacion: "ERNC", estado: "Operación",
-  potenciaNetaMw: 100, region: "Antofagasta", anioServicio: 2022,
+  nombre: "Solar A",
+  propietario: "X",
+  tecnologia: "Solar",
+  clasificacion: "ERNC",
+  estado: "Operación",
+  potenciaNetaMw: 100,
+  region: "Antofagasta",
+  anioServicio: 2022,
 };
 const hidro: PlantaOperacional = {
-  nombre: "Hidro B", propietario: "Y", tecnologia: "Hidráulica de pasada",
-  clasificacion: "ERNC", estado: "Operación",
-  potenciaNetaMw: 50, region: "Los Ríos", anioServicio: 2015,
+  nombre: "Hidro B",
+  propietario: "Y",
+  tecnologia: "Hidráulica de pasada",
+  clasificacion: "ERNC",
+  estado: "Operación",
+  potenciaNetaMw: 50,
+  region: "Los Ríos",
+  anioServicio: 2015,
 };
 const carbon: PlantaOperacional = {
-  nombre: "Carbon C", propietario: "Z", tecnologia: "Carbón",
-  clasificacion: "Convencional", estado: "Operación",
-  potenciaNetaMw: 200, region: "Biobío", anioServicio: 2000,
+  nombre: "Carbon C",
+  propietario: "Z",
+  tecnologia: "Carbón",
+  clasificacion: "Convencional",
+  estado: "Operación",
+  potenciaNetaMw: 200,
+  region: "Biobío",
+  anioServicio: 2000,
 };
 
 const pipe1: ProyectoPipeline = {
-  nombre: "Pipe A", propietario: "X", tecnologia: "Solar",
-  potenciaNetaMw: 300, region: "Atacama", anioServicio: 2026,
+  nombre: "Pipe A",
+  propietario: "X",
+  tecnologia: "Solar",
+  potenciaNetaMw: 300,
+  region: "Atacama",
+  anioServicio: 2026,
 };
 const pipe2: ProyectoPipeline = {
-  nombre: "Pipe B", propietario: "Y", tecnologia: "Eólica",
-  potenciaNetaMw: 150, region: "Antofagasta", anioServicio: 2026,
+  nombre: "Pipe B",
+  propietario: "Y",
+  tecnologia: "Eólica",
+  potenciaNetaMw: 150,
+  region: "Antofagasta",
+  anioServicio: 2026,
 };
 const pipe3: ProyectoPipeline = {
-  nombre: "Pipe C", propietario: "Z", tecnologia: "Solar",
-  potenciaNetaMw: 80, region: "Coquimbo", anioServicio: 2027,
+  nombre: "Pipe C",
+  propietario: "Z",
+  tecnologia: "Solar",
+  potenciaNetaMw: 80,
+  region: "Coquimbo",
+  anioServicio: 2027,
 };
 
-const nb1: NetBillingRecord = { anio: 2024, mes: 1, potenciaKw: 5000, tecnologia: "Solar", region: "RM" };
-const nb2: NetBillingRecord = { anio: 2024, mes: 1, potenciaKw: 3000, tecnologia: "Solar", region: "RM" };
-const nb3: NetBillingRecord = { anio: 2024, mes: 2, potenciaKw: 4000, tecnologia: "Solar", region: "V" };
+const nb1: NetBillingRecord = {
+  anio: 2024,
+  mes: 1,
+  potenciaKw: 5000,
+  tecnologia: "Solar",
+  region: "RM",
+};
+const nb2: NetBillingRecord = {
+  anio: 2024,
+  mes: 1,
+  potenciaKw: 3000,
+  tecnologia: "Solar",
+  region: "RM",
+};
+const nb3: NetBillingRecord = {
+  anio: 2024,
+  mes: 2,
+  potenciaKw: 4000,
+  tecnologia: "Solar",
+  region: "V",
+};
 
 /* ── filtrarErnc ───────────────────────────────────────────────────── */
 
@@ -75,8 +120,11 @@ describe("totalNetaMw", () => {
 
   it("treats undefined potenciaNetaMw as zero", () => {
     const noMw: PlantaOperacional = {
-      nombre: "X", propietario: "Y", tecnologia: "Z",
-      clasificacion: "ERNC", estado: "Op",
+      nombre: "X",
+      propietario: "Y",
+      tecnologia: "Z",
+      clasificacion: "ERNC",
+      estado: "Op",
     };
     expect(totalNetaMw([noMw])).toBe(0);
   });
@@ -103,8 +151,12 @@ describe("capacidadPorRegion", () => {
 
   it("uses 'Sin región' for undefined region", () => {
     const noRegion: PlantaOperacional = {
-      nombre: "X", propietario: "Y", tecnologia: "Solar",
-      clasificacion: "ERNC", estado: "Op", potenciaNetaMw: 10,
+      nombre: "X",
+      propietario: "Y",
+      tecnologia: "Solar",
+      clasificacion: "ERNC",
+      estado: "Op",
+      potenciaNetaMw: 10,
     };
     const result = capacidadPorRegion([noRegion]);
     expect(result[0].region).toBe("Sin región");
@@ -137,8 +189,14 @@ describe("capacidadPorZona", () => {
   });
 
   it("recognizes regional aliases before assigning a zone", () => {
-    const rmPlant = { ...solar, region: "Región Metropolitana de Santiago", potenciaNetaMw: 25 };
-    const central = capacidadPorZona([rmPlant]).find((entry) => entry.zona === "Zona Central");
+    const rmPlant = {
+      ...solar,
+      region: "Región Metropolitana de Santiago",
+      potenciaNetaMw: 25,
+    };
+    const central = capacidadPorZona([rmPlant]).find(
+      (entry) => entry.zona === "Zona Central",
+    );
 
     expect(central).toMatchObject({ count: 1, mw: 25 });
   });
@@ -156,7 +214,11 @@ describe("capacidadPorTecnologia", () => {
   });
 
   it("aggregates multiple plants of same tecnologia", () => {
-    const solar2: PlantaOperacional = { ...solar, nombre: "Solar A2", potenciaNetaMw: 200 };
+    const solar2: PlantaOperacional = {
+      ...solar,
+      nombre: "Solar A2",
+      potenciaNetaMw: 200,
+    };
     const result = capacidadPorTecnologia([solar, solar2]);
     expect(result).toHaveLength(1);
     expect(result[0].mw).toBe(300);
@@ -179,9 +241,13 @@ describe("capacidadPorAnio", () => {
 
   it("excludes plants with null anioServicio", () => {
     const noYear: PlantaOperacional = {
-      nombre: "X", propietario: "Y", tecnologia: "Solar",
-      clasificacion: "ERNC", estado: "Op",
-      potenciaNetaMw: 10, anioServicio: null,
+      nombre: "X",
+      propietario: "Y",
+      tecnologia: "Solar",
+      clasificacion: "ERNC",
+      estado: "Op",
+      potenciaNetaMw: 10,
+      anioServicio: null,
     };
     const result = capacidadPorAnio([noYear, solar]);
     expect(result).toHaveLength(1);
@@ -190,8 +256,12 @@ describe("capacidadPorAnio", () => {
 
   it("excludes plants with undefined anioServicio", () => {
     const noYear: PlantaOperacional = {
-      nombre: "X", propietario: "Y", tecnologia: "Solar",
-      clasificacion: "ERNC", estado: "Op", potenciaNetaMw: 10,
+      nombre: "X",
+      propietario: "Y",
+      tecnologia: "Solar",
+      clasificacion: "ERNC",
+      estado: "Op",
+      potenciaNetaMw: 10,
     };
     const result = capacidadPorAnio([noYear, solar]);
     expect(result).toHaveLength(1);

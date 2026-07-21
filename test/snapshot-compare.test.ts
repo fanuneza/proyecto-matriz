@@ -2,7 +2,12 @@ import { describe, expect, it } from "vitest";
 import { compareSnapshots } from "@/lib/snapshot-compare";
 import type { MonthlySnapshot } from "@/lib/snapshot-types";
 
-function makeSnap(month: string, erncMw: number, nbMw: number, pipelineMw: number): MonthlySnapshot {
+function makeSnap(
+  month: string,
+  erncMw: number,
+  nbMw: number,
+  pipelineMw: number,
+): MonthlySnapshot {
   return {
     schemaVersion: 2,
     snapshotMonth: month,
@@ -41,7 +46,9 @@ function makeSnap(month: string, erncMw: number, nbMw: number, pipelineMw: numbe
         erncMw: erncMw * 0.6,
         nationalSharePct: 60,
         pipelineMw: pipelineMw * 0.5,
-        regiones: [{ nombre: "Antofagasta", slug: "antofagasta", mw: erncMw * 0.3 }],
+        regiones: [
+          { nombre: "Antofagasta", slug: "antofagasta", mw: erncMw * 0.3 },
+        ],
       },
       {
         nombre: "Eolica",
@@ -95,8 +102,12 @@ describe("compareSnapshots", () => {
       makeSnap("2026-04", 11000, 80, 320),
     );
 
-    expect(result.regiones.find((entry) => entry.slug === "antofagasta")?.deltaMw).toBeGreaterThan(0);
-    expect(result.tecnologias.find((entry) => entry.slug === "solar")?.deltaMw).toBeGreaterThan(0);
+    expect(
+      result.regiones.find((entry) => entry.slug === "antofagasta")?.deltaMw,
+    ).toBeGreaterThan(0);
+    expect(
+      result.tecnologias.find((entry) => entry.slug === "solar")?.deltaMw,
+    ).toBeGreaterThan(0);
   });
 
   it("compares net billing and pipeline collections", () => {

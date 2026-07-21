@@ -1,10 +1,14 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage exposes its main story and a working skip link", async ({ page }) => {
+test("homepage exposes its main story and a working skip link", async ({
+  page,
+}) => {
   await page.goto("/");
 
   await expect(page).toHaveTitle("Chile y la nueva matriz energética");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("La transición ya cambió");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "La transición ya cambió",
+  );
 
   await page.keyboard.press("Tab");
   const skipLink = page.getByRole("link", { name: "Saltar al contenido" });
@@ -14,7 +18,10 @@ test("homepage exposes its main story and a working skip link", async ({ page })
 });
 
 test("mobile navigation reaches the comparison tool", async ({ page }) => {
-  test.skip(!test.info().project.name.startsWith("mobile-"), "Mobile-only interaction");
+  test.skip(
+    !test.info().project.name.startsWith("mobile-"),
+    "Mobile-only interaction",
+  );
 
   await page.goto("/");
 
@@ -24,13 +31,17 @@ test("mobile navigation reaches the comparison tool", async ({ page }) => {
   await mobileMenu.locator('a[href="/comparar"]').click();
 
   await expect(page).toHaveURL(/\/comparar$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Comparar");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Comparar",
+  );
 });
 
 test("chart tabs expose the data table to keyboard users", async ({ page }) => {
   await page.goto("/");
 
-  const tabList = page.getByRole("tablist", { name: "Vista de gráfico y tabla" }).first();
+  const tabList = page
+    .getByRole("tablist", { name: "Vista de gráfico y tabla" })
+    .first();
   const chartTab = tabList.getByRole("tab", { name: "Gráfico" });
   const tableTab = tabList.getByRole("tab", { name: "Tabla" });
 

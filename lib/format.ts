@@ -3,7 +3,7 @@ export const PLOTLY_SPANISH_SEPARATORS = ",.";
 
 export function formatNumber(
   value: number,
-  options: Intl.NumberFormatOptions = {}
+  options: Intl.NumberFormatOptions = {},
 ) {
   return value.toLocaleString(NUMBER_LOCALE, options);
 }

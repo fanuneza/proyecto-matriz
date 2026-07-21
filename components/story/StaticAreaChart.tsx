@@ -11,15 +11,31 @@ type Props = {
 
 function formatPeriodo(periodo: string) {
   const [anio, mes] = periodo.split("-");
-  const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+  const meses = [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+  ];
   return `${meses[parseInt(mes, 10) - 1]} ${anio}`;
 }
 
 export function StaticAreaChart({ data, ariaLabel }: Props) {
-  const cumData = data.reduce<{ periodo: string; kw: number }[]>((items, entry) => {
-    const previous = items.at(-1)?.kw ?? 0;
-    return [...items, { periodo: entry.periodo, kw: previous + entry.kw }];
-  }, []);
+  const cumData = data.reduce<{ periodo: string; kw: number }[]>(
+    (items, entry) => {
+      const previous = items.at(-1)?.kw ?? 0;
+      return [...items, { periodo: entry.periodo, kw: previous + entry.kw }];
+    },
+    [],
+  );
 
   const maxVal = Math.max(...cumData.map((d) => d.kw / 1000), 1);
 
@@ -43,7 +59,7 @@ export function StaticAreaChart({ data, ariaLabel }: Props) {
 
   const yTicks = 4;
   const yTickValues = Array.from({ length: yTicks + 1 }, (_, i) =>
-    Math.round((maxVal / yTicks) * i)
+    Math.round((maxVal / yTicks) * i),
   );
 
   // Show roughly 12 x labels
@@ -74,7 +90,12 @@ export function StaticAreaChart({ data, ariaLabel }: Props) {
                   y2={y}
                   className={styles.gridLine}
                 />
-                <text x={-8} y={y + 4} className={styles.tickLabel} textAnchor="end">
+                <text
+                  x={-8}
+                  y={y + 4}
+                  className={styles.tickLabel}
+                  textAnchor="end"
+                >
                   {tick.toLocaleString("es-CL")} MW
                 </text>
               </g>
@@ -116,7 +137,13 @@ export function StaticAreaChart({ data, ariaLabel }: Props) {
           })}
 
           {/* Axes */}
-          <line x1={0} x2={innerW} y1={innerH} y2={innerH} className={styles.axis} />
+          <line
+            x1={0}
+            x2={innerW}
+            y1={innerH}
+            y2={innerH}
+            className={styles.axis}
+          />
           <line x1={0} x2={0} y1={0} y2={innerH} className={styles.axis} />
         </g>
       </svg>

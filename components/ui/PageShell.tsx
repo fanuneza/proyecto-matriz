@@ -41,7 +41,11 @@ export function PageShell({
           {navLinks.length > 0 ? (
             <nav className={styles.nav} aria-label="Navegación de la sección">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className={styles.navLink}>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={styles.navLink}
+                >
                   {link.label}
                 </Link>
               ))}
@@ -52,7 +56,9 @@ export function PageShell({
             <Breadcrumb items={breadcrumbs} />
           ) : null}
 
-          <div className={`${styles.intro} ${!aside ? styles.introSingle : ""}`}>
+          <div
+            className={`${styles.intro} ${!aside ? styles.introSingle : ""}`}
+          >
             <div className={styles.copy}>
               {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
               <h1 className={styles.title}>{title}</h1>
@@ -61,7 +67,9 @@ export function PageShell({
 
             {aside ? (
               <aside className={styles.aside}>
-                {asideTitle ? <p className={styles.asideTitle}>{asideTitle}</p> : null}
+                {asideTitle ? (
+                  <p className={styles.asideTitle}>{asideTitle}</p>
+                ) : null}
                 <div className={styles.asideBody}>{aside}</div>
               </aside>
             ) : null}

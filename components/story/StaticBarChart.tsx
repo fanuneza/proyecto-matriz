@@ -47,7 +47,8 @@ export function StaticBarChart({
               />
             </div>
             <span className={styles.value}>
-              {bar.value.toLocaleString("es-CL", { maximumFractionDigits: 0 })} {unit}
+              {bar.value.toLocaleString("es-CL", { maximumFractionDigits: 0 })}{" "}
+              {unit}
             </span>
           </div>
         ))}

@@ -34,7 +34,7 @@ export type ProyectoPipeline = {
 
 /* ── Normalizers ────────────────────────────────────────────────────── */
 
-type RawCap      = z.infer<typeof CapacidadRawSchema>;
+type RawCap = z.infer<typeof CapacidadRawSchema>;
 type RawPipeline = z.infer<typeof PipelineRawSchema>;
 
 function parseFloatSafe(v: string | undefined): number | undefined {
@@ -51,33 +51,33 @@ function parseIntSafe(v: string | undefined): number | null {
 
 export function normalizePlanta(raw: RawCap): PlantaOperacional {
   return {
-    nombre:          raw.central,
-    propietario:     raw.propietario,
-    tecnologia:      raw.tipo_de_energia,
-    clasificacion:   raw.clasificacion ?? "",
-    leyErnc:         raw.ley_ernc,
-    estado:          raw.estado,
+    nombre: raw.central,
+    propietario: raw.propietario,
+    tecnologia: raw.tipo_de_energia,
+    clasificacion: raw.clasificacion ?? "",
+    leyErnc: raw.ley_ernc,
+    estado: raw.estado,
     potenciaBrutaMw: parseFloatSafe(raw.potencia_bruta_mw),
-    potenciaNetaMw:  parseFloatSafe(raw.potencia_neta_mw),
-    region:          raw.region_nombre,
-    comuna:          raw.comuna_nombre,
-    anioServicio:    parseIntSafe(raw.anio_servicio_central),
-    fechaServicio:   raw.fecha_puesta_servicio_central,
-    puntoConexion:   raw.punto_conexion,
-    sistema:         raw.sistema,
+    potenciaNetaMw: parseFloatSafe(raw.potencia_neta_mw),
+    region: raw.region_nombre,
+    comuna: raw.comuna_nombre,
+    anioServicio: parseIntSafe(raw.anio_servicio_central),
+    fechaServicio: raw.fecha_puesta_servicio_central,
+    puntoConexion: raw.punto_conexion,
+    sistema: raw.sistema,
   };
 }
 
 export function normalizePipeline(raw: RawPipeline): ProyectoPipeline {
   return {
-    nombre:        raw.proyecto,
-    propietario:   raw.propietario,
-    tecnologia:    raw.tipo_tecnologia_final ?? raw.tipo_tecnologia,
+    nombre: raw.proyecto,
+    propietario: raw.propietario,
+    tecnologia: raw.tipo_tecnologia_final ?? raw.tipo_tecnologia,
     potenciaNetaMw: parseFloatSafe(raw.potencia_neta_mw),
-    region:        raw.region,
+    region: raw.region,
     barraConexion: raw.barra_conexion,
-    sistema:       raw.sistema,
-    categoria:     raw.categoria,
-    anioServicio:  raw.anio_puesta_en_servicio,
+    sistema: raw.sistema,
+    categoria: raw.categoria,
+    anioServicio: raw.anio_puesta_en_servicio,
   };
 }

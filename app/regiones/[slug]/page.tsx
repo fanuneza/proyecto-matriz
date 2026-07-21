@@ -98,16 +98,23 @@ export default async function RegionPage({ params }: Props) {
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Capacidad ERNC instalada</span>
             <strong className={shell.metaValue}>
-              {region.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
+              {region.erncMw.toLocaleString("es-CL", {
+                maximumFractionDigits: 0,
+              })}{" "}
+              MW
             </strong>
           </div>
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Participación nacional</span>
-            <strong className={shell.metaValue}>{region.nationalSharePct.toFixed(1)}%</strong>
+            <strong className={shell.metaValue}>
+              {region.nationalSharePct.toFixed(1)}%
+            </strong>
           </div>
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Tecnología principal</span>
-            <strong className={shell.metaValue}>{region.mainTecnologia ?? "-"}</strong>
+            <strong className={shell.metaValue}>
+              {region.mainTecnologia ?? "-"}
+            </strong>
           </div>
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Net billing</span>
@@ -154,17 +161,17 @@ export default async function RegionPage({ params }: Props) {
             <h2 className={shell.sectionTitle}>Lectura rápida</h2>
             <p className={shell.sectionText}>
               La página resume capacidad instalada, no generación efectiva. Una
-              región con muchos MW puede no ser la que más energía entregue hora a
-              hora.
+              región con muchos MW puede no ser la que más energía entregue hora
+              a hora.
             </p>
             <p className={shell.sectionText}>{comparisonText}</p>
           </div>
           <div className={shell.stack}>
             <h2 className={shell.sectionTitle}>Metodología</h2>
             <p className={shell.sectionText}>
-              Los valores provienen de registros agregados de la CNE. El indicador
-              principal es potencia neta instalada y el corte de net billing se
-              expresa como capacidad conectada acumulada.
+              Los valores provienen de registros agregados de la CNE. El
+              indicador principal es potencia neta instalada y el corte de net
+              billing se expresa como capacidad conectada acumulada.
             </p>
           </div>
         </div>

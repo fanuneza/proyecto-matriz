@@ -20,7 +20,9 @@ export function HomeLink({ children, className, onClick }: Props) {
     if (pathname !== "/") return;
 
     event.preventDefault();
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   }
 

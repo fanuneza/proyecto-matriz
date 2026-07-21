@@ -23,7 +23,9 @@ export default async function TecnologiasPage() {
     value: technology.erncMw,
   }));
   const tableRows = data.technologyProfiles.map((technology) => ({
-    tecnologia: <Link href={`/tecnologias/${technology.slug}`}>{technology.nombre}</Link>,
+    tecnologia: (
+      <Link href={`/tecnologias/${technology.slug}`}>{technology.nombre}</Link>
+    ),
     ernc: `${technology.erncMw.toLocaleString("es-CL", {
       maximumFractionDigits: 0,
     })} MW`,
@@ -43,9 +45,9 @@ export default async function TecnologiasPage() {
       title="Energías renovables por tecnología"
       lede={
         <p>
-          La capacidad instalada no equivale a generación real. Esta vista ordena las
-          tecnologías principales del proyecto y su peso relativo dentro del total
-          ERNC.
+          La capacidad instalada no equivale a generación real. Esta vista
+          ordena las tecnologías principales del proyecto y su peso relativo
+          dentro del total ERNC.
         </p>
       }
       navLinks={[

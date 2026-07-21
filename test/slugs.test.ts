@@ -49,7 +49,9 @@ describe("tecnologiaSlug", () => {
   });
 
   it("maps mini hydro variants to the canonical hydraulic slug", () => {
-    expect(tecnologiaSlug("Mini Hidraulica Pasada")).toBe("hidraulica-de-pasada");
+    expect(tecnologiaSlug("Mini Hidraulica Pasada")).toBe(
+      "hidraulica-de-pasada",
+    );
   });
 
   it("converts Eolica to eolica", () => {

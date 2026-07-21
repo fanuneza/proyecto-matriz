@@ -232,8 +232,13 @@
   text-decoration: none;
 }
 
-.storyRail a:hover { color: var(--accent-light); }
-.storyRail a span { color: var(--accent); font-variant-numeric: tabular-nums; }
+.storyRail a:hover {
+  color: var(--accent-light);
+}
+.storyRail a span {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
 
 /* ── Chapters ───────────────────────────────────────────────────────── */
 .chapter {
@@ -326,8 +331,13 @@
 }
 
 @keyframes shimmer {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ── Cierre ─────────────────────────────────────────────────────────── */

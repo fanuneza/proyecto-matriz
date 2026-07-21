@@ -10,15 +10,32 @@ import { buildPageMetadata } from "../seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Datos y metodología",
-  description: "Fuentes, metodología, glosario y descargas públicas del proyecto.",
+  description:
+    "Fuentes, metodología, glosario y descargas públicas del proyecto.",
   path: "/datos",
 });
 
 const downloads = [
-  { label: "Resumen nacional", type: "CSV", href: "/data/downloads/matriz-current.csv" },
-  { label: "Regiones", type: "CSV", href: "/data/downloads/regiones-current.csv" },
-  { label: "Tecnologías", type: "CSV", href: "/data/downloads/tecnologias-current.csv" },
-  { label: "Resumen nacional", type: "JSON", href: "/data/current/summary.json" },
+  {
+    label: "Resumen nacional",
+    type: "CSV",
+    href: "/data/downloads/matriz-current.csv",
+  },
+  {
+    label: "Regiones",
+    type: "CSV",
+    href: "/data/downloads/regiones-current.csv",
+  },
+  {
+    label: "Tecnologías",
+    type: "CSV",
+    href: "/data/downloads/tecnologias-current.csv",
+  },
+  {
+    label: "Resumen nacional",
+    type: "JSON",
+    href: "/data/current/summary.json",
+  },
   { label: "Metadatos", type: "JSON", href: "/data/current/metadata.json" },
 ];
 
@@ -65,7 +82,8 @@ export default async function DatosPage() {
               <div>
                 <p className={shell.resourceTitle}>{endpoint.name}</p>
                 <p className={shell.resourceMeta}>
-                  Consultado el {new Date(endpoint.fetchedAt).toLocaleDateString("es-CL")}
+                  Consultado el{" "}
+                  {new Date(endpoint.fetchedAt).toLocaleDateString("es-CL")}
                 </p>
               </div>
               <p className={shell.resourceMeta}>
@@ -88,7 +106,10 @@ export default async function DatosPage() {
         <h2 className={shell.sectionTitle}>Archivos descargables</h2>
         <div className={shell.resourceList}>
           {downloads.map((download) => (
-            <div key={`${download.label}-${download.type}`} className={shell.resourceRow}>
+            <div
+              key={`${download.label}-${download.type}`}
+              className={shell.resourceRow}
+            >
               <div>
                 <p className={shell.resourceTitle}>{download.label}</p>
                 <p className={shell.resourceMeta}>{download.type}</p>

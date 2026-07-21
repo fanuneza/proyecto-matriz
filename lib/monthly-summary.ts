@@ -18,9 +18,18 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
   const parts: string[] = [];
   const nationalDelta = delta.national.totalErncMwDelta;
   const topRegion = firstMeaningfulChange(delta.regiones, SIGNIFICANT_MW);
-  const topTechnology = firstMeaningfulChange(delta.tecnologias, SIGNIFICANT_MW);
-  const topPipeline = firstMeaningfulChange(delta.pipeline.regiones, SIGNIFICANT_MW);
-  const topNetBilling = firstMeaningfulChange(delta.netBilling.regiones, SECONDARY_MW);
+  const topTechnology = firstMeaningfulChange(
+    delta.tecnologias,
+    SIGNIFICANT_MW,
+  );
+  const topPipeline = firstMeaningfulChange(
+    delta.pipeline.regiones,
+    SIGNIFICANT_MW,
+  );
+  const topNetBilling = firstMeaningfulChange(
+    delta.netBilling.regiones,
+    SECONDARY_MW,
+  );
 
   if (Math.abs(nationalDelta) < SIGNIFICANT_MW) {
     parts.push(
@@ -34,7 +43,9 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
 
   if (topRegion) {
     parts.push(
-      `${topRegion.nombre} concentró el mayor cambio regional, con una variacion de ${Math.abs(topRegion.deltaMw).toLocaleString("es-CL", {
+      `${topRegion.nombre} concentró el mayor cambio regional, con una variacion de ${Math.abs(
+        topRegion.deltaMw,
+      ).toLocaleString("es-CL", {
         maximumFractionDigits: 0,
       })} MW.`,
     );
@@ -42,7 +53,9 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
 
   if (topTechnology) {
     parts.push(
-      `${topTechnology.nombre} fue la tecnología con mayor movimiento mensual, con ${Math.abs(topTechnology.deltaMw).toLocaleString("es-CL", {
+      `${topTechnology.nombre} fue la tecnología con mayor movimiento mensual, con ${Math.abs(
+        topTechnology.deltaMw,
+      ).toLocaleString("es-CL", {
         maximumFractionDigits: 0,
       })} MW de diferencia.`,
     );
@@ -66,6 +79,8 @@ export function buildMonthlySummary(delta: SnapshotDelta): string {
     );
   }
 
-  parts.push("Los valores reflejan capacidad instalada y proyectos declarados, no generación real.");
+  parts.push(
+    "Los valores reflejan capacidad instalada y proyectos declarados, no generación real.",
+  );
   return parts.join(" ");
 }

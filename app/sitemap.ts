@@ -9,13 +9,18 @@ import { SITE_URL } from "./site";
 export const dynamic = "force-static";
 
 function readCurrentDataLastModified() {
-  const metadataPath = path.join(process.cwd(), "public/data/current/metadata.json");
+  const metadataPath = path.join(
+    process.cwd(),
+    "public/data/current/metadata.json",
+  );
 
   if (!fs.existsSync(metadataPath)) {
     return new Date();
   }
 
-  const raw = JSON.parse(fs.readFileSync(metadataPath, "utf-8")) as { generatedAt?: string };
+  const raw = JSON.parse(fs.readFileSync(metadataPath, "utf-8")) as {
+    generatedAt?: string;
+  };
   return raw.generatedAt ? new Date(raw.generatedAt) : new Date();
 }
 
@@ -77,7 +82,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       return {
         url: `${SITE_URL}/archivo/${month}`,
-        lastModified: snapshot?.generatedAt ? new Date(snapshot.generatedAt) : currentDataLastModified,
+        lastModified: snapshot?.generatedAt
+          ? new Date(snapshot.generatedAt)
+          : currentDataLastModified,
         changeFrequency: "monthly" as const,
         priority: 0.5,
       };

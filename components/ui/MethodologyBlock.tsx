@@ -22,8 +22,8 @@ export function MethodologyBlock({ showDatosLink = true }: Props) {
         factor de planta varía según tecnología y ubicación.
       </p>
       <p>
-        Los datos se actualizan en cada compilación del sitio y corresponden a la
-        fecha indicada en el pie de página.
+        Los datos se actualizan en cada compilación del sitio y corresponden a
+        la fecha indicada en el pie de página.
       </p>
       <p className={styles.cite}>
         <strong>Cómo citar:</strong> Proyecto Matriz, a partir de datos de la
@@ -31,7 +31,9 @@ export function MethodologyBlock({ showDatosLink = true }: Props) {
       </p>
       {showDatosLink ? (
         <p>
-          <Link href="/datos">Ver metodología completa, glosario y archivos descargables</Link>
+          <Link href="/datos">
+            Ver metodología completa, glosario y archivos descargables
+          </Link>
         </p>
       ) : null}
     </section>

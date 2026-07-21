@@ -57,9 +57,15 @@ export function Header() {
           aria-controls="mobile-menu"
           onClick={() => setOpen((current) => !current)}
         >
-          <span className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`} />
-          <span className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`} />
-          <span className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`} />
+          <span
+            className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`}
+          />
+          <span
+            className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`}
+          />
+          <span
+            className={`${styles.burgerLine} ${open ? styles.burgerOpen : ""}`}
+          />
         </button>
       </div>
 

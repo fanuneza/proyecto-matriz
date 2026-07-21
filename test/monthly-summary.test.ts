@@ -6,7 +6,11 @@ function makeDelta(erncDelta: number): SnapshotDelta {
   return {
     prevMonth: "2026-03",
     currMonth: "2026-04",
-    national: { totalErncMwDelta: erncDelta, totalNbMwDelta: 35, pipelineMwDelta: -120 },
+    national: {
+      totalErncMwDelta: erncDelta,
+      totalNbMwDelta: 35,
+      pipelineMwDelta: -120,
+    },
     regiones: [
       {
         nombre: "Antofagasta",

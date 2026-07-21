@@ -18,11 +18,18 @@ export function Breadcrumb({ items }: Props) {
                   {item.label}
                 </Link>
               ) : (
-                <span className={styles.current} aria-current={isLast ? "page" : undefined}>
+                <span
+                  className={styles.current}
+                  aria-current={isLast ? "page" : undefined}
+                >
                   {item.label}
                 </span>
               )}
-              {!isLast && <span className={styles.sep} aria-hidden="true">›</span>}
+              {!isLast && (
+                <span className={styles.sep} aria-hidden="true">
+                  ›
+                </span>
+              )}
             </li>
           );
         })}

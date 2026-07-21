@@ -24,7 +24,11 @@ export default function ErrorBoundary({
           Puedes reintentar o volver al inicio.
         </p>
         <div className={styles.actions}>
-          <button type="button" className={styles.retry} onClick={() => reset()}>
+          <button
+            type="button"
+            className={styles.retry}
+            onClick={() => reset()}
+          >
             Reintentar
           </button>
           <Link href="/" className={styles.home}>

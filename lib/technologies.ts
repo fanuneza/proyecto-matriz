@@ -9,8 +9,15 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
   {
     nombre: "Solar",
     slug: "solar",
-    descripcion: "Centrales fotovoltaicas, termosolares y otras variantes solares.",
-    aliases: ["solar fotovoltaica", "solar-csp", "solar csp", "csp", "termosolar"],
+    descripcion:
+      "Centrales fotovoltaicas, termosolares y otras variantes solares.",
+    aliases: [
+      "solar fotovoltaica",
+      "solar-csp",
+      "solar csp",
+      "csp",
+      "termosolar",
+    ],
   },
   {
     nombre: "Eólica",
@@ -21,7 +28,8 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
   {
     nombre: "Hidráulica de pasada",
     slug: "hidraulica-de-pasada",
-    descripcion: "Centrales hidráulicas de pasada, incluidas variantes de menor escala.",
+    descripcion:
+      "Centrales hidráulicas de pasada, incluidas variantes de menor escala.",
     aliases: [
       "mini hidraulica pasada",
       "mini hidroelectrica",
@@ -34,7 +42,11 @@ export const TECNOLOGIAS: TecnologiaEntry[] = [
     nombre: "Biomasa",
     slug: "biomasa",
     descripcion: "Generación a partir de materia organica y mezclas asociadas.",
-    aliases: ["biomasa-petroleo n 6", "biomasa petroleo n 6", "biomasa petroleo"],
+    aliases: [
+      "biomasa-petroleo n 6",
+      "biomasa petroleo n 6",
+      "biomasa petroleo",
+    ],
   },
   {
     nombre: "Geotérmica",
@@ -75,8 +87,12 @@ for (const technology of TECNOLOGIAS) {
   }
 }
 
-export const TEC_BY_SLUG = new Map(TECNOLOGIAS.map((entry) => [entry.slug, entry]));
-export const TEC_BY_NOMBRE = new Map(TECNOLOGIAS.map((entry) => [entry.nombre, entry]));
+export const TEC_BY_SLUG = new Map(
+  TECNOLOGIAS.map((entry) => [entry.slug, entry]),
+);
+export const TEC_BY_NOMBRE = new Map(
+  TECNOLOGIAS.map((entry) => [entry.nombre, entry]),
+);
 
 export function canonicalTechnologyName(raw: string): string | null {
   const normalized = normalizeTechnologyToken(raw);
@@ -89,7 +105,10 @@ export function canonicalTechnologyName(raw: string): string | null {
   for (const technology of TECNOLOGIAS) {
     for (const alias of [technology.nombre, ...technology.aliases]) {
       const normalizedAlias = normalizeTechnologyToken(alias);
-      if (normalized.includes(normalizedAlias) || normalizedAlias.includes(normalized)) {
+      if (
+        normalized.includes(normalizedAlias) ||
+        normalizedAlias.includes(normalized)
+      ) {
         return technology.nombre;
       }
     }
@@ -100,5 +119,5 @@ export function canonicalTechnologyName(raw: string): string | null {
 
 export function technologyDefinition(raw: string): TecnologiaEntry | null {
   const canonical = canonicalTechnologyName(raw);
-  return canonical ? TEC_BY_NOMBRE.get(canonical) ?? null : null;
+  return canonical ? (TEC_BY_NOMBRE.get(canonical) ?? null) : null;
 }

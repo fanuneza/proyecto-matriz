@@ -30,7 +30,10 @@ for (const variants of EXPECTED_ROUTE_VARIANTS) {
 }
 
 for (const month of listSnapshots()) {
-  const variants = [`out/archivo/${month}.html`, `out/archivo/${month}/index.html`];
+  const variants = [
+    `out/archivo/${month}.html`,
+    `out/archivo/${month}/index.html`,
+  ];
   if (!variants.some((route) => fs.existsSync(route))) {
     console.error(`MISSING ROUTE: expected one of ${variants.join(" or ")}`);
     errors += 1;

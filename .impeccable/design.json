@@ -4,27 +4,186 @@
   "title": "Design System: Proyecto Matriz",
   "extensions": {
     "colorMeta": {
-      "bg": { "role": "neutral", "displayName": "Base", "canonical": "#0b0f14", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
-      "bg-surface": { "role": "neutral", "displayName": "Surface", "canonical": "#111822", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
-      "bg-subtle": { "role": "neutral", "displayName": "Subtle", "canonical": "#162030", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] },
-      "signal-teal": { "role": "primary", "displayName": "Signal Teal", "canonical": "#2dd4bf", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
-      "signal-teal-light": { "role": "primary", "displayName": "Signal Teal Light", "canonical": "#5eead4", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
-      "signal-teal-dim": { "role": "primary", "displayName": "Signal Teal Dim", "canonical": "#1a5a52", "tonalRamp": ["#0d2e29", "#134339", "#1a5a52", "#1f6f63", "#22a894", "#2dd4bf", "#5eead4", "#a7f3e8"] },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#ddeef2", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
-      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#8a9baa", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
-      "ink-dim": { "role": "neutral", "displayName": "Ink Dim", "canonical": "#5a6a7a", "tonalRamp": ["#5a6a7a", "#6b7d8a", "#8a9baa", "#a3b3bf", "#bfd0d6", "#ddeef2", "#e9f4f7", "#f4fafb"] },
-      "border": { "role": "neutral", "displayName": "Border", "canonical": "#1e2833", "tonalRamp": ["#0b0f14", "#0e131a", "#111822", "#162030", "#1e2833", "#3a4753", "#6b7d8a", "#8a9baa"] }
+      "bg": {
+        "role": "neutral",
+        "displayName": "Base",
+        "canonical": "#0b0f14",
+        "tonalRamp": [
+          "#0b0f14",
+          "#0e131a",
+          "#111822",
+          "#162030",
+          "#1e2833",
+          "#3a4753",
+          "#6b7d8a",
+          "#8a9baa"
+        ]
+      },
+      "bg-surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#111822",
+        "tonalRamp": [
+          "#0b0f14",
+          "#0e131a",
+          "#111822",
+          "#162030",
+          "#1e2833",
+          "#3a4753",
+          "#6b7d8a",
+          "#8a9baa"
+        ]
+      },
+      "bg-subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
+        "canonical": "#162030",
+        "tonalRamp": [
+          "#0b0f14",
+          "#0e131a",
+          "#111822",
+          "#162030",
+          "#1e2833",
+          "#3a4753",
+          "#6b7d8a",
+          "#8a9baa"
+        ]
+      },
+      "signal-teal": {
+        "role": "primary",
+        "displayName": "Signal Teal",
+        "canonical": "#2dd4bf",
+        "tonalRamp": [
+          "#0d2e29",
+          "#134339",
+          "#1a5a52",
+          "#1f6f63",
+          "#22a894",
+          "#2dd4bf",
+          "#5eead4",
+          "#a7f3e8"
+        ]
+      },
+      "signal-teal-light": {
+        "role": "primary",
+        "displayName": "Signal Teal Light",
+        "canonical": "#5eead4",
+        "tonalRamp": [
+          "#0d2e29",
+          "#134339",
+          "#1a5a52",
+          "#1f6f63",
+          "#22a894",
+          "#2dd4bf",
+          "#5eead4",
+          "#a7f3e8"
+        ]
+      },
+      "signal-teal-dim": {
+        "role": "primary",
+        "displayName": "Signal Teal Dim",
+        "canonical": "#1a5a52",
+        "tonalRamp": [
+          "#0d2e29",
+          "#134339",
+          "#1a5a52",
+          "#1f6f63",
+          "#22a894",
+          "#2dd4bf",
+          "#5eead4",
+          "#a7f3e8"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#ddeef2",
+        "tonalRamp": [
+          "#5a6a7a",
+          "#6b7d8a",
+          "#8a9baa",
+          "#a3b3bf",
+          "#bfd0d6",
+          "#ddeef2",
+          "#e9f4f7",
+          "#f4fafb"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "canonical": "#8a9baa",
+        "tonalRamp": [
+          "#5a6a7a",
+          "#6b7d8a",
+          "#8a9baa",
+          "#a3b3bf",
+          "#bfd0d6",
+          "#ddeef2",
+          "#e9f4f7",
+          "#f4fafb"
+        ]
+      },
+      "ink-dim": {
+        "role": "neutral",
+        "displayName": "Ink Dim",
+        "canonical": "#5a6a7a",
+        "tonalRamp": [
+          "#5a6a7a",
+          "#6b7d8a",
+          "#8a9baa",
+          "#a3b3bf",
+          "#bfd0d6",
+          "#ddeef2",
+          "#e9f4f7",
+          "#f4fafb"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "#1e2833",
+        "tonalRamp": [
+          "#0b0f14",
+          "#0e131a",
+          "#111822",
+          "#162030",
+          "#1e2833",
+          "#3a4753",
+          "#6b7d8a",
+          "#8a9baa"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero title (h1) and the closing chapter headline only." },
-      "headline": { "displayName": "Headline", "purpose": "Chapter h2 headings." },
-      "title": { "displayName": "Title", "purpose": "Chart titles, card titles, h3." },
-      "body": { "displayName": "Body", "purpose": "Paragraph copy, capped at 62ch measure." },
-      "label": { "displayName": "Label", "purpose": "Eyebrows, stat labels, table headers — always uppercase, tracked." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero title (h1) and the closing chapter headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Chapter h2 headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Chart titles, card titles, h3."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraph copy, capped at 62ch measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrows, stat labels, table headers — always uppercase, tracked."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "ease-standard", "value": "ease", "purpose": "Default transition timing for color/background/border state changes (0.15s-0.25s)." }
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Default transition timing for color/background/border state changes (0.15s-0.25s)."
+      }
     ],
     "breakpoints": [
       { "name": "sm", "value": "480px" },
@@ -94,10 +253,26 @@
       "Fluid type scale (clamp()-based steps) so hierarchy holds from phone to desktop without breakpoint-specific overrides"
     ],
     "rules": [
-      { "name": "The One Signal Rule", "body": "Teal is the only saturated color in the system. It marks emphasis and interactivity; it never fills a surface. A second semantic meaning is expressed via color-mix() tints of teal, not a new hue.", "section": "colors" },
-      { "name": "The Cool-Black Rule", "body": "The base is a blue-green-tinted near-black (#0b0f14), never a true black and never warm. Every neutral in the ramp keeps that same cool undertone.", "section": "colors" },
-      { "name": "The One Family Rule", "body": "No serif, no display webfont, no second sans is ever introduced. Hierarchy is built entirely from weight, size, and letter-spacing within the system-sans stack.", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "Surfaces never lift. A card, callout, or panel signals 'layer above' purely by moving one step up the tonal ramp plus a 1px border — never a shadow, however subtle.", "section": "elevation" }
+      {
+        "name": "The One Signal Rule",
+        "body": "Teal is the only saturated color in the system. It marks emphasis and interactivity; it never fills a surface. A second semantic meaning is expressed via color-mix() tints of teal, not a new hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cool-Black Rule",
+        "body": "The base is a blue-green-tinted near-black (#0b0f14), never a true black and never warm. Every neutral in the ramp keeps that same cool undertone.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "No serif, no display webfont, no second sans is ever introduced. Hierarchy is built entirely from weight, size, and letter-spacing within the system-sans stack.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Surfaces never lift. A card, callout, or panel signals 'layer above' purely by moving one step up the tonal ramp plus a 1px border — never a shadow, however subtle.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do keep the base cool and near-black (#0b0f14) — never substitute a warm or true-black neutral.",

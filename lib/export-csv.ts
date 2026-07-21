@@ -11,7 +11,9 @@ export function toCsv(
 ): string {
   const lines = [
     headers.join(","),
-    ...rows.map((row) => headers.map((header) => escapeCell(row[header])).join(",")),
+    ...rows.map((row) =>
+      headers.map((header) => escapeCell(row[header])).join(","),
+    ),
   ];
 
   return lines.join("\n");

@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 import { buildComparisonText } from "@/lib/compare-copy";
 import type { RegionProfile } from "@/lib/region-profiles";
 
-function makeProfile(slug: string, erncMw: number, mainTec: string): RegionProfile {
+function makeProfile(
+  slug: string,
+  erncMw: number,
+  mainTec: string,
+): RegionProfile {
   return {
     slug,
     nombre: slug,
@@ -10,7 +14,14 @@ function makeProfile(slug: string, erncMw: number, mainTec: string): RegionProfi
     nationalSharePct: (erncMw / 30000) * 100,
     comparisonToNationalPct: 0,
     mainTecnologia: mainTec,
-    tecnologias: [{ nombre: mainTec, slug: mainTec.toLowerCase(), mw: erncMw, sharePct: 100 }],
+    tecnologias: [
+      {
+        nombre: mainTec,
+        slug: mainTec.toLowerCase(),
+        mw: erncMw,
+        sharePct: 100,
+      },
+    ],
     nbMw: 50,
     pipelineMw: 200,
     pipelineProjects: null,

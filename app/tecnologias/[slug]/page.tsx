@@ -17,7 +17,9 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const data = await getStoryData();
-  return data.technologyProfiles.map((technology) => ({ slug: technology.slug }));
+  return data.technologyProfiles.map((technology) => ({
+    slug: technology.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -34,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TecnologiaPage({ params }: Props) {
   const { slug } = await params;
   const data = await getStoryData();
-  const technology = data.technologyProfiles.find((entry) => entry.slug === slug);
+  const technology = data.technologyProfiles.find(
+    (entry) => entry.slug === slug,
+  );
 
   if (!technology) {
     notFound();
@@ -97,11 +101,16 @@ export default async function TecnologiaPage({ params }: Props) {
           <div className={shell.metaRow}>
             <span className={shell.metaLabel}>Capacidad instalada</span>
             <strong className={shell.metaValue}>
-              {technology.erncMw.toLocaleString("es-CL", { maximumFractionDigits: 0 })} MW
+              {technology.erncMw.toLocaleString("es-CL", {
+                maximumFractionDigits: 0,
+              })}{" "}
+              MW
             </strong>
           </div>
           <div className={shell.metaRow}>
-            <span className={shell.metaLabel}>Participación dentro de ERNC</span>
+            <span className={shell.metaLabel}>
+              Participación dentro de ERNC
+            </span>
             <strong className={shell.metaValue}>
               {technology.nationalSharePct.toFixed(1)}%
             </strong>
@@ -168,13 +177,13 @@ export default async function TecnologiaPage({ params }: Props) {
           <div className={shell.stack}>
             <h2 className={shell.sectionTitle}>Metodología</h2>
             <p className={shell.sectionText}>
-              La categoría resume capacidad instalada informada por la CNE y agrupa
-              variantes menores bajo un mismo nombre editorial para evitar rutas
-              fragmentadas.
+              La categoría resume capacidad instalada informada por la CNE y
+              agrupa variantes menores bajo un mismo nombre editorial para
+              evitar rutas fragmentadas.
             </p>
             <p className={shell.sectionText}>
-              Capacidad instalada no equivale a generación efectiva. El factor de
-              planta y la operación horaria quedan fuera de esta página.
+              Capacidad instalada no equivale a generación efectiva. El factor
+              de planta y la operación horaria quedan fuera de esta página.
             </p>
           </div>
         </div>

@@ -1,39 +1,41 @@
 /* ── Design tokens ──────────────────────────────────────────────────── */
 :root {
-  --bg:          #0b0f14;
-  --bg-surface:  #111822;
-  --bg-subtle:   #162030;
+  --bg: #0b0f14;
+  --bg-surface: #111822;
+  --bg-subtle: #162030;
 
-  --accent:       #2dd4bf;
+  --accent: #2dd4bf;
   --accent-light: #5eead4;
-  --accent-dim:   #1a5a52;
-  --negative:     #f87171;
+  --accent-dim: #1a5a52;
+  --negative: #f87171;
 
-  --chart-ernc:        var(--accent);
+  --chart-ernc: var(--accent);
   --chart-net-billing: var(--accent);
 
-  --text:        #ddeef2;
-  --text-muted:  #8a9baa;
-  --text-dim:    #768a99;
+  --text: #ddeef2;
+  --text-muted: #8a9baa;
+  --text-dim: #768a99;
 
-  --border:      #1e2833;
+  --border: #1e2833;
 
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-sans:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  --step--1: clamp(0.75rem,  0.72rem + 0.16vw, 0.875rem);
-  --step-0:  clamp(0.9375rem, 0.9rem + 0.2vw,  1.0625rem);
-  --step-1:  clamp(1.125rem,  1.05rem + 0.38vw, 1.375rem);
-  --step-2:  clamp(1.375rem,  1.25rem + 0.63vw, 1.75rem);
-  --step-3:  clamp(1.75rem,   1.55rem + 1vw,    2.375rem);
-  --step-4:  clamp(2.125rem,  1.825rem + 1.5vw, 3.125rem);
-  --step-5:  clamp(2.625rem,  2.125rem + 2.5vw, 4.25rem);
+  --step--1: clamp(0.75rem, 0.72rem + 0.16vw, 0.875rem);
+  --step-0: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.05rem + 0.38vw, 1.375rem);
+  --step-2: clamp(1.375rem, 1.25rem + 0.63vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.55rem + 1vw, 2.375rem);
+  --step-4: clamp(2.125rem, 1.825rem + 1.5vw, 3.125rem);
+  --step-5: clamp(2.625rem, 2.125rem + 2.5vw, 4.25rem);
 
-  --space-xs:  0.5rem;
-  --space-sm:  1rem;
-  --space-md:  2rem;
-  --space-lg:  4rem;
-  --space-xl:  8rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
 
   --measure: 62ch;
   --column-gap: clamp(2rem, 4vw, 5rem);
@@ -42,7 +44,9 @@
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -53,8 +57,12 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
@@ -70,16 +78,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   line-height: 1.15;
   letter-spacing: 0;
   color: var(--text);
 }
 
-h1 { font-size: var(--step-5); font-weight: 700; }
-h2 { font-size: var(--step-3); font-weight: 600; }
-h3 { font-size: var(--step-2); font-weight: 600; }
-h4 { font-size: var(--step-1); font-weight: 500; }
+h1 {
+  font-size: var(--step-5);
+  font-weight: 700;
+}
+h2 {
+  font-size: var(--step-3);
+  font-weight: 600;
+}
+h3 {
+  font-size: var(--step-2);
+  font-weight: 600;
+}
+h4 {
+  font-size: var(--step-1);
+  font-weight: 500;
+}
 
 p {
   max-width: var(--measure);
@@ -90,13 +113,17 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
-a:hover { color: var(--accent-light); }
+a:hover {
+  color: var(--accent-light);
+}
 
 p a {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-p a:hover { text-decoration: underline; }
+p a:hover {
+  text-decoration: underline;
+}
 a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -135,9 +162,15 @@ a:focus-visible {
   top: var(--space-sm);
 }
 
-.text-muted   { color: var(--text-muted); }
-.text-accent  { color: var(--accent); }
-.text-small   { font-size: var(--step--1); }
+.text-muted {
+  color: var(--text-muted);
+}
+.text-accent {
+  color: var(--accent);
+}
+.text-small {
+  font-size: var(--step--1);
+}
 
 .container {
   width: 100%;

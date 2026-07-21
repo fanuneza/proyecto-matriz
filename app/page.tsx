@@ -4,7 +4,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
-import { formatCompactMw, formatMw, formatNumber, formatPercent } from "@/lib/format";
+import {
+  formatCompactMw,
+  formatMw,
+  formatNumber,
+  formatPercent,
+} from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
 import { buildPageMetadata } from "./seo";
 import styles from "./page.module.css";
@@ -18,18 +23,25 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 const BarraHorizontal = dynamic(
-  () => import("@/components/story/BarraHorizontal").then((m) => m.BarraHorizontal),
-  { ssr: true, loading: () => <div className="chart-loading" /> }
+  () =>
+    import("@/components/story/BarraHorizontal").then((m) => m.BarraHorizontal),
+  { ssr: true, loading: () => <div className="chart-loading" /> },
 );
 
 const GraficoCrecimiento = dynamic(
-  () => import("@/components/story/GraficoCrecimiento").then((m) => m.GraficoCrecimiento),
-  { ssr: true, loading: () => <div className="chart-loading" /> }
+  () =>
+    import("@/components/story/GraficoCrecimiento").then(
+      (m) => m.GraficoCrecimiento,
+    ),
+  { ssr: true, loading: () => <div className="chart-loading" /> },
 );
 
 const GraficoNetBilling = dynamic(
-  () => import("@/components/story/GraficoNetBilling").then((m) => m.GraficoNetBilling),
-  { ssr: true, loading: () => <div className="chart-loading" /> }
+  () =>
+    import("@/components/story/GraficoNetBilling").then(
+      (m) => m.GraficoNetBilling,
+    ),
+  { ssr: true, loading: () => <div className="chart-loading" /> },
 );
 
 const CHAPTERS = [
@@ -39,7 +51,13 @@ const CHAPTERS = [
   { href: "#net-billing", number: "04", label: "Quién participa" },
 ];
 
-function EvidenceNote({ generatedEl, label }: { generatedEl: string; label: string }) {
+function EvidenceNote({
+  generatedEl,
+  label,
+}: {
+  generatedEl: string;
+  label: string;
+}) {
   return (
     <p className={styles.evidenceNote}>
       <span>{label}</span>
@@ -71,22 +89,31 @@ export default async function Page() {
   return (
     <>
       <main id="main-content" className={styles.main} tabIndex={-1}>
-        <section id="inicio" className={styles.hero} aria-labelledby="titulo-principal">
+        <section
+          id="inicio"
+          className={styles.hero}
+          aria-labelledby="titulo-principal"
+        >
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>Una lectura nacional con datos CNE</p>
+              <p className={styles.eyebrow}>
+                Una lectura nacional con datos CNE
+              </p>
               <h1 id="titulo-principal" className={styles.heroTitle}>
-                La transición ya cambió la <span className={styles.accent}>capacidad</span>{" "}
-                eléctrica de Chile
+                La transición ya cambió la{" "}
+                <span className={styles.accent}>capacidad</span> eléctrica de
+                Chile
               </h1>
               <p className={styles.heroLead}>
-                Las renovables no convencionales ya reúnen <strong>{formatPercent(porcentajeErnc)}</strong>{" "}
-                de la capacidad instalada del sistema. La transformación existe, pero no se
+                Las renovables no convencionales ya reúnen{" "}
+                <strong>{formatPercent(porcentajeErnc)}</strong> de la capacidad
+                instalada del sistema. La transformación existe, pero no se
                 reparte igual a lo largo del país.
               </p>
               <p className={styles.heroDefinition}>
-                <strong>Capacidad instalada</strong> es la potencia máxima que una central puede
-                aportar; no equivale a la electricidad que genera durante un año.
+                <strong>Capacidad instalada</strong> es la potencia máxima que
+                una central puede aportar; no equivale a la electricidad que
+                genera durante un año.
               </p>
 
               <div className={styles.heroStats}>
@@ -96,13 +123,19 @@ export default async function Page() {
                   sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
                   accent
                 />
-                <Stat value={formatNumber(erncCount)} label="Centrales en operación" />
+                <Stat
+                  value={formatNumber(erncCount)}
+                  label="Centrales en operación"
+                />
                 <Stat
                   value={formatCompactMw(pipelineMwTotal)}
                   label="Proyectos en construcción"
                 />
               </div>
-              <EvidenceNote generatedEl={generadoEl} label="Capacidad instalada neta" />
+              <EvidenceNote
+                generatedEl={generadoEl}
+                label="Capacidad instalada neta"
+              />
             </div>
 
             <figure className={styles.heroMap}>
@@ -125,12 +158,17 @@ export default async function Page() {
                   </li>
                 ))}
               </ol>
-              <figcaption>Capacidad ERNC operacional por zona geográfica.</figcaption>
+              <figcaption>
+                Capacidad ERNC operacional por zona geográfica.
+              </figcaption>
             </figure>
           </div>
         </section>
 
-        <nav className={styles.storyRail} aria-label="Capítulos de esta historia">
+        <nav
+          className={styles.storyRail}
+          aria-label="Capítulos de esta historia"
+        >
           <div className={`container ${styles.storyRailInner}`}>
             <p>Cómo leer esta historia</p>
             <ol>
@@ -146,30 +184,43 @@ export default async function Page() {
           </div>
         </nav>
 
-        <section id="regiones" className={styles.chapter} aria-labelledby="cap-regiones">
+        <section
+          id="regiones"
+          className={styles.chapter}
+          aria-labelledby="cap-regiones"
+        >
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>01</p>
               <p className={styles.chapterKicker}>Dónde se concentra</p>
-              <h2 id="cap-regiones">La expansión renovable tiene un centro de gravedad</h2>
+              <h2 id="cap-regiones">
+                La expansión renovable tiene un centro de gravedad
+              </h2>
               <p>
-                La mayor capacidad ERNC se concentra en el norte del país, donde la
-                radiación solar y el desarrollo fotovoltaico de escala utility empujan
-                el crecimiento.
+                La mayor capacidad ERNC se concentra en el norte del país, donde
+                la radiación solar y el desarrollo fotovoltaico de escala
+                utility empujan el crecimiento.
               </p>
               <p className={styles.chapterTakeaway}>
-                El dato no describe un cambio homogéneo: muestra una transformación territorial.
+                El dato no describe un cambio homogéneo: muestra una
+                transformación territorial.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Capacidad ERNC instalada por región</p>
+              <p className={styles.chartTitle}>
+                Capacidad ERNC instalada por región
+              </p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={regiones}
                 unit="MW"
                 ariaLabel="Capacidad ERNC instalada por región, en megawatts."
+                showShare
               />
-              <EvidenceNote generatedEl={generadoEl} label="Potencia neta por región" />
+              <EvidenceNote
+                generatedEl={generadoEl}
+                label="Potencia neta por región"
+              />
             </div>
           </div>
         </section>
@@ -185,48 +236,70 @@ export default async function Page() {
               <p className={styles.chapterKicker}>Qué la empuja</p>
               <h2 id="cap-tecnologias">La energía solar sostiene el cambio</h2>
               <p>
-                La tecnología solar domina la expansión reciente. La eólica, la hidráulica
-                y la biomasa completan una matriz renovable que no es tecnológica ni
-                territorialmente neutral.
+                La tecnología solar domina la expansión reciente. La eólica, la
+                hidráulica y la biomasa completan una matriz renovable que no es
+                tecnológica ni territorialmente neutral.
               </p>
               <p className={styles.chapterTakeaway}>
-                Mirar la composición permite distinguir crecimiento de diversificación.
+                Mirar la composición permite distinguir crecimiento de
+                diversificación.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Composición por tecnología ERNC</p>
+              <p className={styles.chartTitle}>
+                Composición por tecnología ERNC
+              </p>
               <p className={styles.chartSub}>Megawatts de potencia neta</p>
               <BarraHorizontal
                 data={tecnologias}
                 unit="MW"
                 ariaLabel="Composición por tecnología ERNC."
               />
-              <EvidenceNote generatedEl={generadoEl} label="Potencia neta por tecnología" />
+              <EvidenceNote
+                generatedEl={generadoEl}
+                label="Potencia neta por tecnología"
+              />
             </div>
           </div>
         </section>
 
-        <section id="crecimiento" className={styles.chapter} aria-labelledby="cap-crecimiento">
+        <section
+          id="crecimiento"
+          className={styles.chapter}
+          aria-labelledby="cap-crecimiento"
+        >
           <div className={`container ${styles.chapterLayout}`}>
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>03</p>
               <p className={styles.chapterKicker}>Cuándo se aceleró</p>
-              <h2 id="cap-crecimiento">El salto no fue gradual: se aceleró desde 2015</h2>
+              <h2 id="cap-crecimiento">
+                El salto no fue gradual: se aceleró desde 2015
+              </h2>
               <p>
-                La entrada de nueva capacidad se aceleró con fuerza durante la última
-                década. El pipeline actual indica que esa trayectoria continúa.
+                La entrada de nueva capacidad se aceleró con fuerza durante la
+                última década. El pipeline actual indica que esa trayectoria
+                continúa.
               </p>
               <p className={styles.chapterTakeaway}>
-                El pipeline señala intención de inversión, no capacidad ya operando.
+                El pipeline señala intención de inversión, no capacidad ya
+                operando.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>MW ERNC puestos en servicio por año</p>
+              <p className={styles.chartTitle}>
+                MW ERNC puestos en servicio por año
+              </p>
               <p className={styles.chartSub}>
                 Barras sólidas: operacional · Barras tenues: en construcción
               </p>
-              <GraficoCrecimiento operacional={porAnioOp} pipeline={porAnioPipe} />
-              <EvidenceNote generatedEl={generadoEl} label="Capacidad puesta en servicio y en construcción" />
+              <GraficoCrecimiento
+                operacional={porAnioOp}
+                pipeline={porAnioPipe}
+              />
+              <EvidenceNote
+                generatedEl={generadoEl}
+                label="Capacidad puesta en servicio y en construcción"
+              />
             </div>
           </div>
         </section>
@@ -240,26 +313,36 @@ export default async function Page() {
             <div className={styles.chapterText}>
               <p className={styles.chapterNum}>04</p>
               <p className={styles.chapterKicker}>Quién participa</p>
-              <h2 id="cap-netbilling">La transición también ocurre fuera de las grandes centrales</h2>
+              <h2 id="cap-netbilling">
+                La transición también ocurre fuera de las grandes centrales
+              </h2>
               <p>
-                La generación distribuida avanza con instalaciones conectadas a la red
-                bajo net billing. Ya no es solo un fenómeno residencial: también
-                aparece en comercio y servicios.
+                La generación distribuida avanza con instalaciones conectadas a
+                la red bajo net billing. Ya no es solo un fenómeno residencial:
+                también aparece en comercio y servicios.
               </p>
               <p>
-                En total, el net billing suma <strong>{formatMw(totalNbMw)}</strong> a
-                nivel nacional.
+                En total, el net billing suma{" "}
+                <strong>{formatMw(totalNbMw)}</strong> a nivel nacional.
               </p>
               <p className={styles.chapterTakeaway}>
-                Net billing reúne instalaciones conectadas a la red de hogares, comercios y
-                servicios; es una escala distinta de la generación centralizada.
+                Net billing reúne instalaciones conectadas a la red de hogares,
+                comercios y servicios; es una escala distinta de la generación
+                centralizada.
               </p>
             </div>
             <div className={styles.chapterChart}>
-              <p className={styles.chartTitle}>Generación distribuida (net billing)</p>
-              <p className={styles.chartSub}>Capacidad acumulada y distribución regional</p>
+              <p className={styles.chartTitle}>
+                Generación distribuida (net billing)
+              </p>
+              <p className={styles.chartSub}>
+                Capacidad acumulada y distribución regional
+              </p>
               <GraficoNetBilling porMes={nbPorMes} porRegion={nbPorRegion} />
-              <EvidenceNote generatedEl={generadoEl} label="Capacidad acumulada de generación distribuida" />
+              <EvidenceNote
+                generatedEl={generadoEl}
+                label="Capacidad acumulada de generación distribuida"
+              />
             </div>
           </div>
         </section>
@@ -274,9 +357,10 @@ export default async function Page() {
               El avance es verificable. La pregunta es cómo se distribuye
             </h2>
             <p className={styles.cierreLead}>
-              Los datos muestran una transición en marcha, concentrada en ciertas regiones,
-              tecnologías y escalas. Explora la evidencia, compara territorios o reutiliza los
-              datos para responder tus propias preguntas.
+              Los datos muestran una transición en marcha, concentrada en
+              ciertas regiones, tecnologías y escalas. Explora la evidencia,
+              compara territorios o reutiliza los datos para responder tus
+              propias preguntas.
             </p>
             <ul className={styles.cierreLinks}>
               <li>

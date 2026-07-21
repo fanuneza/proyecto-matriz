@@ -12,7 +12,10 @@ type Props = {
 
 export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
   const allAnios = Array.from(
-    new Set([...operacional.map((d) => d.anio), ...pipeline.map((d) => d.anio)])
+    new Set([
+      ...operacional.map((d) => d.anio),
+      ...pipeline.map((d) => d.anio),
+    ]),
   ).sort((a, b) => a - b);
 
   const opMap = new Map(operacional.map((d) => [d.anio, d.mw]));
@@ -21,7 +24,7 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
   const maxVal = Math.max(
     ...operacional.map((d) => d.mw),
     ...pipeline.map((d) => d.mw),
-    1
+    1,
   );
 
   const margin = { top: 40, right: 20, bottom: 50, left: 60 };
@@ -39,7 +42,7 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
 
   const yTicks = 5;
   const yTickValues = Array.from({ length: yTicks + 1 }, (_, i) =>
-    Math.round((maxVal / yTicks) * i)
+    Math.round((maxVal / yTicks) * i),
   );
 
   const labelStep = allAnios.length > 12 ? 2 : 1;
@@ -66,7 +69,12 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
                   y2={y}
                   className={styles.gridLine}
                 />
-                <text x={-8} y={y + 4} className={styles.tickLabel} textAnchor="end">
+                <text
+                  x={-8}
+                  y={y + 4}
+                  className={styles.tickLabel}
+                  textAnchor="end"
+                >
                   {tick.toLocaleString("es-CL")}
                 </text>
               </g>
@@ -77,7 +85,9 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
           {allAnios.map((anio, i) => {
             const cx = xPos(i);
             const opH = opMap.has(anio) ? innerH - yScale(opMap.get(anio)!) : 0;
-            const pipeH = pipeMap.has(anio) ? innerH - yScale(pipeMap.get(anio)!) : 0;
+            const pipeH = pipeMap.has(anio)
+              ? innerH - yScale(pipeMap.get(anio)!)
+              : 0;
 
             return (
               <g key={anio}>
@@ -120,16 +130,36 @@ export function StaticGrowthChart({ operacional, pipeline, ariaLabel }: Props) {
           })}
 
           {/* Axes */}
-          <line x1={0} x2={innerW} y1={innerH} y2={innerH} className={styles.axis} />
+          <line
+            x1={0}
+            x2={innerW}
+            y1={innerH}
+            y2={innerH}
+            className={styles.axis}
+          />
           <line x1={0} x2={0} y1={0} y2={innerH} className={styles.axis} />
 
           {/* Legend */}
           <g transform={`translate(0, -24)`}>
-            <rect x={0} y={-8} width={12} height={12} className={styles.legendOp} rx={2} />
+            <rect
+              x={0}
+              y={-8}
+              width={12}
+              height={12}
+              className={styles.legendOp}
+              rx={2}
+            />
             <text x={18} y={2} className={styles.legendText}>
               Operacional
             </text>
-            <rect x={110} y={-8} width={12} height={12} className={styles.legendPipe} rx={2} />
+            <rect
+              x={110}
+              y={-8}
+              width={12}
+              height={12}
+              className={styles.legendPipe}
+              rx={2}
+            />
             <text x={128} y={2} className={styles.legendText}>
               En construcción
             </text>

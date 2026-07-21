@@ -56,7 +56,11 @@ export function Footer() {
           <p className={styles.groupLabel}>Fuente</p>
           <p className={styles.sourceText}>
             Datos de la API pública de la{" "}
-            <a href="https://api.cne.cl" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://api.cne.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Comisión Nacional de Energía
             </a>
             : capacidad instalada operacional (<em>capacidad/instaladagx</em>),
@@ -77,9 +81,7 @@ export function Footer() {
             Fabián Núñez
           </a>
         </p>
-        <HomeLink className={styles.homeLink}>
-          Proyecto Matriz
-        </HomeLink>
+        <HomeLink className={styles.homeLink}>Proyecto Matriz</HomeLink>
       </div>
     </footer>
   );

@@ -2,7 +2,10 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import "./load-next-env";
 import { MonthlySnapshotSchema } from "../lib/snapshot-schema";
-import { SNAPSHOT_SCHEMA_VERSION, type MonthlySnapshot } from "../lib/snapshot-types";
+import {
+  SNAPSHOT_SCHEMA_VERSION,
+  type MonthlySnapshot,
+} from "../lib/snapshot-types";
 
 async function main() {
   const force = process.argv.includes("--force");
@@ -12,7 +15,9 @@ async function main() {
   const monthArg = process.argv.find((arg) => arg.startsWith("--month="));
   const month = monthArg ? monthArg.slice("--month=".length) : currentMonth;
   if (!/^\d{4}-\d{2}$/.test(month)) {
-    throw new Error(`Invalid --month value: ${month}. Expected format YYYY-MM.`);
+    throw new Error(
+      `Invalid --month value: ${month}. Expected format YYYY-MM.`,
+    );
   }
   const backfilled = month !== currentMonth;
 
@@ -104,7 +109,9 @@ async function main() {
 
   const validated = MonthlySnapshotSchema.safeParse(snapshot);
   if (!validated.success) {
-    throw new Error(`Snapshot validation failed:\n${validated.error.toString()}`);
+    throw new Error(
+      `Snapshot validation failed:\n${validated.error.toString()}`,
+    );
   }
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });

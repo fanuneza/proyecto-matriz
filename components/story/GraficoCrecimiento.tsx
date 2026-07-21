@@ -14,10 +14,15 @@ type Props = {
 type FilaCrecimiento = { anio: number; mw: number; pipelineMw: number };
 
 export function GraficoCrecimiento({ operacional, pipeline }: Props) {
-  const futurePipeline = pipeline.filter((entry) => entry.anio >= new Date().getFullYear());
+  const futurePipeline = pipeline.filter(
+    (entry) => entry.anio >= new Date().getFullYear(),
+  );
 
   const anios = Array.from(
-    new Set([...operacional.map((e) => e.anio), ...futurePipeline.map((e) => e.anio)])
+    new Set([
+      ...operacional.map((e) => e.anio),
+      ...futurePipeline.map((e) => e.anio),
+    ]),
   ).sort((a, b) => a - b);
 
   const filas: FilaCrecimiento[] = anios.map((anio) => ({

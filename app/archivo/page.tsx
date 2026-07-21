@@ -7,7 +7,8 @@ import { buildPageMetadata } from "../seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Archivo mensual",
-  description: "Registro mensual de snapshots agregados de la matriz energética.",
+  description:
+    "Registro mensual de snapshots agregados de la matriz energética.",
   path: "/archivo",
 });
 
@@ -20,9 +21,9 @@ export default function ArchivoPage() {
       title="Archivo mensual"
       lede={
         <p>
-          Cada mes el proyecto guarda un snapshot agregado de capacidad ERNC, net
-          billing, pipeline y metadatos de origen. No se almacenan respuestas crudas
-          de la API.
+          Cada mes el proyecto guarda un snapshot agregado de capacidad ERNC,
+          net billing, pipeline y metadatos de origen. No se almacenan
+          respuestas crudas de la API.
         </p>
       }
       navLinks={[
@@ -33,7 +34,10 @@ export default function ArchivoPage() {
       asideTitle="Uso"
       aside={
         <>
-          <p>El archivo sirve para comparar cortes mensuales sin romper la exportación estática.</p>
+          <p>
+            El archivo sirve para comparar cortes mensuales sin romper la
+            exportación estática.
+          </p>
           <p>Cada fila ofrece una página editorial y un JSON descargable.</p>
         </>
       }
@@ -46,7 +50,9 @@ export default function ArchivoPage() {
               <div key={month} className={shell.resourceRow}>
                 <div>
                   <p className={shell.resourceTitle}>{month}</p>
-                  <p className={shell.resourceMeta}>Snapshot agregado mensual</p>
+                  <p className={shell.resourceMeta}>
+                    Snapshot agregado mensual
+                  </p>
                 </div>
                 <p className={shell.inlineLinks}>
                   <Link href={`/archivo/${month}`}>Abrir snapshot</Link>
@@ -56,7 +62,9 @@ export default function ArchivoPage() {
             ))}
           </div>
         ) : (
-          <p className={shell.notice}>No hay registros mensuales disponibles todavía.</p>
+          <p className={shell.notice}>
+            No hay registros mensuales disponibles todavía.
+          </p>
         )}
       </section>
     </PageShell>

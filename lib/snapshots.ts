@@ -27,14 +27,18 @@ export function readSnapshot(month: string): MonthlySnapshot | null {
   const parsed = MonthlySnapshotSchema.safeParse(raw);
 
   if (!parsed.success) {
-    console.warn(`Snapshot ${month} failed validation: ${parsed.error.message}`);
+    console.warn(
+      `Snapshot ${month} failed validation: ${parsed.error.message}`,
+    );
     return null;
   }
 
   return parsed.data;
 }
 
-export function getPreviousSnapshot(currentMonth: string): MonthlySnapshot | null {
+export function getPreviousSnapshot(
+  currentMonth: string,
+): MonthlySnapshot | null {
   const all = listSnapshots().filter((month) => month < currentMonth);
   if (all.length === 0) {
     return null;

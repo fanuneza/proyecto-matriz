@@ -8,10 +8,14 @@ import { normalizeNetBilling } from "@/lib/normalize-netbilling";
 describe("normalizePlanta", () => {
   it("maps raw capacidad fields to PlantaOperacional", () => {
     const raw = {
-      central: "Solar Norte", propietario: "EnerSol",
-      tipo_de_energia: "Solar", clasificacion: "ERNC",
-      estado: "Operación", potencia_neta_mw: "150,5",
-      region_nombre: "Antofagasta", anio_servicio_central: "2022",
+      central: "Solar Norte",
+      propietario: "EnerSol",
+      tipo_de_energia: "Solar",
+      clasificacion: "ERNC",
+      estado: "Operación",
+      potencia_neta_mw: "150,5",
+      region_nombre: "Antofagasta",
+      anio_servicio_central: "2022",
     };
     const result = normalizePlanta(raw as any);
     expect(result.nombre).toBe("Solar Norte");
@@ -26,8 +30,10 @@ describe("normalizePlanta", () => {
 
   it("handles missing optional fields gracefully", () => {
     const raw = {
-      central: "X", propietario: "Y",
-      tipo_de_energia: "Solar", estado: "Op",
+      central: "X",
+      propietario: "Y",
+      tipo_de_energia: "Solar",
+      estado: "Op",
     };
     const result = normalizePlanta(raw as any);
     expect(result.potenciaNetaMw).toBeUndefined();
@@ -44,8 +50,10 @@ describe("normalizePlanta", () => {
 
   it("parses comma-decimal string for potencia_neta_mw", () => {
     const raw = {
-      central: "X", propietario: "Y",
-      tipo_de_energia: "Solar", estado: "Op",
+      central: "X",
+      propietario: "Y",
+      tipo_de_energia: "Solar",
+      estado: "Op",
       potencia_neta_mw: "50,75",
     };
     const result = normalizePlanta(raw as any);
@@ -54,8 +62,10 @@ describe("normalizePlanta", () => {
 
   it("parses comma-decimal string for potencia_bruta_mw", () => {
     const raw = {
-      central: "X", propietario: "Y",
-      tipo_de_energia: "Solar", estado: "Op",
+      central: "X",
+      propietario: "Y",
+      tipo_de_energia: "Solar",
+      estado: "Op",
       potencia_bruta_mw: "200,0",
     };
     const result = normalizePlanta(raw as any);
@@ -64,8 +74,10 @@ describe("normalizePlanta", () => {
 
   it("returns null anioServicio for non-numeric string", () => {
     const raw = {
-      central: "X", propietario: "Y",
-      tipo_de_energia: "Solar", estado: "Op",
+      central: "X",
+      propietario: "Y",
+      tipo_de_energia: "Solar",
+      estado: "Op",
       anio_servicio_central: "N/A",
     };
     const result = normalizePlanta(raw as any);
@@ -74,12 +86,17 @@ describe("normalizePlanta", () => {
 
   it("maps optional fields when present", () => {
     const raw = {
-      central: "X", propietario: "Y",
-      tipo_de_energia: "Solar", estado: "Op",
-      clasificacion: "ERNC", ley_ernc: "20936",
-      comuna_nombre: "Calama", anio_servicio_central: "2020",
+      central: "X",
+      propietario: "Y",
+      tipo_de_energia: "Solar",
+      estado: "Op",
+      clasificacion: "ERNC",
+      ley_ernc: "20936",
+      comuna_nombre: "Calama",
+      anio_servicio_central: "2020",
       fecha_puesta_servicio_central: "01/01/2020",
-      punto_conexion: "Barra Norte", sistema: "SING",
+      punto_conexion: "Barra Norte",
+      sistema: "SING",
     };
     const result = normalizePlanta(raw as any);
     expect(result.leyErnc).toBe("20936");
@@ -95,9 +112,12 @@ describe("normalizePlanta", () => {
 describe("normalizePipeline", () => {
   it("maps raw pipeline fields", () => {
     const raw = {
-      proyecto: "Eólico Sur", propietario: "WindCo",
-      tipo_tecnologia: "Eólica", tipo_tecnologia_final: "Eólica",
-      potencia_neta_mw: "200", region: "Los Lagos",
+      proyecto: "Eólico Sur",
+      propietario: "WindCo",
+      tipo_tecnologia: "Eólica",
+      tipo_tecnologia_final: "Eólica",
+      potencia_neta_mw: "200",
+      region: "Los Lagos",
       anio_puesta_en_servicio: 2027,
     };
     const result = normalizePipeline(raw as any);
@@ -110,20 +130,26 @@ describe("normalizePipeline", () => {
 
   it("prefers tipo_tecnologia_final over tipo_tecnologia", () => {
     const raw = {
-      proyecto: "X", propietario: "Y",
+      proyecto: "X",
+      propietario: "Y",
       tipo_tecnologia: "Hidro",
       tipo_tecnologia_final: "Hidráulica de pasada",
-      potencia_neta_mw: "10", region: "Aysén",
+      potencia_neta_mw: "10",
+      region: "Aysén",
       anio_puesta_en_servicio: 2026,
     };
-    expect(normalizePipeline(raw as any).tecnologia).toBe("Hidráulica de pasada");
+    expect(normalizePipeline(raw as any).tecnologia).toBe(
+      "Hidráulica de pasada",
+    );
   });
 
   it("falls back to tipo_tecnologia when tipo_tecnologia_final is absent", () => {
     const raw = {
-      proyecto: "X", propietario: "Y",
+      proyecto: "X",
+      propietario: "Y",
       tipo_tecnologia: "Solar",
-      potencia_neta_mw: "10", region: "Atacama",
+      potencia_neta_mw: "10",
+      region: "Atacama",
       anio_puesta_en_servicio: 2025,
     };
     expect(normalizePipeline(raw as any).tecnologia).toBe("Solar");
@@ -131,9 +157,11 @@ describe("normalizePipeline", () => {
 
   it("parses comma-decimal potencia_neta_mw", () => {
     const raw = {
-      proyecto: "X", propietario: "Y",
+      proyecto: "X",
+      propietario: "Y",
       tipo_tecnologia: "Solar",
-      potencia_neta_mw: "123,4", region: "Atacama",
+      potencia_neta_mw: "123,4",
+      region: "Atacama",
       anio_puesta_en_servicio: 2025,
     };
     expect(normalizePipeline(raw as any).potenciaNetaMw).toBeCloseTo(123.4);
@@ -141,10 +169,14 @@ describe("normalizePipeline", () => {
 
   it("maps optional fields when present", () => {
     const raw = {
-      proyecto: "X", propietario: "Y",
+      proyecto: "X",
+      propietario: "Y",
       tipo_tecnologia: "Solar",
-      potencia_neta_mw: "10", region: "Atacama",
-      barra_conexion: "Barra A", sistema: "SIC", categoria: "PMG",
+      potencia_neta_mw: "10",
+      region: "Atacama",
+      barra_conexion: "Barra A",
+      sistema: "SIC",
+      categoria: "PMG",
       anio_puesta_en_servicio: 2025,
     };
     const result = normalizePipeline(raw as any);
@@ -159,9 +191,11 @@ describe("normalizePipeline", () => {
 describe("normalizeNetBilling", () => {
   it("parses comma-decimal potencia_kw", () => {
     const raw = {
-      anio: 2024, mes: 3,
+      anio: 2024,
+      mes: 3,
       potencia_kw: "1234,5",
-      tecnologia: "Solar", region: "RM",
+      tecnologia: "Solar",
+      region: "RM",
     };
     const result = normalizeNetBilling(raw as any);
     expect(result.potenciaKw).toBeCloseTo(1234.5);
@@ -173,36 +207,45 @@ describe("normalizeNetBilling", () => {
 
   it("returns 0 for malformed potencia_kw", () => {
     const raw = {
-      anio: 2024, mes: 1,
+      anio: 2024,
+      mes: 1,
       potencia_kw: "N/A",
-      tecnologia: "Solar", region: "V",
+      tecnologia: "Solar",
+      region: "V",
     };
     expect(normalizeNetBilling(raw as any).potenciaKw).toBe(0);
   });
 
   it("parses integer string potencia_kw", () => {
     const raw = {
-      anio: 2023, mes: 6,
+      anio: 2023,
+      mes: 6,
       potencia_kw: "5000",
-      tecnologia: "Solar", region: "V",
+      tecnologia: "Solar",
+      region: "V",
     };
     expect(normalizeNetBilling(raw as any).potenciaKw).toBe(5000);
   });
 
   it("maps optional comuna when present", () => {
     const raw = {
-      anio: 2024, mes: 1,
+      anio: 2024,
+      mes: 1,
       potencia_kw: "100",
-      tecnologia: "Solar", region: "RM", comuna: "Santiago",
+      tecnologia: "Solar",
+      region: "RM",
+      comuna: "Santiago",
     };
     expect(normalizeNetBilling(raw as any).comuna).toBe("Santiago");
   });
 
   it("leaves comuna undefined when absent", () => {
     const raw = {
-      anio: 2024, mes: 1,
+      anio: 2024,
+      mes: 1,
       potencia_kw: "100",
-      tecnologia: "Solar", region: "RM",
+      tecnologia: "Solar",
+      region: "RM",
     };
     expect(normalizeNetBilling(raw as any).comuna).toBeUndefined();
   });

@@ -10,7 +10,9 @@ describe("CNE validation error reporting", () => {
   describe("capacidad validation", () => {
     it("identifies an invalid capacidad record", () => {
       // Missing required `central` field
-      const bad = [{ propietario: "X", tipo_de_energia: "Solar", estado: "Op" }];
+      const bad = [
+        { propietario: "X", tipo_de_energia: "Solar", estado: "Op" },
+      ];
       const result = CapacidadArraySchema.safeParse(bad);
       expect(result.success).toBe(false);
       if (!result.success) {
@@ -111,7 +113,7 @@ describe("CNE validation error reporting", () => {
     it("throws on unsuccessful wrapper response", () => {
       const badWrapper = { success: false, data: null };
       expect(() => unwrapCneData(badWrapper)).toThrow(
-        "CNE API returned an unsuccessful response envelope"
+        "CNE API returned an unsuccessful response envelope",
       );
     });
   });

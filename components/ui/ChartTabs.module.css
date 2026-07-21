@@ -19,7 +19,9 @@
   font: inherit;
   font-size: var(--step--1);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .tab:focus-visible {

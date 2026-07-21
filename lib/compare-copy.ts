@@ -1,6 +1,9 @@
 import type { RegionProfile } from "@/lib/region-profiles";
 
-export function buildComparisonText(a: RegionProfile, b: RegionProfile): string {
+export function buildComparisonText(
+  a: RegionProfile,
+  b: RegionProfile,
+): string {
   const parts: string[] = [];
 
   if (a.erncMw !== b.erncMw) {
@@ -34,7 +37,11 @@ export function buildComparisonText(a: RegionProfile, b: RegionProfile): string 
     );
   }
 
-  if (a.pipelineMw !== null && b.pipelineMw !== null && a.pipelineMw !== b.pipelineMw) {
+  if (
+    a.pipelineMw !== null &&
+    b.pipelineMw !== null &&
+    a.pipelineMw !== b.pipelineMw
+  ) {
     const largerPipeline = a.pipelineMw >= b.pipelineMw ? a : b;
     parts.push(
       `${largerPipeline.nombre} muestra una cartera en construcción mayor que la de la otra region.`,

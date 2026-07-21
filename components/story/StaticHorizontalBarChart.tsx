@@ -10,7 +10,11 @@ type Props = {
   ariaLabel: string;
 };
 
-export function StaticHorizontalBarChart({ data, color = "var(--accent)", ariaLabel }: Props) {
+export function StaticHorizontalBarChart({
+  data,
+  color = "var(--accent)",
+  ariaLabel,
+}: Props) {
   const maxVal = Math.max(...data.map((d) => d.kw / 1000), 1);
 
   const margin = { top: 8, right: 32, bottom: 48, left: 130 };
@@ -26,7 +30,7 @@ export function StaticHorizontalBarChart({ data, color = "var(--accent)", ariaLa
 
   const xTicks = 4;
   const xTickValues = Array.from({ length: xTicks + 1 }, (_, i) =>
-    Math.round((maxVal / xTicks) * i)
+    Math.round((maxVal / xTicks) * i),
   );
 
   return (
@@ -51,7 +55,12 @@ export function StaticHorizontalBarChart({ data, color = "var(--accent)", ariaLa
                   y2={innerH}
                   className={styles.gridLine}
                 />
-                <text x={x} y={innerH + 16} className={styles.tickLabel} textAnchor="middle">
+                <text
+                  x={x}
+                  y={innerH + 16}
+                  className={styles.tickLabel}
+                  textAnchor="middle"
+                >
                   {tick.toLocaleString("es-CL")} MW
                 </text>
               </g>
@@ -102,7 +111,13 @@ export function StaticHorizontalBarChart({ data, color = "var(--accent)", ariaLa
           })}
 
           {/* Axes */}
-          <line x1={0} x2={innerW} y1={innerH} y2={innerH} className={styles.axis} />
+          <line
+            x1={0}
+            x2={innerW}
+            y1={innerH}
+            y2={innerH}
+            className={styles.axis}
+          />
           <line x1={0} x2={0} y1={0} y2={innerH} className={styles.axis} />
         </g>
       </svg>

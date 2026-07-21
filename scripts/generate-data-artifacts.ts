@@ -23,7 +23,10 @@ async function main() {
     erncCount: data.erncCount,
   };
 
-  fs.writeFileSync("public/data/current/summary.json", JSON.stringify(summary, null, 2));
+  fs.writeFileSync(
+    "public/data/current/summary.json",
+    JSON.stringify(summary, null, 2),
+  );
   fs.writeFileSync(
     "public/data/current/metadata.json",
     JSON.stringify(data.metadata, null, 2),
@@ -32,7 +35,10 @@ async function main() {
     "public/data/downloads/regiones-current.csv",
     toCsv(
       ["region", "mw"],
-      data.regiones.map((region) => ({ region: region.label, mw: region.value })),
+      data.regiones.map((region) => ({
+        region: region.label,
+        mw: region.value,
+      })),
     ),
   );
   fs.writeFileSync(
