@@ -215,7 +215,6 @@ export default async function Page() {
                 data={regiones}
                 unit="MW"
                 ariaLabel="Capacidad ERNC instalada por región, en megawatts."
-                showShare
               />
               <EvidenceNote
                 generatedEl={generadoEl}

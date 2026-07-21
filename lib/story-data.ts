@@ -125,10 +125,15 @@ export async function getStoryData() {
     zonasEnergeticas: capacidadPorZona(ernc),
     regiones: regionProfiles
       .slice(0, 12)
-      .map((region) => ({ label: region.nombre, value: region.erncMw })),
+      .map((region) => ({
+        label: region.nombre,
+        value: region.erncMw,
+        share: region.nationalSharePct,
+      })),
     tecnologias: technologyProfiles.map((technology) => ({
       label: technology.nombre,
       value: technology.erncMw,
+      share: technology.nationalSharePct,
     })),
     porAnioOp: capacidadPorAnio(ernc).filter(
       (entry) => entry.anio >= 2000 && entry.anio <= currentYear,
