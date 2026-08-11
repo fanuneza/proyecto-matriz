@@ -54,6 +54,91 @@ export function buildPageMetadata({
   };
 }
 
+export type JsonLd = Record<string, unknown>;
+
+export type BreadcrumbItem = {
+  label: string;
+  path?: string;
+};
+
+export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => {
+      const element: JsonLd = {
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.label,
+      };
+      if (item.path) {
+        element.item = absoluteUrl(item.path);
+      }
+      return element;
+    }),
+  };
+}
+
+export type DatasetDistribution = {
+  type: "CSV" | "JSON";
+  url: string;
+  name: string;
+};
+
+export type DatasetInput = {
+  name: string;
+  description: string;
+  distribution: DatasetDistribution[];
+  dateModified: string;
+  creatorName?: string;
+  creatorUrl?: string;
+  isPartOfUrl?: string;
+};
+
+export function buildDatasetJsonLd(input: DatasetInput): JsonLd {
+  const dataset: JsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: input.name,
+    description: input.description,
+    distribution: input.distribution.map((entry) => ({
+      "@type": "DataDownload",
+      encodingFormat: entry.type === "CSV" ? "text/csv" : "application/json",
+      contentUrl: entry.url,
+      name: entry.name,
+    })),
+    dateModified: input.dateModified,
+    spatialCoverage: {
+      "@type": "Place",
+      name: "Chile",
+    },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+  };
+
+  if (input.creatorName) {
+    dataset.creator = {
+      "@type": "Organization",
+      name: input.creatorName,
+      ...(input.creatorUrl ? { url: input.creatorUrl } : {}),
+    };
+  }
+
+  if (input.isPartOfUrl) {
+    dataset.isPartOf = { "@id": input.isPartOfUrl };
+  }
+
+  return dataset;
+}
+
+export function jsonLdScript(data: JsonLd | JsonLd[]) {
+  return {
+    type: "application/ld+json" as const,
+    dangerouslySetInnerHTML: { __html: JSON.stringify(data) },
+  };
+}
+
 export const siteSchema = {
   "@context": "https://schema.org",
   "@graph": [

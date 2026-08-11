@@ -7,7 +7,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { slugToTecnologia } from "@/lib/slugs";
 import { getStoryData } from "@/lib/story-data";
-import { buildPageMetadata } from "../../seo";
+import { buildBreadcrumbJsonLd, buildPageMetadata, jsonLdScript } from "../../seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -62,15 +62,23 @@ export default async function TecnologiaPage({ params }: Props) {
     value: entry.mw,
   }));
 
+  const breadcrumbLd = buildBreadcrumbJsonLd([
+    { label: "Inicio", path: "/" },
+    { label: "Tecnologías", path: "/tecnologias" },
+    { label: technology.nombre },
+  ]);
+
   return (
-    <PageShell
-      eyebrow="Ficha tecnológica"
-      title={technology.nombre}
-      breadcrumbs={[
-        { label: "Inicio", href: "/" },
-        { label: "Tecnologías", href: "/tecnologias" },
-        { label: technology.nombre },
-      ]}
+    <>
+      <script {...jsonLdScript(breadcrumbLd)} />
+      <PageShell
+        eyebrow="Ficha tecnológica"
+        title={technology.nombre}
+        breadcrumbs={[
+          { label: "Inicio", href: "/" },
+          { label: "Tecnologías", href: "/tecnologias" },
+          { label: technology.nombre },
+        ]}
       lede={<p>{technology.descripcion}</p>}
       navLinks={[
         { href: "/tecnologias", label: "Todas las tecnologías" },
@@ -189,5 +197,6 @@ export default async function TecnologiaPage({ params }: Props) {
         </div>
       </section>
     </PageShell>
+    </>
   );
 }

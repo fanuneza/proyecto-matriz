@@ -6,7 +6,13 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { listSnapshots } from "@/lib/snapshots";
 import { getStoryData } from "@/lib/story-data";
-import { buildPageMetadata } from "../seo";
+import {
+  absoluteUrl,
+  buildDatasetJsonLd,
+  buildPageMetadata,
+  jsonLdScript,
+} from "../seo";
+import { SITE_URL } from "../site";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Datos y metodología",
@@ -45,10 +51,27 @@ export default async function DatosPage() {
   const snapshots = listSnapshots();
   const endpoints = Object.values(metadata.endpoints);
 
+  const datasetLd = buildDatasetJsonLd({
+    name: "Matriz ERNC Chile — datos agregados actuales",
+    description:
+      "Capacidad ERNC, net billing y pipeline agregados a partir de datos abiertos de la Comisión Nacional de Energía.",
+    distribution: downloads.map((download) => ({
+      type: download.type as "CSV" | "JSON",
+      url: absoluteUrl(download.href),
+      name: `${download.label} (${download.type})`,
+    })),
+    dateModified: metadata.generatedAt,
+    creatorName: "Proyecto Matriz",
+    creatorUrl: SITE_URL,
+    isPartOfUrl: `${SITE_URL}/#website`,
+  });
+
   return (
-    <PageShell
-      eyebrow="Transparencia"
-      title="Datos y metodología"
+    <>
+      <script {...jsonLdScript(datasetLd)} />
+      <PageShell
+        eyebrow="Transparencia"
+        title="Datos y metodología"
       lede={
         <p>
           Esta sección documenta de dónde salen los datos, cómo se agregan y qué
@@ -76,6 +99,19 @@ export default async function DatosPage() {
     >
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Datasets consultados</h2>
+        <p className={shell.sectionText}>
+          Todos los datasets provienen de la{" "}
+          <a
+            href="https://www.cne.cl/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Comisión Nacional de Energía
+          </a>
+          . La cobertura es nacional; la transformación aplica agregación por
+          región y tecnología, filtrado ERNC y normalización de nombres, sin
+          almacenar respuestas crudas de la API.
+        </p>
         <div className={shell.resourceList}>
           {endpoints.map((endpoint) => (
             <div key={endpoint.name} className={shell.resourceRow}>
@@ -84,6 +120,7 @@ export default async function DatosPage() {
                 <p className={shell.resourceMeta}>
                   Consultado el{" "}
                   {new Date(endpoint.fetchedAt).toLocaleDateString("es-CL")}
+                  {" · Cobertura: nacional"}
                 </p>
               </div>
               <p className={shell.resourceMeta}>
@@ -100,6 +137,27 @@ export default async function DatosPage() {
 
       <section className={shell.section}>
         <GlossaryList />
+      </section>
+
+      <section className={shell.section}>
+        <h2 className={shell.sectionTitle}>Autoría y contacto</h2>
+        <div className={shell.stack}>
+          <p className={shell.sectionText}>
+            Proyecto Matriz es editado por Fabián Núñez. El propósito es
+            documentar y visualizar la expansión renovable chilena a partir de
+            datos abiertos de la CNE.
+          </p>
+          <p className={shell.sectionText}>
+            Contacto:{" "}
+            <a
+              href="https://github.com/fanuneza"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              github.com/fanuneza
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className={shell.section}>
@@ -135,5 +193,6 @@ export default async function DatosPage() {
         )}
       </section>
     </PageShell>
+    </>
   );
 }

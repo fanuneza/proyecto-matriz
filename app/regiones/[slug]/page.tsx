@@ -7,7 +7,7 @@ import { PageShell } from "@/components/ui/PageShell";
 import shell from "@/components/ui/PageShell.module.css";
 import { slugToRegion } from "@/lib/slugs";
 import { getStoryData } from "@/lib/story-data";
-import { buildPageMetadata } from "../../seo";
+import { buildBreadcrumbJsonLd, buildPageMetadata, jsonLdScript } from "../../seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -55,15 +55,23 @@ export default async function RegionPage({ params }: Props) {
     participacion: `${entry.sharePct.toFixed(1)}% del total regional`,
   }));
 
+  const breadcrumbLd = buildBreadcrumbJsonLd([
+    { label: "Inicio", path: "/" },
+    { label: "Regiones", path: "/regiones" },
+    { label: region.nombre },
+  ]);
+
   return (
-    <PageShell
-      eyebrow="Ficha regional"
-      title={region.nombre}
-      breadcrumbs={[
-        { label: "Inicio", href: "/" },
-        { label: "Regiones", href: "/regiones" },
-        { label: region.nombre },
-      ]}
+    <>
+      <script {...jsonLdScript(breadcrumbLd)} />
+      <PageShell
+        eyebrow="Ficha regional"
+        title={region.nombre}
+        breadcrumbs={[
+          { label: "Inicio", href: "/" },
+          { label: "Regiones", href: "/regiones" },
+          { label: region.nombre },
+        ]}
       lede={
         <p>
           {topTech
@@ -177,5 +185,6 @@ export default async function RegionPage({ params }: Props) {
         </div>
       </section>
     </PageShell>
+    </>
   );
 }

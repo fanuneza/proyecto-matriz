@@ -73,6 +73,7 @@ npm run build
 npm run generate-artifacts
 npm run check-output
 npm run check-routes
+npm run check-seo
 npm run write-snapshot
 npm run analyze
 ```
@@ -150,6 +151,7 @@ npm run test
 npm run build
 npm run check-output
 npm run check-routes
+npm run check-seo
 ```
 
 Después de un build exitoso, conviene revisar:

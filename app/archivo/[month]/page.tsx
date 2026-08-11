@@ -13,7 +13,13 @@ import {
   listSnapshots,
   readSnapshot,
 } from "@/lib/snapshots";
-import { buildPageMetadata } from "../../seo";
+import {
+  absoluteUrl,
+  buildBreadcrumbJsonLd,
+  buildDatasetJsonLd,
+  buildPageMetadata,
+  jsonLdScript,
+} from "../../seo";
 
 type Props = {
   params: Promise<{ month: string }>;
@@ -63,15 +69,39 @@ export default async function ArchivoMonthPage({ params }: Props) {
     value: region.erncMw,
   }));
 
+  const breadcrumbLd = buildBreadcrumbJsonLd([
+    { label: "Inicio", path: "/" },
+    { label: "Archivo", path: "/archivo" },
+    { label: `Snapshot ${month}` },
+  ]);
+  const datasetLd = buildDatasetJsonLd({
+    name: `Snapshot ${month} — Matriz ERNC Chile`,
+    description:
+      "Snapshot mensual agregado de capacidad ERNC, net billing y pipeline.",
+    distribution: [
+      {
+        type: "JSON",
+        url: absoluteUrl(`/data/snapshots/${month}.json`),
+        name: `Snapshot ${month} (JSON)`,
+      },
+    ],
+    dateModified: snapshot.generatedAt,
+    creatorName: "Proyecto Matriz",
+    creatorUrl: "https://matriz.fnunez.cl",
+    isPartOfUrl: "https://matriz.fnunez.cl/#website",
+  });
+
   return (
-    <PageShell
-      eyebrow="Snapshot mensual"
-      title={`Snapshot ${month}`}
-      breadcrumbs={[
-        { label: "Inicio", href: "/" },
-        { label: "Archivo", href: "/archivo" },
-        { label: `Snapshot ${month}` },
-      ]}
+    <>
+      <script {...jsonLdScript([breadcrumbLd, datasetLd])} />
+      <PageShell
+        eyebrow="Snapshot mensual"
+        title={`Snapshot ${month}`}
+        breadcrumbs={[
+          { label: "Inicio", href: "/" },
+          { label: "Archivo", href: "/archivo" },
+          { label: `Snapshot ${month}` },
+        ]}
       lede={
         <p>
           Este corte conserva agregados publicables de capacidad ERNC, net
@@ -195,5 +225,6 @@ export default async function ArchivoMonthPage({ params }: Props) {
         )}
       </section>
     </PageShell>
+    </>
   );
 }
