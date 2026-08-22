@@ -14,6 +14,11 @@ const RESOURCE_LINKS = [
   { label: "Archivo", href: "/archivo" },
 ];
 
+const LEGAL_LINKS = [
+  { label: "Privacidad", href: "/privacidad" },
+  { label: "Política de cookies", href: "/politica-de-cookies" },
+];
+
 export function Footer() {
   return (
     <footer className={styles.footer}>
@@ -48,6 +53,25 @@ export function Footer() {
                   <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div className={styles.linkGroup}>
+            <p className={styles.groupLabel}>Legal</p>
+            <ul className={styles.linkList}>
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+              <li>
+                <button
+                  type="button"
+                  className={styles.consentControl}
+                  data-consent-reopen=""
+                >
+                  Gestionar cookies
+                </button>
+              </li>
             </ul>
           </div>
         </div>

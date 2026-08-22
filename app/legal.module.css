@@ -1,0 +1,138 @@
+.updated {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.updated time {
+  color: var(--text);
+}
+
+.toc {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-subtle);
+}
+
+.tocTitle {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tocList {
+  display: grid;
+  gap: 0.25rem;
+  list-style: none;
+  counter-reset: toc;
+}
+
+.tocList a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.tocList a:hover {
+  color: var(--accent-light);
+}
+
+.section h2 {
+  scroll-margin-top: calc(56px + 1rem);
+}
+
+.list {
+  display: grid;
+  gap: 0.5rem;
+  padding-left: 1.25rem;
+  max-width: var(--measure);
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.list strong,
+.list b {
+  color: var(--text);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent-light);
+  overflow-wrap: anywhere;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin-inline: calc(-1 * clamp(1.25rem, 4vw, 3rem));
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.table {
+  width: max(100%, 40rem);
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  line-height: 1.55;
+}
+
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  background: var(--bg-subtle);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.table td {
+  color: var(--text-muted);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.manageButton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 1rem;
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  border-radius: 20px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.manageButton:hover {
+  color: var(--accent-light);
+  border-color: var(--accent-dim);
+  background: color-mix(in srgb, var(--bg-subtle) 80%, var(--accent) 20%);
+}
+
+.manageButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

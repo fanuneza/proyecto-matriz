@@ -184,3 +184,7 @@ a:focus-visible {
   border-top: 1px solid var(--border);
   margin-block: var(--space-lg);
 }
+
+html.consent-banner-open {
+  overflow: hidden;
+}

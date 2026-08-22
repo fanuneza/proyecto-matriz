@@ -1,0 +1,97 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgb(4 8 12 / 65%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 201;
+  display: grid;
+  gap: 0.75rem;
+  width: min(30rem, calc(100% - 2 * var(--space-sm)));
+  max-height: calc(100dvh - 2 * var(--space-sm));
+  overflow-y: auto;
+  padding: var(--space-sm);
+  background: var(--bg-surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 45%);
+}
+
+.heading {
+  max-width: none;
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.text {
+  font-size: var(--step--1);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.text a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.button {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.35rem var(--space-sm);
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.buttonAccept {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.buttonAccept:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+.buttonReject {
+  color: var(--text-muted);
+}
+
+.buttonReject:hover {
+  color: var(--text);
+  background: var(--bg-subtle);
+}

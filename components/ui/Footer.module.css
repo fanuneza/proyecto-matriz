@@ -83,6 +83,31 @@
   text-decoration: none;
 }
 
+.consentControl {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: var(--step--1);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.consentControl:hover {
+  color: var(--text);
+}
+
+.consentControl:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* ── Source column ───────────────────────────────────────────────────── */
 .sourceCol {
   display: flex;

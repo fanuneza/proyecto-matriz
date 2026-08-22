@@ -15,6 +15,8 @@ const FIXED_ROUTES: IndexableRoute[] = [
   { path: "/tecnologias", changeFrequency: "weekly", priority: 0.7 },
   { path: "/comparar", changeFrequency: "weekly", priority: 0.7 },
   { path: "/archivo", changeFrequency: "weekly", priority: 0.6 },
+  { path: "/privacidad", changeFrequency: "monthly", priority: 0.3 },
+  { path: "/politica-de-cookies", changeFrequency: "monthly", priority: 0.3 },
 ];
 
 export function getIndexableRoutes(): IndexableRoute[] {

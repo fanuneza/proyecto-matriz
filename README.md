@@ -122,6 +122,18 @@ Output directory: out
 Node version: 20
 ```
 
+Variables de entorno de build en Cloudflare Pages:
+
+```text
+NEXT_PUBLIC_GTM_ID=...   (opcional; habilita Google Tag Manager y GA4)
+```
+
+`NEXT_PUBLIC_GTM_ID` se inyecta al compilar: si la variable no está definida,
+el sitio se exporta sin analítica y sin cambios en el HTML. Con la variable
+definida, GTM solo se carga después de que la persona visitante acepte las
+cookies en el aviso de consentimiento (ver `/politica-de-cookies` y
+`/privacidad`); su elección se guarda en `localStorage` bajo `matriz_consent`.
+
 `wrangler.toml` debe mantener:
 
 ```toml

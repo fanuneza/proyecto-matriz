@@ -61,5 +61,8 @@ export default defineConfig({
     command: "npm run dev -- --port 3100",
     url: "http://localhost:3100",
     reuseExistingServer: !process.env.CI,
+    env: {
+      NEXT_PUBLIC_GTM_ID: "GTM-E2ETEST",
+    },
   },
 });

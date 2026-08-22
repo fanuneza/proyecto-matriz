@@ -11,6 +11,8 @@ const EXPECTED_ROUTE_VARIANTS = [
   ["out/tecnologias/solar.html", "out/tecnologias/solar/index.html"],
   ["out/comparar.html", "out/comparar/index.html"],
   ["out/archivo.html", "out/archivo/index.html"],
+  ["out/privacidad.html", "out/privacidad/index.html"],
+  ["out/politica-de-cookies.html", "out/politica-de-cookies/index.html"],
 ];
 
 let errors = 0;

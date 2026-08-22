@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
+import { CookieConsent } from "@/components/analytics/CookieConsent";
 import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import "./globals.css";
 import { siteSchema } from "./seo";
 import { SITE_URL } from "./site";
+
+const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
+const gtmId =
+  typeof rawGtmId === "string" && /^GTM-[A-Z0-9]+$/.test(rawGtmId)
+    ? rawGtmId
+    : null;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -50,6 +57,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {gtmId && <CookieConsent gtmId={gtmId} />}
         <a href="#main-content" className="skip-link">
           Saltar al contenido
         </a>
