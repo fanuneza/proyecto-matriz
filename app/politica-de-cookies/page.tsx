@@ -8,7 +8,7 @@ import { LEGAL_UPDATED_ISO, legalUpdatedText } from "../site";
 
 const CONSENT_KEY = "matriz_consent";
 
-const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
+const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 const gtmId =
   typeof rawGtmId === "string" && /^GTM-[A-Z0-9]+$/.test(rawGtmId)
     ? rawGtmId

@@ -6,7 +6,7 @@ import "./globals.css";
 import { siteSchema } from "./seo";
 import { SITE_URL } from "./site";
 
-const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID;
+const rawGtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
 const gtmId =
   typeof rawGtmId === "string" && /^GTM-[A-Z0-9]+$/.test(rawGtmId)
     ? rawGtmId
