@@ -1,5 +1,17 @@
 import { expect, test } from "@playwright/test";
 
+const CONSENT_KEY = "matriz_consent";
+
+// These tests exercise page navigation and widgets, not consent. Seed a
+// stored rejection so the consent modal doesn't overlay the page.
+test.beforeEach(async ({ context }) => {
+  await context.addInitScript((key) => {
+    try {
+      window.localStorage.setItem(key, "denied");
+    } catch {}
+  }, CONSENT_KEY);
+});
+
 test("homepage exposes its main story and a working skip link", async ({
   page,
 }) => {

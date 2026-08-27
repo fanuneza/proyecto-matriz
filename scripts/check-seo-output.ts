@@ -49,6 +49,13 @@ function extractCanonical(html: string): string | null {
   return null;
 }
 
+// Next.js serializes the root canonical as the bare origin (no trailing
+// slash), while metadata/sitemap use `${SITE_URL}/`. Compare on a
+// trailing-slash-normalized basis so both spellings of the home URL pass.
+function normalizeCanonical(url: string): string {
+  return url.replace(/\/+$/, "");
+}
+
 function extractDescription(html: string): string {
   const match = html.match(
     /<meta\s+name\s*=\s*["']\s*description\s*["']\s+content\s*=\s*["']([^"']*)["']/i,
@@ -84,7 +91,7 @@ for (const routePath of indexablePaths) {
   if (!canonical) {
     console.error(`MISSING CANONICAL: ${htmlFile} has no rel=canonical link`);
     errors += 1;
-  } else if (canonical !== publicUrl) {
+  } else if (normalizeCanonical(canonical) !== normalizeCanonical(publicUrl)) {
     console.error(
       `WRONG CANONICAL: ${htmlFile} canonical "${canonical}" !== "${publicUrl}"`,
     );
