@@ -1,62 +1,54 @@
-/* ── Scroll offset for fixed header (56px) ──────────────────────────── */
-.main :global(#inicio),
-.main :global(#regiones),
-.main :global(#tecnologias),
-.main :global(#crecimiento),
-.main :global(#net-billing) {
-  scroll-margin-top: 56px;
-}
-
-/* ── Layout ─────────────────────────────────────────────────────────── */
+/* Homepage overview */
 .main {
   padding-top: 56px;
 }
 
-/* ── Hero ───────────────────────────────────────────────────────────── */
+.main section[id] {
+  scroll-margin-top: 128px;
+}
+
 .hero {
-  --hero-map-column: clamp(25rem, 31vw, 29rem);
-  --hero-column-gap: clamp(2rem, 5vw, 5rem);
-  --hero-map-height: clamp(34rem, 45vw, 40rem);
-  min-height: calc(100svh - 56px);
-  display: flex;
-  align-items: center;
-  position: relative;
-  background-color: var(--bg);
-  padding-block: clamp(3rem, 7vh, 5.5rem);
-  overflow: hidden;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem) 0;
+  background: var(--bg);
 }
 
 .heroInner {
-  position: relative;
-  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--hero-map-column);
-  gap: var(--hero-column-gap);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
 }
 
 .heroCopy {
-  position: relative;
-  z-index: 1;
   max-width: 42rem;
 }
 
 .eyebrow {
-  font-size: var(--step--1);
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: var(--space-sm);
-  max-width: none;
+  margin-bottom: 1.5rem;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .heroTitle {
-  font-size: clamp(3rem, 3.8vw, 3.9rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  margin-bottom: var(--space-md);
+  font-size: clamp(2.5rem, 4.6vw, 4.3rem);
+  line-height: 1.07;
+  font-weight: 650;
+  letter-spacing: -0.045em;
   text-wrap: balance;
+  margin-bottom: 1.5rem;
 }
 
 .accent {
@@ -64,54 +56,123 @@
 }
 
 .heroLead {
-  font-size: var(--step-1);
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.8;
+  max-width: 47ch;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1.75rem;
+}
+
+.primaryAction, .secondaryAction {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 150ms, border-color 150ms;
+}
+
+.primaryAction {
   color: var(--text);
-  line-height: 1.65;
-  max-width: 48ch;
-  margin-bottom: var(--space-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--accent-dim);
+}
+
+.primaryAction:hover {
+  color: var(--accent-light);
+  border-color: var(--accent);
+  background: var(--bg-surface);
+}
+
+.secondaryAction {
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.secondaryAction:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
 }
 
 .heroDefinition {
-  padding: 0.875rem 0 0.875rem 1rem;
-  border-left: 1px solid var(--accent-dim);
   color: var(--text-muted);
-  font-size: var(--step--1);
-  line-height: 1.65;
-  margin-bottom: var(--space-md);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--accent-dim);
+  max-width: 54ch;
 }
 
-.heroStats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem var(--space-md);
-  align-items: start;
+.heroDefinition strong {
+  color: var(--text);
+  font-weight: 500;
 }
 
-.heroStats > * + * {
-  border-left: 1px solid var(--border);
-  padding-left: var(--space-sm);
+.heroSource {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.heroSource span {
+  padding-inline: 0.3rem;
 }
 
 .heroMap {
-  z-index: 1;
-  align-self: center;
-  min-height: var(--hero-map-height);
-  width: 100%;
-  display: grid;
-  grid-template-columns: minmax(9rem, 1fr) minmax(12rem, 1.1fr);
-  column-gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
   position: relative;
+  margin: 0;
+  width: 100%;
+  height: 510px;
+  padding: 4.75rem 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--bg-surface);
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-blend-mode: soft-light;
+  overflow: hidden;
+}
+
+.mapHeading {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.mapHeading p {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.mapHeading > span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
 }
 
 .mapImage {
   grid-column: 1;
-  width: auto;
-  height: var(--hero-map-height);
-  max-width: none;
+  grid-row: 1;
   justify-self: center;
+  height: 370px;
+  width: auto;
+  max-width: 100%;
   object-fit: contain;
-  opacity: 0.92;
 }
 
 .mapMarkers {
@@ -121,73 +182,192 @@
   display: grid;
   grid-template-rows: 1.6fr 1.15fr 1.45fr 1.05fr 2.3fr;
   list-style: none;
-  padding-block: 3%;
 }
 
 .mapMarkers li {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
   gap: 0.2rem;
   color: var(--text-muted);
-  font-family: var(--font-sans);
-  font-size: 0.625rem;
-  letter-spacing: 0.08em;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 .mapMarkerBar {
   display: block;
-  width: clamp(2.75rem, 5vw, 4.5rem);
-  height: 1px;
+  width: 100%;
+  max-width: 100px;
+  height: 3px;
+  margin-bottom: 0.25rem;
   background: var(--accent-dim);
 }
 
 .mapMarkerBar span {
   display: block;
-  min-width: 2px;
+  min-width: 0;
   height: 100%;
   background: var(--accent);
 }
 
 .mapMarkers strong {
   color: var(--text);
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
 }
 
-.heroMap > figcaption {
+.heroMap figcaption {
   position: absolute;
-  bottom: -0.5rem;
-  right: 0;
-  max-width: 25ch;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
   color: var(--text-muted);
-  font-size: var(--step--1);
-  line-height: 1.5;
-  text-align: right;
+  font-size: 0.6875rem;
+}
+
+.statsContainer {
+  padding-top: 2.5rem;
+}
+
+.statsHeading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+
+.statsHeading > span {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-block: 0.5rem 2rem;
+}
+
+.heroStats > * {
+  padding-right: 1rem;
+}
+
+.heroStats > * + * {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border);
 }
 
 .evidenceNote {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 0.5rem;
-  margin-top: var(--space-md);
-  font-size: var(--step--1);
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   max-width: none;
 }
 
 .evidenceNote span:first-child {
   color: var(--text);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .evidenceNote a {
   margin-left: 0.25rem;
+}
+
+.explore {
+  padding-block: 2.5rem 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.sectionHeading {
+  display: flex;
+  gap: 1.5rem;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  letter-spacing: -0.025em;
+}
+
+.sectionHeading > p {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.sectionHeading .chapterKicker {
+  color: var(--accent);
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.exploreCard {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  border-radius: 6px;
+}
+
+.cardCategory {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.exploreCard h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.65rem;
+}
+
+.exploreCard p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.cardLink {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
+
+.chapterLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  min-height: 44px;
+}
+
 
 /* ── Reading rail ──────────────────────────────────────────────────── */
 .storyRail {
@@ -259,7 +439,7 @@
 
 .chapterText {
   position: sticky;
-  top: calc(56px + var(--space-md));
+  top: 136px;
 }
 
 .chapterNum {
@@ -304,7 +484,10 @@
 }
 
 .chapterChart {
-  padding-top: 0.25rem;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-surface);
 }
 
 .chartTitle {
@@ -374,181 +557,194 @@
   font-weight: 500;
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE — 1024px (landscape tablet / small desktop)
-══════════════════════════════════════════════════════════════════════ */
+
 @media (max-width: 1024px) {
   .heroInner {
-    --hero-map-column: 22rem;
-    gap: var(--space-md);
-  }
-
-  .chapterLayout {
-    grid-template-columns: 1fr 1.2fr;
-  }
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+  gap: 2rem;
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE — 960px (stats column breakpoint)
-══════════════════════════════════════════════════════════════════════ */
-@media (max-width: 960px) {
-  .storyRailInner {
-    gap: var(--space-sm);
-  }
+  .heroTitle {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
 }
-
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE — 768px (tablet)
-══════════════════════════════════════════════════════════════════════ */
-@media (max-width: 768px) {
-  .hero {
-    min-height: auto;
-    padding-block: var(--space-lg);
-    align-items: flex-start;
-    padding-top: calc(var(--space-lg) + 1rem);
-  }
-
-  .heroInner {
-    grid-template-columns: 1fr;
-  }
 
   .heroMap {
-    min-height: clamp(32rem, 100vw, 42rem);
-    max-width: none;
-    width: 100%;
-    justify-self: end;
-  }
-
-  .mapImage {
-    height: clamp(32rem, 100vw, 42rem);
-    max-width: 100%;
-  }
-
-  .storyRail {
-    position: relative;
-    top: auto;
-  }
-
-  .storyRailInner {
-    min-height: auto;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding-block: 0.75rem;
-  }
-
-  .storyRail ol {
-    width: 100%;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 0.125rem;
-  }
-
-  .storyRail a {
-    padding-right: 0.75rem;
-    white-space: nowrap;
-  }
-
-  .heroTitle {
-    font-size: clamp(2rem, 8vw, var(--step-5));
-  }
-
-  .chapter {
-    padding-block: var(--space-md);
-  }
-
-  .chapterLayout {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  /* Remove sticky on mobile — text sits above chart */
-  .chapterText {
-    position: static;
-  }
-
-  .chapterNum {
-    font-size: var(--step-2);
-  }
-
-  .cierre {
-    padding-block: var(--space-md);
-  }
-
-  .main :global(.chart-loading) {
-    height: 280px;
-  }
+  height: 480px;
+  padding-inline: 1rem;
 }
-
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE — 480px (phones)
-══════════════════════════════════════════════════════════════════════ */
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: clamp(1.75rem, 9vw, 2.5rem);
-  }
-
-  .heroLead {
-    font-size: var(--step-0);
-  }
-
-  .heroStats {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
 
   .heroStats > * + * {
-    border-left: 0;
-    border-top: 1px solid var(--border);
-    padding: var(--space-sm) 0 0;
-  }
-
-  .heroMap {
-    min-height: clamp(30rem, 145vw, 38rem);
-    width: 100%;
-    grid-template-columns: minmax(0, 1fr) 7rem;
-  }
-
-  .mapImage {
-    height: clamp(30rem, 145vw, 38rem);
-    max-width: 100%;
-  }
-
-  .evidenceNote {
-    gap: 0.25rem;
-  }
-
-  .evidenceNote a {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .chapter {
-    padding-block: 1.5rem;
-  }
-
-  .cierre {
-    padding-block: 1.5rem;
-  }
-
-  .cierreTitle {
-    font-size: var(--step-2);
-  }
-
-  .cierreLead {
-    font-size: var(--step-0);
-  }
-
-  .main :global(.chart-loading) {
-    height: 220px;
-  }
+  padding-left: 1rem;
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   RESPONSIVE — 320px (small phones)
-══════════════════════════════════════════════════════════════════════ */
-@media (max-width: 320px) {
+  .exploreCard {
+  padding: 1rem;
+}
+
+  .sectionHeading {
+  align-items: start;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+}
+@media (max-width: 768px) {
+  .main section[id] {
+  scroll-margin-top: 72px;
+}
+
+  .heroInner {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
   .heroTitle {
-    font-size: 1.65rem;
-  }
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+}
+
+  .heroCopy {
+  max-width: none;
+}
+
+  .heroMap {
+  height: 430px;
+  grid-template-columns: 1fr 1fr;
+}
+
+  .mapImage {
+  height: 300px;
+}
+
+  .statsContainer {
+  padding-top: 2rem;
+}
+
+  .heroStats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 0;
+}
+
+  .heroStats > * {
+  padding-right: 0.75rem;
+}
+
+  .heroStats > * + * {
+  padding-left: 0.75rem;
+}
+
+  .heroStats > :nth-child(3) {
+  border-left: none;
+  padding-left: 0;
+}
+
+  .explore {
+  padding-block: 2rem;
+}
+
+  .exploreGrid {
+  grid-template-columns: 1fr;
+}
+
+  .exploreCard {
+  padding: 1.25rem;
+}
+
+  .storyRail {
+  position: relative;
+  top: auto;
+}
+
+  .storyRailInner {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding-block: 0.75rem;
+}
+
+  .storyRail ol {
+  width: 100%;
+  overflow-x: auto;
+  justify-content: flex-start;
+}
+
+  .storyRail a {
+  white-space: nowrap;
+  padding-right: 0.75rem;
+}
+
+  .chapter {
+  padding-block: 2.5rem;
+}
+
+  .chapterLayout {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+  .chapterText {
+  position: static;
+}
+
+  .chapterNum {
+  font-size: var(--step-2);
+}
+
+  .cierre {
+  padding-block: 2.5rem;
+}
+
+  .cierreTitle {
+  font-size: var(--step-2);
+}
+
+  .cierreLead {
+  font-size: var(--step-0);
+}
+
+  .main :global(.chart-loading) {
+  height: 280px;
+}
+
+}
+@media (max-width: 480px) {
+  .hero {
+  padding-top: 2rem;
+}
+
+  .eyebrow {
+  font-size: 0.625rem;
+  letter-spacing: 0.07em;
+}
+
+  .heroTitle {
+  font-size: clamp(2.2rem, 10vw, 3rem);
+}
+
+  .heroActions {
+  gap: 0.5rem;
+}
+
+  .primaryAction, .secondaryAction {
+  font-size: 0.8125rem;
+  padding: 0.65rem 0.75rem;
+  gap: 0.75rem;
+}
+
+  .heroSource {
+  font-size: 0.6875rem;
+}
+
+  .heroStats {
+  gap: 1.25rem 0;
+}
+
+  .evidenceNote a {
+  width: 100%;
+  margin-left: 0;
+}
+
+  .chapterChart {
+  min-width: 0;
+}
+
 }

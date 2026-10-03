@@ -79,3 +79,24 @@ test("region comparison swaps the selected regions", async ({ page }) => {
   await expect(regionA).toHaveValue("atacama");
   await expect(regionB).toHaveValue("antofagasta");
 });
+
+test("homepage region selector opens the selected region profile", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const explorer = page.getByRole("article").filter({
+    has: page.getByRole("heading", { name: "Explora tu región" }),
+  });
+  await expect(explorer.getByRole("link", { name: "Ver todas" })).toHaveAttribute(
+    "href",
+    "/regiones",
+  );
+  await explorer
+    .getByRole("combobox", { name: "Selecciona una región" })
+    .selectOption("antofagasta");
+  await explorer.getByRole("link", { name: "Ver región" }).click();
+  await expect(page).toHaveURL(/\/regiones\/antofagasta$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Antofagasta",
+  );
+});

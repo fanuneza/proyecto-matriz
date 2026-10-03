@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(14, 15, 17, 0.94);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
@@ -36,7 +36,7 @@
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--accent);
+  color: var(--text);
   white-space: nowrap;
 }
 

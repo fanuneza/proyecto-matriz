@@ -20,6 +20,9 @@
 # production
 /build
 
+# Local previews and generated design captures
+/.cache/
+
 # misc
 .DS_Store
 *.pem

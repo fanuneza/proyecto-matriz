@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { MethodologyBlock } from "@/components/ui/MethodologyBlock";
 import { Stat } from "@/components/ui/Stat";
+import { RegionQuickLink } from "@/components/tools/RegionQuickLink";
 import {
   formatCompactMw,
   formatMw,
@@ -83,6 +84,7 @@ export default async function Page() {
     nbPorMes,
     nbPorRegion,
     generadoEl,
+    regionProfiles,
   } = await getStoryData();
   const maxZonaMw = Math.max(...zonasEnergeticas.map((zona) => zona.mw), 1);
 
@@ -97,7 +99,8 @@ export default async function Page() {
           <div className={`container ${styles.heroInner}`}>
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>
-                Una lectura nacional con datos CNE
+                <span className={styles.statusDot} aria-hidden="true" />
+                Observatorio de energía · Chile
               </p>
               <h1 id="titulo-principal" className={styles.heroTitle}>
                 La transición ya cambió la{" "}
@@ -105,46 +108,40 @@ export default async function Page() {
                 Chile
               </h1>
               <p className={styles.heroLead}>
-                Las renovables no convencionales ya reúnen{" "}
-                <strong>{formatPercent(porcentajeErnc)}</strong> de la capacidad
-                instalada del sistema. La transformación existe, pero no se
-                reparte igual a lo largo del país.
+                Entiende cómo avanzan las energías renovables. Explora su
+                capacidad, compara regiones y accede a los datos abiertos
+                de la Comisión Nacional de Energía.
               </p>
+              <div className={styles.heroActions}>
+                <a className={styles.primaryAction} href="#explorar">
+                  Explorar los datos <span aria-hidden="true">↗</span>
+                </a>
+                <Link className={styles.secondaryAction} href="/comparar">
+                  Comparar regiones <span aria-hidden="true">→</span>
+                </Link>
+              </div>
               <p className={styles.heroDefinition}>
                 <strong>Capacidad instalada</strong> es la potencia máxima que
                 una central puede aportar; no equivale a la electricidad que
                 genera durante un año.
               </p>
 
-              <div className={styles.heroStats}>
-                <Stat
-                  value={formatCompactMw(totalErncMw)}
-                  label="Capacidad ERNC instalada"
-                  sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
-                  accent
-                />
-                <Stat
-                  value={formatNumber(erncCount)}
-                  label="Centrales en operación"
-                />
-                <Stat
-                  value={formatCompactMw(pipelineMwTotal)}
-                  label="Proyectos en construcción"
-                />
-              </div>
-              <EvidenceNote
-                generatedEl={generadoEl}
-                label="Capacidad instalada neta"
-              />
+              <p className={styles.heroSource}>
+                Fuente: CNE <span aria-hidden="true">·</span> Datos al {generadoEl}
+              </p>
             </div>
 
             <figure className={styles.heroMap}>
+              <div className={styles.mapHeading}>
+                <p>Panorama territorial</p>
+                <span>Capacidad ERNC en operación</span>
+              </div>
               <Image
                 className={styles.mapImage}
                 src="/maps/chile.svg"
                 alt="Mapa de Chile con cinco zonas geográficas de capacidad ERNC."
-                width={220}
-                height={910}
+                width={190}
+                height={930}
                 priority
               />
               <ol className={styles.mapMarkers}>
@@ -159,9 +156,93 @@ export default async function Page() {
                 ))}
               </ol>
               <figcaption>
-                Capacidad ERNC operacional por zona geográfica.
+                Potencia instalada por zona · MW / GW
               </figcaption>
             </figure>
+          </div>
+          <div className={`container ${styles.statsContainer}`}>
+            <div className={styles.statsHeading}>
+              <span>La matriz en cifras</span>
+              <Link href="/datos">Ver fuente y metodología ↗</Link>
+            </div>
+            <div className={styles.heroStats}>
+              <Stat
+                value={formatCompactMw(totalErncMw)}
+                label="Capacidad ERNC instalada"
+                sub={`${formatPercent(porcentajeErnc)} del sistema eléctrico`}
+                accent
+              />
+              <Stat
+                value={formatNumber(erncCount)}
+                label="Centrales ERNC en operación"
+                sub="Instalaciones a escala nacional"
+              />
+              <Stat
+                value={formatCompactMw(pipelineMwTotal)}
+                label="En construcción"
+                sub="Capacidad prevista, aún no operativa"
+              />
+              <Stat
+                value={formatCompactMw(totalNbMw)}
+                label="Generación distribuida"
+                sub="Capacidad conectada bajo net billing"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="explorar"
+          className={styles.explore}
+          aria-labelledby="explore-title"
+        >
+          <div className="container">
+            <div className={styles.sectionHeading}>
+              <div>
+                <p className={styles.chapterKicker}>
+                  Datos abiertos, preguntas concretas
+                </p>
+                <h2 id="explore-title">Encuentra tu punto de partida</h2>
+              </div>
+              <p>Del panorama nacional al detalle de tu región.</p>
+            </div>
+            <div className={styles.exploreGrid}>
+              <article className={styles.exploreCard}>
+                <span className={styles.cardCategory}>01 / Territorio</span>
+                <h3>Explora tu región</h3>
+                <p>
+                  Consulta la capacidad instalada, sus tecnologías y los
+                  proyectos en construcción.
+                </p>
+                <RegionQuickLink
+                  regions={regionProfiles
+                    .map(({ slug, nombre }) => ({ slug, nombre }))
+                    .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"))}
+                />
+              </article>
+              <article className={styles.exploreCard}>
+                <span className={styles.cardCategory}>02 / Comparación</span>
+                <h3>Compara dos regiones</h3>
+                <p>
+                  Contrasta territorios con los mismos indicadores y comparte
+                  tu comparación.
+                </p>
+                <Link className={styles.cardLink} href="/comparar">
+                  Abrir comparador <span aria-hidden="true">→</span>
+                </Link>
+              </article>
+              <article className={styles.exploreCard}>
+                <span className={styles.cardCategory}>03 / Datos abiertos</span>
+                <h3>Lleva los datos contigo</h3>
+                <p>
+                  Descarga archivos CSV y JSON. Revisa las fuentes,
+                  definiciones y metodología.
+                </p>
+                <Link className={styles.cardLink} href="/datos">
+                  Ver datos y descargas <span aria-hidden="true">↓</span>
+                </Link>
+              </article>
+            </div>
           </div>
         </section>
 
@@ -170,7 +251,7 @@ export default async function Page() {
           aria-label="Capítulos de esta historia"
         >
           <div className={`container ${styles.storyRailInner}`}>
-            <p>Cómo leer esta historia</p>
+            <p>La transición, en detalle</p>
             <ol>
               {CHAPTERS.map((chapter) => (
                 <li key={chapter.href}>
@@ -205,6 +286,9 @@ export default async function Page() {
                 El dato no describe un cambio homogéneo: muestra una
                 transformación territorial.
               </p>
+              <Link className={styles.chapterLink} href="/regiones">
+                Explorar todas las regiones <span aria-hidden="true">↗</span>
+              </Link>
             </div>
             <div className={styles.chapterChart}>
               <p className={styles.chartTitle}>
@@ -243,6 +327,9 @@ export default async function Page() {
                 Mirar la composición permite distinguir crecimiento de
                 diversificación.
               </p>
+              <Link className={styles.chapterLink} href="/tecnologias">
+                Explorar las tecnologías <span aria-hidden="true">↗</span>
+              </Link>
             </div>
             <div className={styles.chapterChart}>
               <p className={styles.chartTitle}>
