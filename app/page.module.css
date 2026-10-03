@@ -8,13 +8,13 @@
 }
 
 .hero {
-  padding-block: clamp(2.5rem, 5vw, 4.5rem) 0;
+  padding-block: clamp(2rem, 4vw, 3.5rem) 0;
   background: var(--bg);
 }
 
 .heroInner {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
 }
@@ -43,8 +43,8 @@
 }
 
 .heroTitle {
-  font-size: clamp(2.5rem, 4.6vw, 4.3rem);
-  line-height: 1.07;
+  font-size: clamp(2.75rem, 4.8vw, 4.5rem);
+  line-height: 1.08;
   font-weight: 650;
   letter-spacing: -0.045em;
   text-wrap: balance;
@@ -69,7 +69,8 @@
   margin-block: 1.75rem;
 }
 
-.primaryAction, .secondaryAction {
+.primaryAction,
+.secondaryAction {
   min-height: 46px;
   display: inline-flex;
   align-items: center;
@@ -79,13 +80,15 @@
   border-radius: 5px;
   font-size: 0.875rem;
   font-weight: 600;
-  transition: background 150ms, border-color 150ms;
+  transition:
+    background 150ms,
+    border-color 150ms;
 }
 
 .primaryAction {
   color: var(--text);
-  background: var(--bg-subtle);
-  border: 1px solid var(--accent-dim);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  border: 1px solid var(--accent);
 }
 
 .primaryAction:hover {
@@ -129,34 +132,23 @@
 }
 
 .heroMap {
-  position: relative;
   margin: 0;
   width: 100%;
-  height: 510px;
-  padding: 4.75rem 1.5rem 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+  padding: 1.5rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background-color: var(--bg-surface);
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-blend-mode: soft-light;
-  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bg-surface);
 }
 
 .mapHeading {
-  position: absolute;
-  top: 1.25rem;
-  left: 1.5rem;
-  right: 1.5rem;
-  padding-bottom: 0.75rem;
+  display: grid;
+  gap: 0.2rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
 
 .mapHeading p {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
 }
 
@@ -165,14 +157,23 @@
   font-size: 0.75rem;
 }
 
+/* Keep the complete SVG in normal flow: no clipping or absolute positioning. */
+.mapBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: 1.5rem;
+}
+
 .mapImage {
+  display: block;
   grid-column: 1;
   grid-row: 1;
   justify-self: center;
-  height: 370px;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  height: 350px;
   object-fit: contain;
+  object-position: center;
 }
 
 .mapMarkers {
@@ -221,11 +222,7 @@
 }
 
 .heroMap figcaption {
-  position: absolute;
-  left: 1.5rem;
-  right: 1.5rem;
-  bottom: 1rem;
-  padding-top: 0.75rem;
+  padding-top: 0.875rem;
   border-top: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 0.6875rem;
@@ -254,7 +251,11 @@
 .heroStats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding-block: 0.5rem 2rem;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .heroStats > * {
@@ -286,7 +287,7 @@
 }
 
 .explore {
-  padding-block: 2.5rem 3rem;
+  padding-block: 3rem 3.5rem;
   border-top: 1px solid var(--border);
 }
 
@@ -327,7 +328,13 @@
   padding: 1.5rem;
   border: 1px solid var(--border);
   background: var(--bg-surface);
-  border-radius: 6px;
+  border-radius: 8px;
+  transition: border-color 150ms;
+}
+
+.exploreCard:focus-within,
+.exploreCard:hover {
+  border-color: var(--accent-dim);
 }
 
 .cardCategory {
@@ -367,7 +374,6 @@
   font-size: 0.875rem;
   min-height: 44px;
 }
-
 
 /* ── Reading rail ──────────────────────────────────────────────────── */
 .storyRail {
@@ -443,9 +449,10 @@
 }
 
 .chapterNum {
-  font-size: var(--step-3);
-  font-weight: 700;
-  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+  font-weight: 500;
+  color: var(--accent);
   letter-spacing: 0;
   line-height: 1;
   margin-bottom: var(--space-sm);
@@ -557,194 +564,189 @@
   font-weight: 500;
 }
 
-
 @media (max-width: 1024px) {
   .heroInner {
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
-  gap: 2rem;
-}
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+    gap: 2rem;
+  }
 
   .heroTitle {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-}
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+  }
 
   .heroMap {
-  height: 480px;
-  padding-inline: 1rem;
-}
+    padding-inline: 1rem;
+  }
 
   .heroStats > * + * {
-  padding-left: 1rem;
-}
+    padding-left: 1rem;
+  }
 
   .exploreCard {
-  padding: 1rem;
-}
+    padding: 1rem;
+  }
 
   .sectionHeading {
-  align-items: start;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
+    align-items: start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 @media (max-width: 768px) {
   .main section[id] {
-  scroll-margin-top: 72px;
-}
+    scroll-margin-top: 72px;
+  }
 
   .heroInner {
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 
   .heroTitle {
-  font-size: clamp(2.5rem, 7vw, 3.5rem);
-}
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
+  }
 
   .heroCopy {
-  max-width: none;
-}
+    max-width: none;
+  }
 
   .heroMap {
-  height: 430px;
-  grid-template-columns: 1fr 1fr;
-}
+    padding: 1.25rem;
+  }
 
   .mapImage {
-  height: 300px;
-}
+    height: 300px;
+  }
 
   .statsContainer {
-  padding-top: 2rem;
-}
+    padding-top: 2rem;
+  }
 
   .heroStats {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem 0;
-}
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0;
+  }
 
   .heroStats > * {
-  padding-right: 0.75rem;
-}
+    padding-right: 0.75rem;
+  }
 
   .heroStats > * + * {
-  padding-left: 0.75rem;
-}
+    padding-left: 0.75rem;
+  }
 
   .heroStats > :nth-child(3) {
-  border-left: none;
-  padding-left: 0;
-}
+    border-left: none;
+    padding-left: 0;
+  }
 
   .explore {
-  padding-block: 2rem;
-}
+    padding-block: 2rem;
+  }
 
   .exploreGrid {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+  }
 
   .exploreCard {
-  padding: 1.25rem;
-}
+    padding: 1.25rem;
+  }
 
   .storyRail {
-  position: relative;
-  top: auto;
-}
+    position: relative;
+    top: auto;
+  }
 
   .storyRailInner {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.25rem;
-  padding-block: 0.75rem;
-}
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding-block: 0.75rem;
+  }
 
   .storyRail ol {
-  width: 100%;
-  overflow-x: auto;
-  justify-content: flex-start;
-}
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
 
   .storyRail a {
-  white-space: nowrap;
-  padding-right: 0.75rem;
-}
+    white-space: nowrap;
+    padding-right: 0.75rem;
+  }
 
   .chapter {
-  padding-block: 2.5rem;
-}
+    padding-block: 2.5rem;
+  }
 
   .chapterLayout {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
   .chapterText {
-  position: static;
-}
+    position: static;
+  }
 
   .chapterNum {
-  font-size: var(--step-2);
-}
+    font-size: var(--step-2);
+  }
 
   .cierre {
-  padding-block: 2.5rem;
-}
+    padding-block: 2.5rem;
+  }
 
   .cierreTitle {
-  font-size: var(--step-2);
-}
+    font-size: var(--step-2);
+  }
 
   .cierreLead {
-  font-size: var(--step-0);
-}
+    font-size: var(--step-0);
+  }
 
   .main :global(.chart-loading) {
-  height: 280px;
-}
-
+    height: 280px;
+  }
 }
 @media (max-width: 480px) {
   .hero {
-  padding-top: 2rem;
-}
+    padding-top: 2rem;
+  }
 
   .eyebrow {
-  font-size: 0.625rem;
-  letter-spacing: 0.07em;
-}
+    font-size: 0.625rem;
+    letter-spacing: 0.07em;
+  }
 
   .heroTitle {
-  font-size: clamp(2.2rem, 10vw, 3rem);
-}
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
 
   .heroActions {
-  gap: 0.5rem;
-}
+    gap: 0.5rem;
+  }
 
-  .primaryAction, .secondaryAction {
-  font-size: 0.8125rem;
-  padding: 0.65rem 0.75rem;
-  gap: 0.75rem;
-}
+  .primaryAction,
+  .secondaryAction {
+    font-size: 0.8125rem;
+    padding: 0.65rem 0.75rem;
+    gap: 0.75rem;
+  }
 
   .heroSource {
-  font-size: 0.6875rem;
-}
+    font-size: 0.6875rem;
+  }
 
   .heroStats {
-  gap: 1.25rem 0;
-}
+    gap: 1.25rem 0;
+  }
 
   .evidenceNote a {
-  width: 100%;
-  margin-left: 0;
-}
+    width: 100%;
+    margin-left: 0;
+  }
 
   .chapterChart {
-  min-width: 0;
-}
-
+    min-width: 0;
+  }
 }

@@ -100,17 +100,16 @@ export default async function Page() {
             <div className={styles.heroCopy}>
               <p className={styles.eyebrow}>
                 <span className={styles.statusDot} aria-hidden="true" />
-                Observatorio de energía · Chile
+                Proyecto independiente · Datos CNE
               </p>
               <h1 id="titulo-principal" className={styles.heroTitle}>
-                La transición ya cambió la{" "}
-                <span className={styles.accent}>capacidad</span> eléctrica de
-                Chile
+                La transición energética de Chile,{" "}
+                <span className={styles.accent}>en datos.</span>
               </h1>
               <p className={styles.heroLead}>
-                Entiende cómo avanzan las energías renovables. Explora su
-                capacidad, compara regiones y accede a los datos abiertos
-                de la Comisión Nacional de Energía.
+                Una mirada a la energía que estamos construyendo. Explora las
+                renovables, compara tu región y encuentra los datos detrás de la
+                transición.
               </p>
               <div className={styles.heroActions}>
                 <a className={styles.primaryAction} href="#explorar">
@@ -121,13 +120,14 @@ export default async function Page() {
                 </Link>
               </div>
               <p className={styles.heroDefinition}>
-                <strong>Capacidad instalada</strong> es la potencia máxima que
-                una central puede aportar; no equivale a la electricidad que
-                genera durante un año.
+                <strong>¿Qué estamos midiendo?</strong> La capacidad instalada
+                es la potencia máxima que una central puede aportar; no equivale
+                a la electricidad que genera durante un año.
               </p>
 
               <p className={styles.heroSource}>
-                Fuente: CNE <span aria-hidden="true">·</span> Datos al {generadoEl}
+                Fuente: CNE <span aria-hidden="true">·</span> Datos al{" "}
+                {generadoEl}
               </p>
             </div>
 
@@ -136,27 +136,29 @@ export default async function Page() {
                 <p>Panorama territorial</p>
                 <span>Capacidad ERNC en operación</span>
               </div>
-              <Image
-                className={styles.mapImage}
-                src="/maps/chile.svg"
-                alt="Mapa de Chile con cinco zonas geográficas de capacidad ERNC."
-                width={190}
-                height={930}
-                priority
-              />
-              <ol className={styles.mapMarkers}>
-                {zonasEnergeticas.map(({ zona, mw }) => (
-                  <li key={zona}>
-                    <span className={styles.mapMarkerBar} aria-hidden="true">
-                      <span style={{ width: `${(mw / maxZonaMw) * 100}%` }} />
-                    </span>
-                    <span>{zona}</span>
-                    <strong>{formatCompactMw(mw)}</strong>
-                  </li>
-                ))}
-              </ol>
+              <div className={styles.mapBody}>
+                <Image
+                  className={styles.mapImage}
+                  src="/maps/chile.svg"
+                  alt="Mapa completo de Chile continental, de Arica a Magallanes."
+                  width={190}
+                  height={930}
+                  priority
+                />
+                <ol className={styles.mapMarkers}>
+                  {zonasEnergeticas.map(({ zona, mw }) => (
+                    <li key={zona}>
+                      <span className={styles.mapMarkerBar} aria-hidden="true">
+                        <span style={{ width: `${(mw / maxZonaMw) * 100}%` }} />
+                      </span>
+                      <span>{zona}</span>
+                      <strong>{formatCompactMw(mw)}</strong>
+                    </li>
+                  ))}
+                </ol>
+              </div>
               <figcaption>
-                Potencia instalada por zona · MW / GW
+                ERNC: energías renovables no convencionales
               </figcaption>
             </figure>
           </div>
@@ -224,8 +226,8 @@ export default async function Page() {
                 <span className={styles.cardCategory}>02 / Comparación</span>
                 <h3>Compara dos regiones</h3>
                 <p>
-                  Contrasta territorios con los mismos indicadores y comparte
-                  tu comparación.
+                  Contrasta territorios con los mismos indicadores y comparte tu
+                  comparación.
                 </p>
                 <Link className={styles.cardLink} href="/comparar">
                   Abrir comparador <span aria-hidden="true">→</span>
@@ -235,8 +237,8 @@ export default async function Page() {
                 <span className={styles.cardCategory}>03 / Datos abiertos</span>
                 <h3>Lleva los datos contigo</h3>
                 <p>
-                  Descarga archivos CSV y JSON. Revisa las fuentes,
-                  definiciones y metodología.
+                  Descarga archivos CSV y JSON. Revisa las fuentes, definiciones
+                  y metodología.
                 </p>
                 <Link className={styles.cardLink} href="/datos">
                   Ver datos y descargas <span aria-hidden="true">↓</span>
@@ -280,7 +282,7 @@ export default async function Page() {
               <p>
                 La mayor capacidad ERNC se concentra en el norte del país, donde
                 la radiación solar y el desarrollo fotovoltaico de escala
-                utility empujan el crecimiento.
+                industrial empujan el crecimiento.
               </p>
               <p className={styles.chapterTakeaway}>
                 El dato no describe un cambio homogéneo: muestra una
@@ -363,12 +365,12 @@ export default async function Page() {
               </h2>
               <p>
                 La entrada de nueva capacidad se aceleró con fuerza durante la
-                última década. El pipeline actual indica que esa trayectoria
-                continúa.
+                última década. Los proyectos en construcción indican que esa
+                trayectoria continúa.
               </p>
               <p className={styles.chapterTakeaway}>
-                El pipeline señala intención de inversión, no capacidad ya
-                operando.
+                La capacidad en construcción señala inversión futura, no
+                capacidad ya operando.
               </p>
             </div>
             <div className={styles.chapterChart}>

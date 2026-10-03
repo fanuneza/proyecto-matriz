@@ -4,6 +4,7 @@ import { InsightBlock } from "@/components/editorial/InsightBlock";
 import { StaticBarChart } from "@/components/story/StaticBarChart";
 import { DataViewTabs } from "@/components/ui/DataViewTabs";
 import { PageShell } from "@/components/ui/PageShell";
+import { RegionDirectory } from "@/components/tools/RegionDirectory";
 import shell from "@/components/ui/PageShell.module.css";
 import { formatCompactMw } from "@/lib/format";
 import { getStoryData } from "@/lib/story-data";
@@ -59,6 +60,29 @@ export default async function RegionesPage() {
         </>
       }
     >
+      <section
+        className={shell.section}
+        aria-labelledby="region-directory-title"
+      >
+        <h2 id="region-directory-title" className={shell.sectionTitle}>
+          Encuentra tu región
+        </h2>
+        <p className={shell.sectionText}>
+          Busca un territorio para conocer su capacidad instalada, sus
+          tecnologías y los proyectos en construcción.
+        </p>
+        <RegionDirectory
+          regions={data.regionProfiles.map(
+            ({ slug, nombre, erncMw, nationalSharePct, mainTecnologia }) => ({
+              slug,
+              nombre,
+              erncMw,
+              nationalSharePct,
+              mainTecnologia,
+            }),
+          )}
+        />
+      </section>
       <section className={shell.section}>
         <h2 className={shell.sectionTitle}>Panorama regional</h2>
         {topRegion ? (

@@ -13,10 +13,10 @@
   --chart-net-billing: var(--accent);
 
   --text: #ddeef2;
-  --text-muted: #8a9baa;
+  --text-muted: #a1b1bf;
   --text-dim: #768a99;
 
-  --border: #1e2833;
+  --border: #26333e;
 
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -83,7 +83,7 @@ h2,
 h3,
 h4 {
   line-height: 1.15;
-  letter-spacing: 0;
+  letter-spacing: -0.025em;
   color: var(--text);
 }
 
