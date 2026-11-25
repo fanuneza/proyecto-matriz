@@ -6,7 +6,11 @@ const critters = new Critters({
   path: "out",
   publicPath: "/",
   logLevel: "warn",
-  preload: "swap",
+  // "body" moves the pruned stylesheet links to the end of <body>.
+  // "swap"/"media" add inline onload handlers, which our CSP
+  // (script-src-attr 'none') blocks, logging console errors and
+  // failing Lighthouse Best Practices.
+  preload: "body",
   pruneSource: true,
 });
 
